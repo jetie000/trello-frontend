@@ -4,11 +4,11 @@ import { variables } from "@/variables";
 
 
 export interface userState {
-    user?: IUser
+    token?: IUser
 }
 
 const initialState: userState = {
-    user: JSON.parse(localStorage.getItem(variables.USER_LOCALSTORAGE)!) || undefined
+    token: JSON.parse(localStorage.getItem(variables.TOKEN_LOCALSTORAGE)!) || undefined
 }
 
 export const userSlice = createSlice({
@@ -16,12 +16,12 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            localStorage.removeItem(variables.USER_LOCALSTORAGE);
-            state.user = undefined;
+            localStorage.removeItem(variables.TOKEN_LOCALSTORAGE);
+            state.token = undefined;
         },
-        setUser: (state, { payload: user }: PayloadAction<IUser>) => {
-            state.user = user;
-            localStorage.setItem(variables.USER_LOCALSTORAGE, JSON.stringify(user));
+        login: (state, { payload: token }: PayloadAction<IUser>) => {
+            state.token = token;
+            localStorage.setItem(variables.TOKEN_LOCALSTORAGE, JSON.stringify(token));
         }
     },
 })
