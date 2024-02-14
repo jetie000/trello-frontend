@@ -1,4 +1,3 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { baseApi } from './baseApi'
 
 export const userApi = baseApi.injectEndpoints({
@@ -24,16 +23,6 @@ export const userApi = baseApi.injectEndpoints({
         //         method: 'PUT',
         //     }),
         // }),
-        // changeUserAdmin: builder.mutation<string | IUser, IUser>({
-        //     query: (user) => ({
-        //         body: user,
-        //         url: '/user/changeInfoAdmin',
-        //         method: 'PUT',
-        //     }),
-        //     invalidatesTags: () => [{
-        //         type: 'Users'
-        //     }]
-        // }),
         // deleteUser: builder.mutation<string, IUserDeleteInfo>({
         //     query: (userInfo: IUserDeleteInfo) => ({
         //         body: userInfo,
@@ -41,15 +30,6 @@ export const userApi = baseApi.injectEndpoints({
         //         method: 'DELETE',
         //     }),
         //     invalidatesTags: () => [{
-        //         type: 'Users'
-        //     }]
-        // }),
-        // getAll: builder.query<IUser[], {limit: number, contain: string}>({
-        //     query: ({limit, contain}) => ({
-        //         url: '/user/getAll?contain=' + (contain === '' ? 'no_search_string' : contain)+ '&limit=' + limit,
-        //         method: 'GET',
-        //     }),
-        //     providesTags: () => [{
         //         type: 'Users'
         //     }]
         // }),
