@@ -1,6 +1,7 @@
 import { AuthResponse } from '@/types/authResponse.interface'
 import { baseApi } from './baseApi'
 import { IUserChangeInfo, IUserLoginInfo, IUserRegisterInfo, IUserResponse} from '@/types/user.interface'
+import { IError } from '@/types/error.interface'
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: builder => ({
@@ -10,27 +11,27 @@ export const userApi = baseApi.injectEndpoints({
                 method: 'POST',
             })
         }),
-        getById: builder.query<AuthResponse | string, number>({
+        getById: builder.query<AuthResponse | IError, number>({
             query: (id: number) => ({
                 url: '/user/getById?id='+id,
                 method: 'POST',
             })
         }),
-        logInUser: builder.mutation<AuthResponse | string, IUserLoginInfo>({
+        logInUser: builder.mutation<AuthResponse | IError, IUserLoginInfo>({
             query: (userInfo: IUserLoginInfo) => ({
                 body: userInfo,
                 url: '/auth/login',
                 method: 'POST',
             })
         }),
-        registerUser: builder.mutation<AuthResponse | string, IUserRegisterInfo>({
+        registerUser: builder.mutation<AuthResponse | IError, IUserRegisterInfo>({
             query: (userInfo: IUserRegisterInfo) => ({
                 body: userInfo,
                 url: '/auth/register',
                 method: 'POST',
             }),
         }),
-        changeUser: builder.mutation<AuthResponse | string, IUserChangeInfo>({
+        changeUser: builder.mutation<AuthResponse | IError, IUserChangeInfo>({
             query: (userInfo: IUserChangeInfo) => ({
                 body: userInfo,
                 url: '/user',
@@ -43,7 +44,7 @@ export const userApi = baseApi.injectEndpoints({
                 method: 'POST',
             }),
         }),
-        deleteUser: builder.mutation<string, number>({
+        deleteUser: builder.mutation<string | IError, number>({
             query: (userId: number) => ({
                 url: '/user/'+userId,
                 method: 'DELETE',
@@ -52,4 +53,12 @@ export const userApi = baseApi.injectEndpoints({
     })
 })
 
-export const { } = userApi
+export const {
+    useChangeUserMutation,
+    useDeleteUserMutation,
+    useGetByIdQuery,
+    useGetByIdsQuery,
+    useLogInUserMutation,
+    useLogoutMutation,
+    useRegisterUserMutation
+ } = userApi

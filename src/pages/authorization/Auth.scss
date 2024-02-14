@@ -1,0 +1,20 @@
+@import '@/variables.scss';
+
+.main-window{
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.inner-window{
+    width: 400px;
+    margin: auto;
+}
+
+@media (max-width: $media-sm-1) {
+    .inner-window{
+        padding: 20px !important; //to override bootstrap style
+        margin: auto 20px;
+    }
+}

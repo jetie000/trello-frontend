@@ -4,7 +4,7 @@ import { variables } from "@/variables";
 
 
 export interface userState {
-    token?: IUser
+    token?: string
 }
 
 const initialState: userState = {
@@ -19,7 +19,7 @@ export const userSlice = createSlice({
             localStorage.removeItem(variables.TOKEN_LOCALSTORAGE);
             state.token = undefined;
         },
-        login: (state, { payload: token }: PayloadAction<IUser>) => {
+        login: (state, { payload: token }: PayloadAction<string>) => {
             state.token = token;
             localStorage.setItem(variables.TOKEN_LOCALSTORAGE, JSON.stringify(token));
         }
