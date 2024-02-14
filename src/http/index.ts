@@ -9,7 +9,8 @@ export const api = axios.create({
 
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     if (config.headers)
-        config.headers.Authorization = `Bearer ${localStorage.getItem(variables.TOKEN_LOCALSTORAGE)}`
+        if (localStorage.getItem(variables.TOKEN_LOCALSTORAGE))
+            config.headers.Authorization = `Bearer ${localStorage.getItem(variables.TOKEN_LOCALSTORAGE)}`
     return config;
 })
 

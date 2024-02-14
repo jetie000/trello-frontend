@@ -5,11 +5,12 @@ import { useActions } from '@/hooks/useActions';
 import { Toast as bootstrapToast } from 'bootstrap';
 import { AuthResponse } from '@/types/authResponse.interface';
 import { IError } from '@/types/error.interface';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 function Login() {
     const navigate = useNavigate();
     const { login, setToastChildren } = useActions();
-    const [logInUser, { isLoading, isSuccess, isError, data }] = useLogInUserMutation();
+    const [logInUser, { isLoading, isSuccess, isError, data, error }] = useLogInUserMutation();
 
     useEffect(() => {
         if (isSuccess) {
@@ -21,7 +22,9 @@ function Login() {
         }
         if (isError) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren((data as IError).message)
+            setToastChildren(((error as FetchBaseQueryError)?.data as IError).message)
+            console.log(error);
+            
             myToast.show();
             return;
         }

@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import Modal from '@/pages/modal/Modal'
-import 'bootstrap';
 import { useRegisterUserMutation } from '@/store/api/user.api';
 import { Toast as bootstrapToast } from 'bootstrap';
 import { useActions } from '@/hooks/useActions';
 import { IError } from '@/types/error.interface';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
 function Register() {
-    const [registerUser, { isLoading, isSuccess, isError, data }] = useRegisterUserMutation();
+    const [registerUser, { isLoading, isSuccess, isError, data, error }] = useRegisterUserMutation();
     const { setToastChildren } = useActions();
 
     useEffect(() => {
         const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
         if (isSuccess) {
-            setToastChildren("You've succesfully registered");
-            (document.getElementById('inputName') as HTMLInputElement).value = '';
-            (document.getElementById('inputSurname') as HTMLInputElement).value = '';
+            setToastChildren("You've succesfully registered\nCheck your e-mail for confirm letter");
+            (document.getElementById('inputFullName') as HTMLInputElement).value = '';
             (document.getElementById('inputEmail') as HTMLInputElement).value = '';
             (document.getElementById('inputPassword') as HTMLInputElement).value = '';
             myToast.show()
         }
         if (isError) {
-            setToastChildren((data as IError).message)
+            console.log(error);
+            
+            setToastChildren(((error as FetchBaseQueryError)?.data as IError).message)
             myToast.show()
         }
-        
+
     }, [isLoading])
 
     const registerClick = () => {
@@ -37,6 +38,8 @@ function Register() {
             myToast.show();
             return;
         }
+        console.log(inputEmail, ' ', inputFullName, ' ', inputPassword);
+
         registerUser({
             email: inputEmail.trim(),
             password: inputPassword.trim(),
@@ -61,8 +64,6 @@ function Register() {
                 </div>
                 <button type="button"
                     className="btn btn-primary mt-3 w-100"
-                    data-bs-toggle="modal"
-                    data-bs-target="#registerModal"
                     onClick={() => registerClick()}>
                     Register
                 </button>

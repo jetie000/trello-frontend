@@ -8,6 +8,7 @@ import AuthWrapper from './pages/authorization/AuthWrapper';
 import Login from './pages/authorization/Login';
 import Register from './pages/authorization/Register';
 import Custom404 from './pages/notFound/NotFound';
+import ReactDOM from 'react-dom/client';
 
 function App() {
 
@@ -44,4 +45,6 @@ function App() {
     );
 }
 
-export default App;
+
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
+root.render(<App />)
