@@ -23,6 +23,8 @@ body {
     cursor: pointer;
 }
 
+// !IMPORTANT for overriding bootstrap styles
+
 .main-wrapper {
     width: 1168px !important;
 }
@@ -57,8 +59,6 @@ body {
 @media (max-width: $media-sm-2) {
     .main-wrapper {
         max-width: 368px !important;
-    }
-    #app > div{
         padding: 10px !important;
     }
 }
@@ -66,8 +66,6 @@ body {
 @media (max-width: $media-sm-1) {
     .main-wrapper {
         max-width: 270px !important;
-    }
-    #app > div{
         padding: 10px !important;
     }
 }

@@ -28,7 +28,7 @@ function Header() {
         <header className='bg-primary position-sticky top-0 z-2'>
             <nav className="navbar navbar-expand-sm navbar-dark header-wrapper m-auto ps-3 pe-3">
                 <span className="navbar-brand cursor-pointer" onClick={() => navigate('/')}>
-                    Main
+                    My boards
                 </span>
                 <div className='dropdown align-items-center d-flex cursor-pointer ms-auto'>
                     <div className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 
 function Wrapper({children}: {children: ReactElement}) {
     return ( 
-        <div className="main-wrapper ms-auto me-auto">
+        <div className="main-wrapper p-3 ms-auto me-auto">
             {children}
         </div>
      );

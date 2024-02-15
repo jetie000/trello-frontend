@@ -12,6 +12,9 @@ import ReactDOM from 'react-dom/client';
 import Header from './pages/header/Header';
 import "./index.scss";
 import Wrapper from './pages/wrapper/Wrapper';
+import MyBoards from './pages/myBoards/MyBoards';
+import AddBoard from './pages/addBoard/AddBoard';
+import Cabinet from './pages/cabinet/Cabinet';
 
 function App() {
 
@@ -40,7 +43,9 @@ function App() {
                                     <Register />
                                 </AuthWrapper>
                             } />
-                        <Route path='/' element={<h1>LETS GO</h1>} />
+                        <Route path='/' element={<MyBoards/>} />
+                        <Route path='/board/add' element={<AddBoard/>} />
+                        <Route path='/cabinet' element={<Cabinet/>} />
                         <Route path='*' element={<Custom404 />} />
                     </Routes>
                 </Wrapper>
