@@ -1,33 +1,10 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { variables } from "@/variables";
-import { api } from "@/http";
 import { AuthResponse } from "@/types/authResponse.interface";
-
-// const axiosBaseQuery =
-//     ({ baseUrl } = { baseUrl: '' }) =>
-//         async ({ url, method, data, params, headers }: any) => {
-//             try {
-//                 const result = await api({
-//                     url: baseUrl + url,
-//                     method,
-//                     data,
-//                     params,
-//                     headers,
-//                 })
-//                 return { data: result.data }
-//             } catch (axiosError: any) {
-//                 const err = axiosError
-//                 return {
-//                     error: {
-//                         status: err.response?.status,
-//                         data: err.response?.data || err.message,
-//                     },
-//                 }
-//             }
-//         }
 
 const baseQuery = fetchBaseQuery({
     baseUrl: variables.API_URL,
+    credentials: "include",
     prepareHeaders: (headers) => {
         if (localStorage.getItem(variables.TOKEN_LOCALSTORAGE))
             headers.set('Authorization',`Bearer ${localStorage.getItem(variables.TOKEN_LOCALSTORAGE)}`)
@@ -50,6 +27,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             result = await baseQuery(args, api, extraOptions);
         } else {
             localStorage.removeItem(variables.TOKEN_LOCALSTORAGE)
+            localStorage.removeItem(variables.USERID_LOCALSTORAGE)
         }
     }
     return result;

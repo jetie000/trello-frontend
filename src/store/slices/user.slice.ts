@@ -5,10 +5,12 @@ import { variables } from "@/variables";
 
 export interface userState {
     token?: string
+    id?: number
 }
 
 const initialState: userState = {
-    token: JSON.parse(localStorage.getItem(variables.TOKEN_LOCALSTORAGE)!) || undefined
+    token: localStorage.getItem(variables.TOKEN_LOCALSTORAGE) || undefined,
+    id: Number(localStorage.getItem(variables.USERID_LOCALSTORAGE)) || undefined
 }
 
 export const userSlice = createSlice({
@@ -17,11 +19,15 @@ export const userSlice = createSlice({
     reducers: {
         logout: (state) => {
             localStorage.removeItem(variables.TOKEN_LOCALSTORAGE);
+            localStorage.removeItem(variables.USERID_LOCALSTORAGE)
             state.token = undefined;
+            state.id = undefined
         },
-        login: (state, { payload: token }: PayloadAction<string>) => {
+        login: (state, { payload: {token, id} }: PayloadAction<userState>) => {
             state.token = token;
+            state.id = id
             localStorage.setItem(variables.TOKEN_LOCALSTORAGE, JSON.stringify(token));
+            localStorage.setItem(variables.USERID_LOCALSTORAGE, JSON.stringify(id));
         }
     },
 })

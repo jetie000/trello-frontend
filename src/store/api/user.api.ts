@@ -1,6 +1,6 @@
 import { AuthResponse } from '@/types/authResponse.interface'
 import { baseApi } from './baseApi'
-import { IUserChangeInfo, IUserLoginInfo, IUserRegisterInfo, IUserResponse} from '@/types/user.interface'
+import { IUser, IUserChangeInfo, IUserLoginInfo, IUserRegisterInfo, IUserResponse} from '@/types/user.interface'
 import { IError } from '@/types/error.interface'
 
 export const userApi = baseApi.injectEndpoints({
@@ -11,10 +11,10 @@ export const userApi = baseApi.injectEndpoints({
                 method: 'POST',
             })
         }),
-        getById: builder.query<AuthResponse | IError, number>({
+        getById: builder.query<IUser | IError, number>({
             query: (id: number) => ({
-                url: '/user/getById?id='+id,
-                method: 'POST',
+                url: '/user/'+id,
+                method: 'GET',
             })
         }),
         logInUser: builder.mutation<AuthResponse | IError, IUserLoginInfo>({

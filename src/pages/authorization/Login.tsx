@@ -17,7 +17,10 @@ function Login() {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
             setToastChildren("You've succedfully logged in");
             myToast.show();
-            login((data as AuthResponse).accessToken);
+            login({
+                token: (data as AuthResponse).accessToken,
+                id: (data as AuthResponse).id
+            });
             navigate('/');
         }
         if (isError) {
