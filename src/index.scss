@@ -1,13 +1,73 @@
+@import 'variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Montserrat, Helvetica, sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.full-height {
+    min-height: max-content;
+}
+
+body {
+    min-height: 100vh;
+}
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.main-wrapper {
+    width: 1168px !important;
+}
+
+.header-wrapper{
+  max-width: 1168px !important;
+}
+
+@media (max-width: $media-lg-2) {
+    .main-wrapper {
+        width: 868px !important;
+    }
+}
+
+@media (max-width: $media-lg-1) {
+    .main-wrapper {
+        width: 668px !important;
+    }
+}
+
+@media (max-width: $media-md-2) {
+    .main-wrapper {
+        width: 568px !important;
+    }
+}
+
+@media (max-width: $media-md-1) {
+    .main-wrapper {
+        max-width: 490px !important;
+    }
+}
+@media (max-width: $media-sm-2) {
+    .main-wrapper {
+        max-width: 368px !important;
+    }
+    #app > div{
+        padding: 10px !important;
+    }
+}
+
+@media (max-width: $media-sm-1) {
+    .main-wrapper {
+        max-width: 270px !important;
+    }
+    #app > div{
+        padding: 10px !important;
+    }
 }

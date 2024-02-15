@@ -9,6 +9,9 @@ import Login from './pages/authorization/Login';
 import Register from './pages/authorization/Register';
 import Custom404 from './pages/notFound/NotFound';
 import ReactDOM from 'react-dom/client';
+import Header from './pages/header/Header';
+import "./index.scss";
+import Wrapper from './pages/wrapper/Wrapper';
 
 function App() {
 
@@ -22,23 +25,25 @@ function App() {
 
         <Provider store={store}>
             <BrowserRouter>
-                {/* <Header /> */}
-                <Routes>
-                    <Route path='/login'
-                        element={
-                            <AuthWrapper>
-                                <Login />
-                            </AuthWrapper>
-                        } />
-                    <Route path='/register'
-                        element={
-                            <AuthWrapper>
-                                <Register />
-                            </AuthWrapper>
-                        } />
-                    <Route path='/' element={<h1>LETS GO</h1>}/>
-                    <Route path='*' element={<Custom404 />} />
-                </Routes>
+                <Header />
+                <Wrapper>
+                    <Routes>
+                        <Route path='/login'
+                            element={
+                                <AuthWrapper>
+                                    <Login />
+                                </AuthWrapper>
+                            } />
+                        <Route path='/register'
+                            element={
+                                <AuthWrapper>
+                                    <Register />
+                                </AuthWrapper>
+                            } />
+                        <Route path='/' element={<h1>LETS GO</h1>} />
+                        <Route path='*' element={<Custom404 />} />
+                    </Routes>
+                </Wrapper>
                 <Toast />
             </BrowserRouter>
         </Provider>
