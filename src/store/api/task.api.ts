@@ -28,4 +28,7 @@ export const taskApi = baseApi.injectEndpoints({
 })
 
 export const {
+    useAddTaskMutation,
+    useChangeTaskMutation,
+    useDeleteTaskMutation,
  } = taskApi

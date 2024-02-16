@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IUser } from "@/types/user.interface";
 import { variables } from "@/variables";
 
 

@@ -28,4 +28,7 @@ export const columnApi = baseApi.injectEndpoints({
 })
 
 export const {
+    useAddColumnMutation,
+    useChangeColumnMutation,
+    useDeleteColumnMutation
  } = columnApi

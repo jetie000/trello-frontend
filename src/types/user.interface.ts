@@ -38,6 +38,6 @@ export interface IUserResponse {
     email: string
     fullName: string
     loginDate: Date
-    boardsPartipated: []
-    tasksParticipated: []
+    boardsPartipated?: []
+    tasksParticipated?: []
 }
