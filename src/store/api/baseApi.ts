@@ -3,7 +3,7 @@ import { variables } from "@/variables";
 import { AuthResponse } from "@/types/authResponse.interface";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: variables.API_URL,
+    baseUrl: process.env.API_URL,
     credentials: "include",
     prepareHeaders: (headers) => {
         if (localStorage.getItem(variables.TOKEN_LOCALSTORAGE))
