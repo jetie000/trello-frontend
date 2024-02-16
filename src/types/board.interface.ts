@@ -6,6 +6,19 @@ export interface IBoard {
     name: string
     description?: string
     creatorId: number
-    columns: IColumn[]
-    users: IUser[]
+    columns?: IColumn[]
+    users?: IUser[]
+}
+
+export interface IBoardAddInfo{
+    name: string
+    description?: string
+    creatorId: number
+}
+
+export interface IBoardUpdateInfo{
+    id: number
+    name: number
+    description?: number
+    userIds: number[]
 }

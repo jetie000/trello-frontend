@@ -11,3 +11,18 @@ export interface ITask {
     Column: IColumn
     columnId: number
 }
+
+export interface ITaskAddInfo{
+    name: string
+    description?: string
+    columnId: number
+    userIds: number[]
+}
+
+export interface ITaskUpdateInfo{
+    id: number
+    name: string
+    description?: string
+    columnId: number
+    userIds: number[]
+}
