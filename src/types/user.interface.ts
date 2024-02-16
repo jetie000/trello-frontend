@@ -35,6 +35,7 @@ export interface IUserChangeInfo {
 }
 
 export interface IUserResponse {
+    id: number
     email: string
     fullName: string
     loginDate: Date

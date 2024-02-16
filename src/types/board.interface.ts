@@ -14,6 +14,7 @@ export interface IBoardAddInfo{
     name: string
     description?: string
     creatorId: number
+    userIds: number[]
 }
 
 export interface IBoardUpdateInfo{

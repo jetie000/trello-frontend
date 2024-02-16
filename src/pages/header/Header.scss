@@ -1,7 +1,7 @@
 @import '../../variables.scss';
 
 .dropdown-toggle::after {
-    color: white !important;
+    color: white !important; // to override bootstrap style
 }
 
 @media (min-width: $media-burger) {

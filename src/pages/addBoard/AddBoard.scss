@@ -11,14 +11,18 @@
     max-height: 200px;
 }
 
+.add-board-behind-canvas{
+    z-index: 1 !important; // to override bootstrap style
+}
+
 @media (max-width: $media-md-1) {
     .user-search-list> li>div {
             & > span{
-                font-size: 20px !important;
+                font-size: 20px !important; // to override bootstrap style
             }
 
             & > div > div{
-                font-size: 16px !important;
+                font-size: 16px !important; // to override bootstrap style
             }
     }
 }
@@ -28,8 +32,8 @@
         flex-direction: column;
         height: auto;
         & >div{
-            width: 100% !important;
-            padding: 10px 0 0 0 !important;
+            width: 100% !important; // to override bootstrap style
+            padding: 10px 0 0 0 !important; // to override bootstrap style
         }
     }
 }
@@ -37,5 +41,6 @@
 @media (max-width: $media-sm-1) {
     .add-board {
         width: 250px;
+        padding: 0 !important; // to override bootstrap style
     }
 }

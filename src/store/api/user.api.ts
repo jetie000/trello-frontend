@@ -5,9 +5,9 @@ import { IError } from '@/types/error.interface'
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: builder => ({
-        getByIds: builder.query<IUserResponse[], string>({
-            query: (ids: string) => ({
-                url: '/user/getByIds?ids='+ids,
+        getByIds: builder.query<IUserResponse[] | IError, number[]>({
+            query: (ids: number[]) => ({
+                url: '/user/getByIds/'+ids.join('_'),
                 method: 'GET',
             })
         }),
