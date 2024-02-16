@@ -15,6 +15,7 @@ import Wrapper from './pages/wrapper/Wrapper';
 import MyBoards from './pages/myBoards/MyBoards';
 import AddBoard from './pages/addBoard/AddBoard';
 import Cabinet from './pages/cabinet/Cabinet';
+import { ErrorBoundary } from 'react-error-boundary';
 
 function App() {
 
@@ -27,30 +28,32 @@ function App() {
     return (
 
         <Provider store={store}>
-            <BrowserRouter>
-                <Header />
-                <Wrapper>
-                    <Routes>
-                        <Route path='/login'
-                            element={
-                                <AuthWrapper>
-                                    <Login />
-                                </AuthWrapper>
-                            } />
-                        <Route path='/register'
-                            element={
-                                <AuthWrapper>
-                                    <Register />
-                                </AuthWrapper>
-                            } />
-                        <Route path='/' element={<MyBoards/>} />
-                        <Route path='/board/add' element={<AddBoard/>} />
-                        <Route path='/cabinet' element={<Cabinet/>} />
-                        <Route path='*' element={<Custom404 />} />
-                    </Routes>
-                </Wrapper>
-                <Toast />
-            </BrowserRouter>
+            <ErrorBoundary fallback={<h1>ERROR: Something went wrong</h1>}>
+                <BrowserRouter>
+                    <Header />
+                    <Wrapper>
+                        <Routes>
+                            <Route path='/login'
+                                element={
+                                    <AuthWrapper>
+                                        <Login />
+                                    </AuthWrapper>
+                                } />
+                            <Route path='/register'
+                                element={
+                                    <AuthWrapper>
+                                        <Register />
+                                    </AuthWrapper>
+                                } />
+                            <Route path='/' element={<MyBoards />} />
+                            <Route path='/board/add' element={<AddBoard />} />
+                            <Route path='/cabinet' element={<Cabinet />} />
+                            <Route path='*' element={<Custom404 />} />
+                        </Routes>
+                    </Wrapper>
+                    <Toast />
+                </BrowserRouter>
+            </ErrorBoundary>
         </Provider>
     );
 }

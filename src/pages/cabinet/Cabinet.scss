@@ -1,153 +1,16 @@
 @import '../../variables.scss';
 
-.my-info {
+.cabinet-my-info {
     width: 350px;
     flex-grow: 1;
 }
 
-.collection-wrapper {
-    height: calc(100vh - 180px);
-}
-
-.users-wrapper {
-    height: calc(100vh - 520px);
-}
-
-.collection-item {
-    height: 300px;
-    transition: all 0.2s ease-in-out;
-
-    &:hover {
-        filter: brightness(80%);
-    }
-}
-
-.collection-add {
-    height: 100px;
-}
-
-@media (max-width: $media-lg-2) {
-    .collection-item {
-        height: 200px !important; //to override bootstrap style
-
-        &>div {
-            padding: 10px !important; //to override bootstrap style
-            padding-left: 20px !important; //to override bootstrap style
-        }
-    }
-
-
-}
-
-@media (max-width: $media-lg-1) {
-    .cabinet-wrapper {
-        flex-direction: column !important; //to override bootstrap style
-
-        &>div:first-child {
-            margin: 1rem;
-            width: 50%;
-            align-self: center;
-        }
-
-        &>div:nth-child(2) {
-            width: 100% !important; //to override bootstrap style
-            padding: 0 !important; //to override bootstrap style
-        }
-    }
-}
-
-
-@media (max-width: $media-md-2) {
-    .collection-item {
-        height: 150px !important; //to override bootstrap style
-
-        &>div {
-            padding: 10px !important; //to override bootstrap style
-            padding-left: 20px !important; //to override bootstrap style
-            font-size: 16px !important; //to override bootstrap style
-
-            &>span {
-                font-size: 20px !important; //to override bootstrap style
-            }
-
-            &>div>div>span {
-                font-size: 16px !important; //to override bootstrap style
-            }
-        }
-    }
-
-    .cabinet-items-list {
-
-        &>li div,
-        &>li span {
-            font-size: 16px !important; //to override bootstrap style
-        }
-    }
-}
-
-@media (max-width: $media-md-1) {
-    .collection-item {
-        height: 150px !important; //to override bootstrap style
-
-        &>div {
-            padding: 5px !important; //to override bootstrap style
-            padding-left: 10px !important; //to override bootstrap style
-            font-size: 16px !important; //to override bootstrap style
-
-            &>span {
-                font-size: 20px !important; //to override bootstrap style
-            }
-
-            &>div>div>span {
-                font-size: 16px !important; //to override bootstrap style
-            }
-        }
-    }
-}
-
-@media (max-width: $media-sm-2) {
-    .collection-item {
-        flex-direction: column;
-        height: unset !important; //to override bootstrap style
-
-        &>img {
-            border-radius: 1rem !important; //to override bootstrap style
-        }
-
-        &>div {
-            width: 100% !important; //to override bootstrap style
-            padding: 5px !important; //to override bootstrap style
-            padding-left: 10px !important; //to override bootstrap style
-            font-size: 16px !important; //to override bootstrap style
-
-            &>span {
-                font-size: 20px !important; //to override bootstrap style
-            }
-
-            &>div>div>span {
-                font-size: 16px !important; //to override bootstrap style
-            }
-        }
-    }
-
-    .cabinet-wrapper {
-        &>div:first-child {
-            width: 100%;
-        }
-    }
-
-    .cabinet-items-list>li {
-        flex-direction: column !important; //to override bootstrap style
-
-        & .vr {
-            display: none !important; //to override bootstrap style
-        }
-    }
-
-}
 
 @media (max-width: $media-sm-1) {
-    .my-info {
+    .cabinet-my-info {
         width: 250px;
+    }
+    .cabinet-buttons{
+        flex-direction: column;
     }
 }

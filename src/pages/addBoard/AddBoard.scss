@@ -1,0 +1,41 @@
+@import '../../variables.scss';
+
+.add-board {
+    width: 350px;
+    flex-grow: 1;
+}
+
+.user-search-list {
+    width: 100%;
+    top: 0;
+    max-height: 200px;
+}
+
+@media (max-width: $media-md-1) {
+    .user-search-list> li>div {
+            & > span{
+                font-size: 20px !important;
+            }
+
+            & > div > div{
+                font-size: 16px !important;
+            }
+    }
+}
+
+@media (max-width: $media-sm-2) {
+    .user-search-list> li {
+        flex-direction: column;
+        height: auto;
+        & >div{
+            width: 100% !important;
+            padding: 10px 0 0 0 !important;
+        }
+    }
+}
+
+@media (max-width: $media-sm-1) {
+    .add-board {
+        width: 250px;
+    }
+}

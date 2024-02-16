@@ -8,7 +8,7 @@ export const userApi = baseApi.injectEndpoints({
         getByIds: builder.query<IUserResponse[], string>({
             query: (ids: string) => ({
                 url: '/user/getByIds?ids='+ids,
-                method: 'POST',
+                method: 'GET',
             })
         }),
         getById: builder.query<IUser | IError, number>({
@@ -50,6 +50,12 @@ export const userApi = baseApi.injectEndpoints({
                 method: 'DELETE',
             })
         }),
+        searchUsers: builder.query<IUserResponse[] | IError, string>({
+            query: (search: string) => ({
+                url: '/user/search/'+search,
+                method: "GET"
+            })
+        })
     })
 })
 
@@ -60,5 +66,6 @@ export const {
     useGetByIdsQuery,
     useLogInUserMutation,
     useLogoutMutation,
-    useRegisterUserMutation
+    useRegisterUserMutation,
+    useSearchUsersQuery
  } = userApi
