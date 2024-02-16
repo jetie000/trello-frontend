@@ -43,4 +43,10 @@
         width: 250px;
         padding: 0 !important; // to override bootstrap style
     }
+    .add-board-users{
+        &>li{
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
 }
