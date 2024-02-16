@@ -10,7 +10,7 @@ export const boardApi = baseApi.injectEndpoints({
                 method: 'GET',
             })
         }),
-        getByUserId: builder.query<IBoard | IError, number>({
+        getByUserId: builder.query<IBoard[] | IError, number>({
             query: (id: number) => ({
                 url: '/board/user/'+id,
                 method: 'GET',

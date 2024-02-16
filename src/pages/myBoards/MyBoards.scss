@@ -1,0 +1,8 @@
+@import '../../variables.scss';
+
+
+@media (max-width: $media-sm-2){
+    .my-boards-list>div{
+        flex-direction: column;
+    }
+}

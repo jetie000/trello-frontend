@@ -29,7 +29,7 @@ function AddBoard() {
     const descRef = useRef<HTMLTextAreaElement>(null)
 
     const { isLoading, isError, data: dataSearch } = useSearchUsersQuery(searchStr, { skip: searchStr === '' });
-    const [addBoard, { isLoading: isLoadingAdd, isError: isErrorAdd, data: dataAdd }] = useAddBoardMutation();
+    const [addBoard, { isLoading: isLoadingAdd, isError: isErrorAdd, data: dataAdd, isSuccess: isSuccessAdd }] = useAddBoardMutation();
 
     useEffect(() => {
         if (isError) {
@@ -40,9 +40,14 @@ function AddBoard() {
     }, [isLoading])
 
     useEffect(() => {
-        if (isError) {
+        if (isErrorAdd) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
             setToastChildren("Request error")
+            myToast.show()
+        }
+        if(isSuccessAdd){
+            const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
+            setToastChildren("Board succesfully added")
             myToast.show()
         }
     }, [isLoadingAdd])
@@ -130,7 +135,14 @@ function AddBoard() {
                 <button type="button"
                     className="btn btn-primary w-100 mt-3"
                     onClick={() => addBoardClick()}>
-                    Add board
+                    {
+                        isLoadingAdd ?
+                            <div className="spinner-border spinner-border-sm" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div> :
+                            'Add board'
+
+                    }
                 </button>
 
             </div>
