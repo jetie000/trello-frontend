@@ -27,7 +27,7 @@ function Login() {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
             setToastChildren(((error as FetchBaseQueryError)?.data as IError).message)
             console.log(error);
-            
+
             myToast.show();
             return;
         }
@@ -63,7 +63,14 @@ function Login() {
                 <button type="button"
                     className="btn btn-primary mt-3 w-100"
                     onClick={logIn}>
-                    Sign In
+                    {
+                        isLoading ?
+                            <div className="spinner-border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div> :
+                            'Sign In'
+
+                    }
                 </button>
             </form>
         </div>

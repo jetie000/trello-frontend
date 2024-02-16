@@ -65,7 +65,14 @@ function Register() {
                 <button type="button"
                     className="btn btn-primary mt-3 w-100"
                     onClick={() => registerClick()}>
-                    Register
+                    {
+                        isLoading ?
+                            <div className="spinner-border" role="status">
+                                <span className="visually-hidden">Loading...</span>
+                            </div> :
+                            'Sign Up'
+
+                    }
                 </button>
             </form>
         </div>
