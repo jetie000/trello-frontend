@@ -4,19 +4,23 @@ import { useParams } from 'react-router';
 import './Board.scss'
 import { useMemo } from 'react';
 import BoardsColumns from './BoardsColumns';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { IError } from '@/types/error.interface';
 
 function Board() {
     const { id } = useParams()
-    const {isLoading, isError, data } = useGetBoardByIdQuery(Number(id));
+    const { isLoading, isError, data, error } = useGetBoardByIdQuery(Number(id));
 
-    const creatorName = useMemo(() => data && data.users?.find(u => u.id === data.creatorId)?.fullName, [data])
+    const creatorName = useMemo(
+        () => data && 'name' in data && data.users?.find(u => u.id === data.creatorId)?.fullName,
+        [data])
 
-    return (
-        isLoading ?
-            <div className="spinner-border m-auto" role="status">
-                < span className="visually-hidden" > Loading...</span >
-            </div >
-            :
+    return isLoading ?
+        <div className="spinner-border m-auto" role="status">
+            < span className="visually-hidden" > Loading...</span >
+        </div >
+        : isError ? <h1 className='m-auto'>{((error as FetchBaseQueryError).data as IError).message}</h1>
+            : data && 'name' in data &&
             <div className='d-flex'>
                 <div className='d-flex flex-column board-info gap-2'>
                     <div className="d-flex flex-column border rounded-2 p-3 ">
@@ -47,10 +51,9 @@ function Board() {
                     </ul>
                 </div>
                 <div className="d-flex">
-                    <BoardsColumns/>
+                    <BoardsColumns board={data}/>
                 </div>
             </div>
-    );
 }
 
 export default Board;

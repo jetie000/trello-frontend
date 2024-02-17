@@ -4,21 +4,21 @@ import { IColumn, IColumnAddInfo, IColumnUpdateInfo } from '@/types/column.inter
 
 export const columnApi = baseApi.injectEndpoints({
     endpoints: builder => ({
-        addColumn: builder.mutation<IColumn, IColumnAddInfo>({
+        addColumn: builder.mutation<IColumn | IError, IColumnAddInfo>({
             query: (columnInfo: IColumnAddInfo) => ({
                 body: columnInfo,
                 url: '/column',
                 method: 'POST',
             }),
         }),
-        changeColumn: builder.mutation<IColumn, IColumnUpdateInfo>({
+        changeColumn: builder.mutation<IColumn | IError, IColumnUpdateInfo>({
             query: (columnInfo: IColumnUpdateInfo) => ({
                 body: columnInfo,
                 url: '/column',
                 method: 'PUT',
             }),
         }),
-        deleteColumn: builder.mutation<IColumn, number>({
+        deleteColumn: builder.mutation<IColumn | IError, number>({
             query: (columnId: number) => ({
                 url: '/column/'+columnId,
                 method: 'DELETE',

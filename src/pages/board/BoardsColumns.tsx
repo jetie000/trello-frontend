@@ -1,7 +1,8 @@
+import { IBoard } from '@/types/board.interface';
 import * as React from 'react';
 
 
-function BoardsColumns() {
+function BoardsColumns({board}: {board: IBoard}) {
     return ( 
         <div>
 

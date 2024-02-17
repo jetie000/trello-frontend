@@ -14,13 +14,13 @@ function UsersList({ userIds, setUserIds }: UsersListProps) {
     const { setToastChildren } = useActions();
 
     useEffect(() => {
-        if(isError){
+        if (isError) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
             setToastChildren("Request error")
             myToast.show()
         }
     }, [isLoading])
-    
+
     const deleteUser = (id: number) => {
         const index = userIds.findIndex(el => el === id)
         if (index !== undefined)
@@ -30,7 +30,7 @@ function UsersList({ userIds, setUserIds }: UsersListProps) {
     return (
         <ul className='list-group add-board-users'>
             {
-                data && data.map(user =>
+                data && 'length' in data && data.map(user =>
                     <li className='list-group-item d-flex justify-content-between' key={user.id}>
                         <div className="d-flex flex-column">
                             <div>{user.email}</div>
