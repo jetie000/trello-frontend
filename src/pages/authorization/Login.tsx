@@ -18,8 +18,8 @@ function Login() {
             setToastChildren("You've succedfully logged in");
             myToast.show();
             login({
-                token: (data as AuthResponse).accessToken,
-                id: (data as AuthResponse).id
+                token: data?.accessToken,
+                id: data?.id
             });
             navigate('/');
         }

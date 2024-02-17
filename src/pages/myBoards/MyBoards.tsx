@@ -1,4 +1,4 @@
-import { useGetByUserIdQuery } from '@/store/api/board.api';
+import { useGetBoardByUserIdQuery } from '@/store/api/board.api';
 import { RootState } from '@/store/store';
 import { IBoard } from '@/types/board.interface';
 import React from 'react';
@@ -15,7 +15,7 @@ function MyBoards() {
     }
 
     const navigate = useNavigate()
-    const { isLoading, isError, data } = useGetByUserIdQuery(id || 0);
+    const { isLoading, isError, data } = useGetBoardByUserIdQuery(id || 0);
 
     return (
         <div className='d-flex flex-fill flex-column'>

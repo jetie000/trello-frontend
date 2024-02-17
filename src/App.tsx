@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
 import { store } from './store/store';
 import Toast from './pages/toast/Toast';
 import { useSetTheme } from './hooks/useSetTheme';
@@ -10,12 +11,12 @@ import Register from './pages/authorization/Register';
 import Custom404 from './pages/notFound/NotFound';
 import ReactDOM from 'react-dom/client';
 import Header from './pages/header/Header';
-import "./index.scss";
 import Wrapper from './pages/wrapper/Wrapper';
 import MyBoards from './pages/myBoards/MyBoards';
 import AddBoard from './pages/addBoard/AddBoard';
 import Cabinet from './pages/cabinet/Cabinet';
-import { ErrorBoundary } from 'react-error-boundary';
+import Board from './pages/board/Board';
+import "./index.scss";
 
 function App() {
 
@@ -28,7 +29,7 @@ function App() {
     return (
 
         <Provider store={store}>
-            <ErrorBoundary fallback={<h1>ERROR: Something went wrong</h1>}>
+            <ErrorBoundary fallback={<h1 className='p-4'>ERROR: Something went wrong</h1>}>
                 <BrowserRouter>
                     <Header />
                     <Wrapper>
@@ -47,6 +48,7 @@ function App() {
                                 } />
                             <Route path='/' element={<MyBoards />} />
                             <Route path='/board/add' element={<AddBoard />} />
+                            <Route path='/board/:id' element={<Board />} />
                             <Route path='/cabinet' element={<Cabinet />} />
                             <Route path='*' element={<Custom404 />} />
                         </Routes>

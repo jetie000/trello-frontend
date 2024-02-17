@@ -87,7 +87,7 @@ function Cabinet() {
                 oldPassword: inputOldPassword.trim(),
                 fullName: inputFullName.trim(),
                 password: inputNewPassword.trim(),
-                id: (dataUser as IUser).id
+                id: dataUser?.id || 0
             });
     }
 
@@ -98,7 +98,7 @@ function Cabinet() {
             <div className='d-flex flex-column gap-3'>
                 <span>{variables.LANGUAGES[language].SURE_DELETE_ACC_MY}</span>
                 <button onClick={() => {
-                    deleteUser((dataUser as IUser).id);
+                    deleteUser(dataUser.id);
                     logOutClick()
                 }} className='btn btn-danger'>
                     {variables.LANGUAGES[language].DELETE_ACCOUNT}
@@ -119,13 +119,13 @@ function Cabinet() {
                     <label htmlFor="inputFullName">{variables.LANGUAGES[language].NAME}</label>
                     <input className="form-control" id="inputFullName"
                         placeholder={variables.LANGUAGES[language].ENTER_NEW_NAME}
-                        defaultValue={(dataUser as IUser)?.fullName.split(' ', 2)[1]} />
+                        defaultValue={dataUser?.fullName.split(' ', 2)[1]} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputEmail">Email</label>
                     <input type='email' className="form-control" id="inputEmail"
                         placeholder={variables.LANGUAGES[language].ENTER_NEW_EMAIL}
-                        defaultValue={(dataUser as IUser)?.email} />
+                        defaultValue={dataUser?.email} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputOldPassword">{variables.LANGUAGES[language].OLD_PASS}</label>

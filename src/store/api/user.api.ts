@@ -5,33 +5,33 @@ import { IError } from '@/types/error.interface'
 
 export const userApi = baseApi.injectEndpoints({
     endpoints: builder => ({
-        getByIds: builder.query<IUserResponse[] | IError, number[]>({
+        getByIds: builder.query<IUserResponse[], number[]>({
             query: (ids: number[]) => ({
                 url: '/user/getByIds/'+ids.join('_'),
                 method: 'GET',
             })
         }),
-        getById: builder.query<IUser | IError, number>({
+        getById: builder.query<IUser, number>({
             query: (id: number) => ({
                 url: '/user/'+id,
                 method: 'GET',
             })
         }),
-        logInUser: builder.mutation<AuthResponse | IError, IUserLoginInfo>({
+        logInUser: builder.mutation<AuthResponse, IUserLoginInfo>({
             query: (userInfo: IUserLoginInfo) => ({
                 body: userInfo,
                 url: '/auth/login',
                 method: 'POST',
             })
         }),
-        registerUser: builder.mutation<AuthResponse | IError, IUserRegisterInfo>({
+        registerUser: builder.mutation<AuthResponse, IUserRegisterInfo>({
             query: (userInfo: IUserRegisterInfo) => ({
                 body: userInfo,
                 url: '/auth/register',
                 method: 'POST',
             }),
         }),
-        changeUser: builder.mutation<AuthResponse | IError, IUserChangeInfo>({
+        changeUser: builder.mutation<AuthResponse, IUserChangeInfo>({
             query: (userInfo: IUserChangeInfo) => ({
                 body: userInfo,
                 url: '/user',
@@ -44,13 +44,13 @@ export const userApi = baseApi.injectEndpoints({
                 method: 'POST',
             }),
         }),
-        deleteUser: builder.mutation<string | IError, number>({
+        deleteUser: builder.mutation<string, number>({
             query: (userId: number) => ({
                 url: '/user/'+userId,
                 method: 'DELETE',
             })
         }),
-        searchUsers: builder.query<IUserResponse[] | IError, string>({
+        searchUsers: builder.query<IUserResponse[], string>({
             query: (search: string) => ({
                 url: '/user/search/'+search,
                 method: "GET"

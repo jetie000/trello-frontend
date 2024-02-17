@@ -30,7 +30,7 @@ function UsersList({ userIds, setUserIds }: UsersListProps) {
     return (
         <ul className='list-group add-board-users'>
             {
-                data && (data as IUserResponse[]).map(user =>
+                data && data.map(user =>
                     <li className='list-group-item d-flex justify-content-between' key={user.id}>
                         <div className="d-flex flex-column">
                             <div>{user.email}</div>

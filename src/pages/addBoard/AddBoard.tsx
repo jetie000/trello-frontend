@@ -116,7 +116,7 @@ function AddBoard() {
                 {isShow &&
                     <div className="position-relative">
                         <ul onClick={() => setIsShow(false)} id='searchList' className="list-group user-search-list position-absolute">
-                            {dataSearch && searchStr !== '' && (dataSearch as IUserResponse[]).length > 0 && (dataSearch as IUserResponse[]).map(user =>
+                            {dataSearch && searchStr !== '' && dataSearch.length > 0 && dataSearch.map(user =>
                                 <li
                                     onClick={() => addUserClick(user)}
                                     className='list-group-item p-2 cursor-pointer text-truncate'
