@@ -1,6 +1,8 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { variables } from "@/variables";
 import { AuthResponse } from "@/types/authResponse.interface";
+import { store } from "../store";
+import { userSlice } from "../slices/user.slice";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: process.env.API_URL,
@@ -26,8 +28,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             localStorage.setItem(variables.TOKEN_LOCALSTORAGE, (refreshResult.data as AuthResponse).accessToken)
             result = await baseQuery(args, api, extraOptions);
         } else {
-            localStorage.removeItem(variables.TOKEN_LOCALSTORAGE)
-            localStorage.removeItem(variables.USERID_LOCALSTORAGE)
+            store.dispatch(userSlice.actions.logout())
         }
     }
     return result;

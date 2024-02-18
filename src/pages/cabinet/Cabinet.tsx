@@ -46,6 +46,8 @@ function Cabinet() {
     useEffect(() => {
         const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
         if (isSuccessDelete) {
+            const myModal = bootstrapModal.getOrCreateInstance(document.getElementById('myInfoModal') || 'myInfoModal');
+            myModal.hide();
             setToastChildren(variables.LANGUAGES[language].USER_SUCCESSFULLY_DELETED)
             myToast.show()
         }
@@ -81,7 +83,7 @@ function Cabinet() {
             myToast.show();
             return;
         }
-        if (token)
+        if (token && dataUser && 'id' in dataUser)
             changeUser({
                 email: inputEmail.trim(),
                 oldPassword: inputOldPassword.trim(),
@@ -93,7 +95,7 @@ function Cabinet() {
 
     const deleteAccClick = () => {
         const myModal = bootstrapModal.getOrCreateInstance(document.getElementById('myInfoModal') || 'myInfoModal');
-        const children = dataUser && !isError
+        const children = dataUser && 'id' in dataUser && !isError
             ?
             <div className='d-flex flex-column gap-3'>
                 <span>{variables.LANGUAGES[language].SURE_DELETE_ACC_MY}</span>
@@ -119,13 +121,13 @@ function Cabinet() {
                     <label htmlFor="inputFullName">{variables.LANGUAGES[language].NAME}</label>
                     <input className="form-control" id="inputFullName"
                         placeholder={variables.LANGUAGES[language].ENTER_NEW_NAME}
-                        defaultValue={dataUser?.fullName.split(' ', 2)[1]} />
+                        defaultValue={(dataUser as IUser)?.fullName.split(' ', 2)[1]} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputEmail">Email</label>
                     <input type='email' className="form-control" id="inputEmail"
                         placeholder={variables.LANGUAGES[language].ENTER_NEW_EMAIL}
-                        defaultValue={dataUser?.email} />
+                        defaultValue={(dataUser as IUser)?.email} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputOldPassword">{variables.LANGUAGES[language].OLD_PASS}</label>

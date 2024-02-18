@@ -1,16 +1,40 @@
-.board-info{
+.board-info {
     width: 350px;
 
-    &>:first-child{
+    &>:first-child {
         height: 200px;
     }
 
-    &>:nth-child(2){
+    &>:nth-child(2) {
         height: calc(100vh - 300px);
     }
 }
 
-.board-users-avatar{
+.board-users-avatar {
     width: 50px;
     height: 50px;
+}
+
+.board-columns {
+    height: calc(100vh - 100px);
+
+    &>div {
+
+        align-items: flex-start;
+
+        &>* {
+            width: 200px !important;
+            overflow-y: auto;
+        }
+
+        &>button{
+            height: 100px;
+        }
+    }
+}
+
+.board-tasks{
+    &>div{
+        height: 200px;
+    }
 }
