@@ -100,8 +100,8 @@ function Columns({ board }: { board: IBoard }) {
             </div>
             <Modal title='Change Column' id='changeColumn' size='sm'>
                 <div className="d-flex flex-column">
-                    <label htmlFor="inputColumnName">Name</label>
-                    <input className="form-control mb-2" id="inputColumnName"
+                    <label htmlFor="inputColumnNameChange">Name</label>
+                    <input className="form-control mb-2" id="inputColumnNameChange"
                         placeholder="Enter column name" ref={changeColumnRef} defaultValue={currentColumn?.name} />
                     <button className='btn btn-primary' onClick={addColumnClick}>
                         Change column

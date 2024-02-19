@@ -5,7 +5,7 @@ import { store } from "../store";
 import { userSlice } from "../slices/user.slice";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: variables.API_URL,
+    baseUrl: process.env.API_URL,
     credentials: "include",
     prepareHeaders: (headers) => {
         if (localStorage.getItem(variables.TOKEN_LOCALSTORAGE))

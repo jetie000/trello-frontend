@@ -47,7 +47,7 @@ function TaskAdd({column}:{column: IColumn | undefined}) {
             <input className="form-control mb-2" id="inputTaskName"
                 placeholder="Enter task name" ref={addTaskNameRef} />
             <label htmlFor="inputTaskDesc">Description (Optional)</label>
-            <textarea className="form-control mb-2" id="inputDescName"
+            <textarea className="form-control mb-2" id="inputTaskDesc"
                 placeholder="Enter task description" ref={addTaskDescRef} />
             <UsersList userIds={userIds} setUserIds={setUserIds} boardId={column?.boardId}/>
             <button className='btn btn-primary mt-2' onClick={addTaskClick}>

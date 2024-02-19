@@ -75,11 +75,11 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
 
     return (
         <div className="d-flex flex-column">
-            <label htmlFor="inputTaskName">Name</label>
-            <input className="form-control mb-2" id="inputTaskName"
+            <label htmlFor="inputTaskNameChange">Name</label>
+            <input className="form-control mb-2" id="inputTaskNameChange"
                 placeholder="Enter task name" ref={changeTaskNameRef} defaultValue={task?.name} />
-            <label htmlFor="inputTaskDesc">Description (Optional)</label>
-            <textarea className="form-control mb-2" id="inputDescName"
+            <label htmlFor="inputTaskDescChange">Description (Optional)</label>
+            <textarea className="form-control mb-2" id="inputTaskDescChange"
                 placeholder="Enter task description" ref={changeTaskDescRef} defaultValue={task?.description} />
             <UsersList userIds={userIds} setUserIds={setUserIds} boardId={Number(id)}/>
             <button className='btn btn-primary mt-2 mb-2' onClick={changeTaskClick}>
