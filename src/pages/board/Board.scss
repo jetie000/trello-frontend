@@ -5,29 +5,39 @@
     height: calc(100vh - 85px);
 
     &>:first-child {
-        height: 200px;
+        height: 250px;
     }
 
     &>:nth-child(2) {
-        height: calc(100vh - 300px);
+        height: calc(100vh - 350px);
+        &>h6{
+            min-height: 100px;
+        }
     }
 }
+
 
 .board-users-avatar {
     width: 50px;
     height: 50px;
 }
 
+.board-users-avatar-sm{
+    width: 25px;
+    height: 25px;
+}
+
 .board-columns {
     height: calc(100vh - 85px);
 
-    &>div {
+    &>div:first-child {
 
         align-items: flex-start;
 
         &>* {
-            width: 200px !important;
+            width: 200px;
             overflow-y: auto;
+            max-height: calc(100vh - 125px);
         }
 
         &>button{

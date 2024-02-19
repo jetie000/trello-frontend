@@ -10,6 +10,7 @@ export const taskApi = baseApi.injectEndpoints({
                 url: '/task',
                 method: 'POST',
             }),
+            invalidatesTags: ["Board"]
         }),
         changeTask: builder.mutation<ITask | IError, ITaskUpdateInfo>({
             query: (taskInfo: ITaskUpdateInfo) => ({
@@ -17,12 +18,14 @@ export const taskApi = baseApi.injectEndpoints({
                 url: '/task',
                 method: 'PUT',
             }),
+            invalidatesTags: ["Board"]
         }),
-        deleteTask: builder.mutation<ITask | IError, number>({
-            query: (taskId: number) => ({
-                url: '/task/'+taskId,
+        deleteTask: builder.mutation<ITask | IError, {taskId: number, boardId: number}>({
+            query: ({taskId, boardId}) => ({
+                url: '/task/'+taskId+'/board/'+boardId,
                 method: 'DELETE',
-            })
+            }),
+            invalidatesTags: ["Board"]
         }),
     })
 })

@@ -14,26 +14,26 @@ function UsersList({ userIds, setUserIds }: UsersListProps) {
     const inputSearch = useRef<HTMLInputElement>(null);
     const [searchStr, setSearchStr] = useState('');
     const [isShow, setIsShow] = useState(false);
-    const { isLoading, isError, data } = useGetByIdsQuery(userIds);
+    const { isLoading, isError, data } = useGetByIdsQuery(userIds, {skip: userIds.length === 0});
     const { setToastChildren } = useActions();
-    const { isLoading: isLoadingSearch, isError: isErrorSearch, data: dataSearch } = useSearchUsersQuery(searchStr, { skip: searchStr === '' });
+    const { isLoading: isLoadingSearch, isError: isErrorSearch, data: dataSearch } = useSearchUsersQuery(searchStr, { skip: searchStr === ''});
 
     useEffect(() => {
         if (isError) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Request error")
+            setToastChildren("Request by ids error")
             myToast.show()
         }
     }, [isLoading])
 
     
     useEffect(() => {
-        if (isError) {
+        if (isErrorSearch) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Request error")
+            setToastChildren("Request search error")
             myToast.show()
         }
-    }, [isLoading])
+    }, [isLoadingSearch])
 
     const deleteUser = (id: number) => {
         const index = userIds.findIndex(el => el === id)
