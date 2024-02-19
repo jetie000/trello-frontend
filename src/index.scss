@@ -23,6 +23,14 @@ body {
     cursor: pointer;
 }
 
+.min-w-0{
+    min-width: 0;
+}
+
+.min-h-0{
+    min-height: 0;
+}
+
 // !IMPORTANT for overriding bootstrap styles
 
 .main-wrapper {

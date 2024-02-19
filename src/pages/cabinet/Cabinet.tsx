@@ -8,7 +8,7 @@ import { useActions } from "@/hooks/useActions";
 import { baseApi } from "@/store/api/baseApi";
 import { variables } from "@/variables";
 import './Cabinet.scss'
-import Modal from "../modal/Modal";
+import Modal from "../../components/modal/Modal";
 import { IModalInfo } from "@/types/modalInfo.interface";
 import { useChangeUserMutation, useDeleteUserMutation, useGetByIdQuery, useLogoutMutation } from "@/store/api/user.api";
 import { IUser } from "@/types/user.interface";
@@ -46,6 +46,8 @@ function Cabinet() {
     useEffect(() => {
         const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
         if (isSuccessDelete) {
+            const myModal = bootstrapModal.getOrCreateInstance(document.getElementById('myInfoModal') || 'myInfoModal');
+            myModal.hide();
             setToastChildren(variables.LANGUAGES[language].USER_SUCCESSFULLY_DELETED)
             myToast.show()
         }
@@ -81,24 +83,24 @@ function Cabinet() {
             myToast.show();
             return;
         }
-        if (token)
+        if (token && dataUser && 'id' in dataUser)
             changeUser({
                 email: inputEmail.trim(),
                 oldPassword: inputOldPassword.trim(),
                 fullName: inputFullName.trim(),
                 password: inputNewPassword.trim(),
-                id: (dataUser as IUser).id
+                id: dataUser?.id || 0
             });
     }
 
     const deleteAccClick = () => {
         const myModal = bootstrapModal.getOrCreateInstance(document.getElementById('myInfoModal') || 'myInfoModal');
-        const children = dataUser && !isError
+        const children = dataUser && 'id' in dataUser && !isError
             ?
             <div className='d-flex flex-column gap-3'>
                 <span>{variables.LANGUAGES[language].SURE_DELETE_ACC_MY}</span>
                 <button onClick={() => {
-                    deleteUser((dataUser as IUser).id);
+                    deleteUser(dataUser.id);
                     logOutClick()
                 }} className='btn btn-danger'>
                     {variables.LANGUAGES[language].DELETE_ACCOUNT}
@@ -119,7 +121,7 @@ function Cabinet() {
                     <label htmlFor="inputFullName">{variables.LANGUAGES[language].NAME}</label>
                     <input className="form-control" id="inputFullName"
                         placeholder={variables.LANGUAGES[language].ENTER_NEW_NAME}
-                        defaultValue={(dataUser as IUser)?.fullName.split(' ', 2)[1]} />
+                        defaultValue={(dataUser as IUser)?.fullName} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputEmail">Email</label>
@@ -159,7 +161,7 @@ function Cabinet() {
                     </svg>
                 </button>
             </div>
-            <Modal id='myInfoModal' title={modalInfo.title}>
+            <Modal id='myInfoModal' title={modalInfo.title} size="sm">
                 {modalInfo.children}
             </Modal>
         </div>

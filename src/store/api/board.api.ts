@@ -4,17 +4,19 @@ import { IBoard, IBoardAddInfo, IBoardUpdateInfo } from '@/types/board.interface
 
 export const boardApi = baseApi.injectEndpoints({
     endpoints: builder => ({
-        getById: builder.query<IBoard | IError, number>({
+        getBoardById: builder.query<IBoard | IError, number>({
             query: (id: number) => ({
                 url: '/board/'+id,
                 method: 'GET',
-            })
+            }),
+            providesTags: ['Board']
         }),
-        getByUserId: builder.query<IBoard | IError, number>({
+        getBoardByUserId: builder.query<IBoard[] | IError, number>({
             query: (id: number) => ({
                 url: '/board/user/'+id,
                 method: 'GET',
-            })
+            }),
+            providesTags: ['Boards']
         }),
         addBoard: builder.mutation<IBoard | IError, IBoardAddInfo>({
             query: (boardInfo: IBoardAddInfo) => ({
@@ -22,6 +24,7 @@ export const boardApi = baseApi.injectEndpoints({
                 url: '/board',
                 method: 'POST',
             }),
+            invalidatesTags: ['Boards']
         }),
         changeBoard: builder.mutation<IBoard | IError, IBoardUpdateInfo>({
             query: (boardInfo: IBoardUpdateInfo) => ({
@@ -29,12 +32,21 @@ export const boardApi = baseApi.injectEndpoints({
                 url: '/board',
                 method: 'PUT',
             }),
+            invalidatesTags: ['Board', 'Boards']
         }),
         deleteBoard: builder.mutation<IBoard | IError, number>({
             query: (boardId: number) => ({
                 url: '/board/'+boardId,
                 method: 'DELETE',
-            })
+            }),
+            invalidatesTags: ['Board', 'Boards']
+        }),
+        leaveBoard: builder.mutation<IBoard | IError, number>({
+            query: (boardId: number) => ({
+                url: '/board/'+boardId+'/leave',
+                method: 'POST',
+            }),
+            invalidatesTags: ['Board', 'Boards']
         }),
     })
 })
@@ -43,6 +55,7 @@ export const {
     useAddBoardMutation,
     useChangeBoardMutation,
     useDeleteBoardMutation,
-    useGetByIdQuery,
-    useGetByUserIdQuery
+    useGetBoardByIdQuery,
+    useGetBoardByUserIdQuery,
+    useLeaveBoardMutation
  } = boardApi

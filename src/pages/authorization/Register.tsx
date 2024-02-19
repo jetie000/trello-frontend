@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Modal from '@/pages/modal/Modal'
+import Modal from '@/components/modal/Modal'
 import { useRegisterUserMutation } from '@/store/api/user.api';
 import { Toast as bootstrapToast } from 'bootstrap';
 import { useActions } from '@/hooks/useActions';
@@ -13,7 +13,7 @@ function Register() {
     useEffect(() => {
         const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
         if (isSuccess) {
-            setToastChildren("You've succesfully registered\nCheck your e-mail for confirm letter");
+            setToastChildren("You've succesfully registered. Check your e-mail for confirm letter");
             (document.getElementById('inputFullName') as HTMLInputElement).value = '';
             (document.getElementById('inputEmail') as HTMLInputElement).value = '';
             (document.getElementById('inputPassword') as HTMLInputElement).value = '';

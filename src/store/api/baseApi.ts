@@ -1,9 +1,11 @@
 import { BaseQueryFn, FetchArgs, FetchBaseQueryError, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { variables } from "@/variables";
 import { AuthResponse } from "@/types/authResponse.interface";
+import { store } from "../store";
+import { userSlice } from "../slices/user.slice";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: variables.API_URL,
+    baseUrl: process.env.API_URL,
     credentials: "include",
     prepareHeaders: (headers) => {
         if (localStorage.getItem(variables.TOKEN_LOCALSTORAGE))
@@ -26,8 +28,7 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
             localStorage.setItem(variables.TOKEN_LOCALSTORAGE, (refreshResult.data as AuthResponse).accessToken)
             result = await baseQuery(args, api, extraOptions);
         } else {
-            localStorage.removeItem(variables.TOKEN_LOCALSTORAGE)
-            localStorage.removeItem(variables.USERID_LOCALSTORAGE)
+            store.dispatch(userSlice.actions.logout())
         }
     }
     return result;
@@ -36,6 +37,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const baseApi = createApi({
     reducerPath: 'baseApi',
     baseQuery: baseQueryWithReauth,
-    tagTypes: ['User', 'Users'],
+    tagTypes: ['User', 'Users', 'Board', 'Boards'],
     endpoints: () => ({}),
 });

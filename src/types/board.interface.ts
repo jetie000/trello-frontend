@@ -19,7 +19,7 @@ export interface IBoardAddInfo{
 
 export interface IBoardUpdateInfo{
     id: number
-    name: number
-    description?: number
+    name: string
+    description?: string
     userIds: number[]
 }
