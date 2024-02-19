@@ -1,25 +1,30 @@
 import { useActions } from '@/hooks/useActions';
 import { useGetByIdsQuery, useSearchUsersQuery } from '@/store/api/user.api';
 import { IUserResponse } from '@/types/user.interface';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Toast as bootstrapToast } from 'bootstrap';
 
 interface UsersListProps {
     userIds: number[]
     setUserIds: Function
+    boardId?: number
 }
 
-function UsersList({ userIds, setUserIds }: UsersListProps) {
-    
+function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
+
     const inputSearch = useRef<HTMLInputElement>(null);
     const [searchStr, setSearchStr] = useState('');
     const [isShow, setIsShow] = useState(false);
-    const { isLoading, isError, data } = useGetByIdsQuery(userIds, {skip: userIds.length === 0});
+    const { isLoading, isError, data } = useGetByIdsQuery(userIds, { skip: userIds.length === 0 });
     const { setToastChildren } = useActions();
-    const { isLoading: isLoadingSearch, isError: isErrorSearch, data: dataSearch } = useSearchUsersQuery(searchStr, { skip: searchStr === ''});
+    const { isLoading: isLoadingSearch, isError: isErrorSearch, data: dataSearch } = useSearchUsersQuery(searchStr, { skip: searchStr === '' });
 
-    console.log(userIds);
-    
+    const dataSearchChecked = useMemo(() => dataSearch && boardId && 'length' in dataSearch ?
+        dataSearch.filter(u => u.boardsPartipated?.find(b => b.id === boardId)) :
+        dataSearch,
+        [dataSearch, boardId]
+    )
+
     useEffect(() => {
         if (isError) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
@@ -28,7 +33,7 @@ function UsersList({ userIds, setUserIds }: UsersListProps) {
         }
     }, [isLoading])
 
-    
+
     useEffect(() => {
         if (isErrorSearch) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
@@ -77,8 +82,8 @@ function UsersList({ userIds, setUserIds }: UsersListProps) {
                 isShow &&
                 <div className="position-relative">
                     <ul onClick={() => setIsShow(false)} id='searchList' className="list-group user-search-list position-absolute">
-                        {dataSearch && searchStr !== '' && 'length' in dataSearch && dataSearch.length > 0 &&
-                            dataSearch.map(user =>
+                        {dataSearchChecked && searchStr !== '' && 'length' in dataSearchChecked && dataSearchChecked.length > 0 &&
+                            dataSearchChecked.map(user =>
                                 <li
                                     onClick={() => addUserClick(user)}
                                     className='list-group-item p-2 cursor-pointer text-truncate'

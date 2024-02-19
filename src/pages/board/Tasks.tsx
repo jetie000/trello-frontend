@@ -32,7 +32,7 @@ function Tasks({ column, setCurrentColumn, setCurrentTask }: TasksProps) {
                                 {
                                     t.users.filter((t, i) => i < 3).map(tu =>
                                         <div key={tu.id}
-                                            className='d-flex board-users-avatar-sm bg-secondary
+                                            className='d-flex board-users-avatar-sm bg-secondary text-light
                                          border rounded-circle align-items-center justify-content-center'>
                                             {tu.fullName[0]}
                                         </div>)

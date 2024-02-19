@@ -81,7 +81,7 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
             <label htmlFor="inputTaskDesc">Description (Optional)</label>
             <textarea className="form-control mb-2" id="inputDescName"
                 placeholder="Enter task description" ref={changeTaskDescRef} defaultValue={task?.description} />
-            <UsersList userIds={userIds} setUserIds={setUserIds} />
+            <UsersList userIds={userIds} setUserIds={setUserIds} boardId={Number(id)}/>
             <button className='btn btn-primary mt-2 mb-2' onClick={changeTaskClick}>
                 Change task
             </button>
