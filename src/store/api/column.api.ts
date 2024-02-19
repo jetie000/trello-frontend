@@ -10,6 +10,7 @@ export const columnApi = baseApi.injectEndpoints({
                 url: '/column',
                 method: 'POST',
             }),
+            invalidatesTags: ["Board"]
         }),
         changeColumn: builder.mutation<IColumn | IError, IColumnUpdateInfo>({
             query: (columnInfo: IColumnUpdateInfo) => ({
@@ -17,12 +18,14 @@ export const columnApi = baseApi.injectEndpoints({
                 url: '/column',
                 method: 'PUT',
             }),
+            invalidatesTags: ["Board"]
         }),
         deleteColumn: builder.mutation<IColumn | IError, number>({
             query: (columnId: number) => ({
                 url: '/column/'+columnId,
                 method: 'DELETE',
-            })
+            }),
+            invalidatesTags: ["Board"]
         }),
     })
 })

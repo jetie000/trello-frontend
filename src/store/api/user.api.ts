@@ -9,13 +9,15 @@ export const userApi = baseApi.injectEndpoints({
             query: (ids: number[]) => ({
                 url: '/user/getByIds/'+ids.join('_'),
                 method: 'GET',
-            })
+            }),
+            providesTags: ['Users']
         }),
         getById: builder.query<IUser | IError, number>({
             query: (id: number) => ({
                 url: '/user/'+id,
                 method: 'GET',
-            })
+            }),
+            providesTags: ['User']
         }),
         logInUser: builder.mutation<AuthResponse | IError, IUserLoginInfo>({
             query: (userInfo: IUserLoginInfo) => ({
@@ -37,6 +39,7 @@ export const userApi = baseApi.injectEndpoints({
                 url: '/user',
                 method: 'PUT',
             }),
+            invalidatesTags: ['User', 'Users']
         }),
         logout: builder.mutation<string | IError, null>({
             query: () => ({
@@ -48,13 +51,15 @@ export const userApi = baseApi.injectEndpoints({
             query: (userId: number) => ({
                 url: '/user/'+userId,
                 method: 'DELETE',
-            })
+            }),
+            invalidatesTags: ['User', 'Users']
         }),
         searchUsers: builder.query<IUserResponse[] | IError, string>({
             query: (search: string) => ({
                 url: '/user/search/'+search,
                 method: "GET"
-            })
+            }),
+            providesTags: ['Users']
         })
     })
 })

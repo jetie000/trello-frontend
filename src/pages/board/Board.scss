@@ -1,5 +1,8 @@
+@import '../../variables.scss';
+
 .board-info {
     width: 350px;
+    height: calc(100vh - 85px);
 
     &>:first-child {
         height: 200px;
@@ -16,7 +19,7 @@
 }
 
 .board-columns {
-    height: calc(100vh - 100px);
+    height: calc(100vh - 85px);
 
     &>div {
 

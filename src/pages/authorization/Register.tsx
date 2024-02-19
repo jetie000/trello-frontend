@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Modal from '@/pages/modal/Modal'
+import Modal from '@/components/modal/Modal'
 import { useRegisterUserMutation } from '@/store/api/user.api';
 import { Toast as bootstrapToast } from 'bootstrap';
 import { useActions } from '@/hooks/useActions';

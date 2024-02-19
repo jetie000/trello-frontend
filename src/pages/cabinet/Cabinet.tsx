@@ -8,7 +8,7 @@ import { useActions } from "@/hooks/useActions";
 import { baseApi } from "@/store/api/baseApi";
 import { variables } from "@/variables";
 import './Cabinet.scss'
-import Modal from "../modal/Modal";
+import Modal from "../../components/modal/Modal";
 import { IModalInfo } from "@/types/modalInfo.interface";
 import { useChangeUserMutation, useDeleteUserMutation, useGetByIdQuery, useLogoutMutation } from "@/store/api/user.api";
 import { IUser } from "@/types/user.interface";
@@ -161,7 +161,7 @@ function Cabinet() {
                     </svg>
                 </button>
             </div>
-            <Modal id='myInfoModal' title={modalInfo.title}>
+            <Modal id='myInfoModal' title={modalInfo.title} size="sm">
                 {modalInfo.children}
             </Modal>
         </div>
