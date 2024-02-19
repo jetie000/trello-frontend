@@ -24,7 +24,6 @@ function Columns({ board }: { board: IBoard }) {
     const [currentColumn, setCurrentColumn] = useState<IColumn>()
     const [currentTask, setCurrentTask] = useState<ITask>()
 
-
     const addColumnClick = () => {
         if (changeColumnRef.current &&
             changeColumnRef.current.value !== '' &&
@@ -89,7 +88,7 @@ function Columns({ board }: { board: IBoard }) {
                                 </button>
                             </div>
                             <hr className='mt-2 mb-2' />
-                            <Tasks column={c} setCurrentColumn={setCurrentColumn} setCurrentTask={setCurrentTask}/>
+                            <Tasks column={c} setCurrentColumn={setCurrentColumn} setCurrentTask={setCurrentTask} />
                         </div>)
                 }
                 <button className='btn btn-primary border rounded-2' data-bs-toggle="modal" data-bs-target="#addColumn">
@@ -121,12 +120,12 @@ function Columns({ board }: { board: IBoard }) {
                 </div>
             </Modal>
             <Modal id='addTask' title='Add task' size='md'>
-                <TaskAdd column={currentColumn}/>
+                <TaskAdd column={currentColumn} />
             </Modal>
             <Modal id='changeTask' title='Change task' size='md'>
-                <TaskChangeDelete task={currentTask}/>
+                <TaskChangeDelete task={currentTask} />
             </Modal>
-            
+
         </div>
     );
 }

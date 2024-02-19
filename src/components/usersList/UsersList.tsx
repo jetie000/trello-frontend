@@ -18,6 +18,8 @@ function UsersList({ userIds, setUserIds }: UsersListProps) {
     const { setToastChildren } = useActions();
     const { isLoading: isLoadingSearch, isError: isErrorSearch, data: dataSearch } = useSearchUsersQuery(searchStr, { skip: searchStr === ''});
 
+    console.log(userIds);
+    
     useEffect(() => {
         if (isError) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');

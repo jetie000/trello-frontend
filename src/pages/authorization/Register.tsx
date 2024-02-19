@@ -13,7 +13,7 @@ function Register() {
     useEffect(() => {
         const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
         if (isSuccess) {
-            setToastChildren("You've succesfully registered\nCheck your e-mail for confirm letter");
+            setToastChildren("You've succesfully registered. Check your e-mail for confirm letter");
             (document.getElementById('inputFullName') as HTMLInputElement).value = '';
             (document.getElementById('inputEmail') as HTMLInputElement).value = '';
             (document.getElementById('inputPassword') as HTMLInputElement).value = '';

@@ -2,9 +2,13 @@ import { IColumn } from '@/types/column.interface';
 import moment from 'moment';
 import * as React from 'react';
 
-function Tasks({ column, setCurrentColumn, setCurrentTask }: { column: IColumn, setCurrentColumn: Function, setCurrentTask: Function }) {
+interface TasksProps {
+    column: IColumn,
+    setCurrentColumn: Function,
+    setCurrentTask: Function
+}
 
-
+function Tasks({ column, setCurrentColumn, setCurrentTask }: TasksProps) {
 
     const tasksSorted = React.useMemo(
         () => column.tasks && column.tasks.slice()
@@ -36,7 +40,7 @@ function Tasks({ column, setCurrentColumn, setCurrentTask }: { column: IColumn, 
                                 {
                                     t.users.length > 3 && '...'
                                 }
-                                { t.users.length === 0 && 'add users'}
+                                {t.users.length === 0 && 'add users'}
                             </div>
                         </div>
                     </div>

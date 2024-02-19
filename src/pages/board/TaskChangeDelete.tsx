@@ -11,13 +11,19 @@ import { useParams } from 'react-router-dom';
 
 
 function TaskChangeDelete({ task }: { task: ITask | undefined }) {
-    const {id} = useParams()
+    const { id } = useParams()
     const { setToastChildren } = useActions();
     const changeTaskNameRef = useRef<HTMLInputElement>(null)
     const changeTaskDescRef = useRef<HTMLTextAreaElement>(null)
     const [changeTask, { isSuccess: isSuccessChange, isError: isErrorChange, isLoading: isLoadingChange }] = useChangeTaskMutation()
     const [deleteTask, { isSuccess: isSuccessDelete, isError: isErrorDelete, isLoading: isLoadingDelete }] = useDeleteTaskMutation()
-    const [userIds, setUserIds] = useState<number[]>(task?.users.map(u => u.id) || [])
+    const [userIds, setUserIds] = useState<number[]>([])
+
+    React.useEffect(() => {
+        if (task?.users.length) {
+            setUserIds(task.users.map(u => u.id))
+        }
+    }, [task?.users])
 
     const changeTaskClick = () => {
         if (changeTaskNameRef.current && changeTaskDescRef.current &&
@@ -30,6 +36,11 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
                 columnId: task.columnId
             })
         }
+    }
+
+    const deleteTaskClick = () => {
+        const myModal = bootstrapModal.getOrCreateInstance(document.getElementById('deleteTask') || 'deleteTask');
+        myModal.show();
     }
 
     React.useEffect(() => {
@@ -74,10 +85,7 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
             <button className='btn btn-primary mt-2 mb-2' onClick={changeTaskClick}>
                 Change task
             </button>
-            <button className='btn btn-danger' onClick={() => {
-                const myModal = bootstrapModal.getOrCreateInstance(document.getElementById('deleteTask') || 'deleteTask');
-                myModal.show();
-            }}>
+            <button className='btn btn-danger' onClick={() => deleteTaskClick()}>
                 Delete task
             </button>
             <Modal id='deleteTask' title='Delete task' size='sm'>
@@ -85,7 +93,7 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
                     <div>
                         Are you sure you want delete this task?
                     </div>
-                    <button className='btn btn-danger' onClick={() => deleteTask({taskId: task?.id || 0, boardId: Number(id) || 0})}>
+                    <button className='btn btn-danger' onClick={() => deleteTask({ taskId: task?.id || 0, boardId: Number(id) || 0 })}>
                         Delete task
                     </button>
                 </div>
