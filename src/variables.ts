@@ -1,4 +1,5 @@
 export const variables = {
+    API_URL: "https://express-backend-trello.vercel.app/api",
     TOKEN_LOCALSTORAGE: "token",
     THEME_LOCALSTORAGE: "page_theme",
     LANGUAGE_LOCALSTORAGE: "page_language",
