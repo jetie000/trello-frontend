@@ -11,6 +11,7 @@ import TaskChangeDelete from './TaskChangeDelete';
 import ColumnChangeDelete from './ColumnChangeDelete';
 import { useChangeColumnMutation } from '@/store/api/column.api';
 import { useActions } from '@/hooks/useActions';
+import { useChangeTaskMutation } from '@/store/api/task.api';
 
 
 function Columns({ board }: { board: IBoard }) {
@@ -18,12 +19,29 @@ function Columns({ board }: { board: IBoard }) {
     const [currentColumn, setCurrentColumn] = useState<IColumn>()
     const [currentTask, setCurrentTask] = useState<ITask>()
     const [columns, setColumns] = useState<IColumn[]>()
+
     const [changeColumn, { isSuccess, isError, isLoading }] = useChangeColumnMutation()
+    const [changeTask, { isSuccess: isSuccessTask, isError: isErrorTask, isLoading: isLoadingTask }] = useChangeTaskMutation()
+
+    const [drugStartColumn, setDrugStartColumn] = useState<IColumn | undefined>()
+    const [drugStartTask, setDrugStartTask] = useState<ITask | undefined>()
 
     React.useEffect(() => {
-        if(isError){
+        if (isSuccessTask)
+            setDrugStartTask(undefined);
+        if (isErrorTask) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("You've succedfully logged in");
+            setToastChildren("Error changing task column");
+            myToast.show();
+        }
+    }, [isLoadingTask])
+
+    React.useEffect(() => {
+        if (isSuccess)
+            setDrugStartColumn(undefined);
+        if (isError) {
+            const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
+            setToastChildren("Error changing column order");
             myToast.show();
         }
     }, [isLoading])
@@ -32,8 +50,6 @@ function Columns({ board }: { board: IBoard }) {
         if (board.columns)
             setColumns(board.columns.slice().sort((c1, c2) => c1.order - c2.order))
     }, [board.columns])
-
-    const [drugStartColumn, setDrugStartColumn] = useState<IColumn>()
 
     function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
         e.currentTarget.className = 'border rounded-2 p-2 cursor-grab'
@@ -62,7 +78,33 @@ function Columns({ board }: { board: IBoard }) {
                 name: drugStartColumn.name
             })
         }
+        else
+            if (drugStartTask && drugStartTask.columnId !== c.id && columns) {
+                setColumns(columns.map(column => {
+                    let columnTemp = Object.assign({}, column)
+                    columnTemp.tasks = column.tasks?.slice()
+                    if (column.tasks?.some(t => t.id === drugStartTask.id)) {
+                        columnTemp.tasks = column.tasks.filter(t => t.id !== drugStartTask.id)
+                    } else
+                        if (column.id === c.id) {
+                            if (columnTemp.tasks?.length)
+                                columnTemp.tasks?.push(drugStartTask)
+                            else
+                                columnTemp.tasks = [drugStartTask]
+                        }
+                    return columnTemp
+                }))
+                changeTask({
+                    id: drugStartTask.id,
+                    name: drugStartTask.name,
+                    userIds: drugStartTask.users.map(u => u.id),
+                    columnId: c.id
+                })
+            }
     }
+
+    console.log(columns);
+    
 
     return (
         <div className='d-flex p-3 border rounded-2 board-columns flex-fill min-w-0 overflow-x-auto'>
@@ -91,7 +133,8 @@ function Columns({ board }: { board: IBoard }) {
                                 </button>
                             </div>
                             <hr className='mt-2 mb-2' />
-                            <Tasks columns={columns} column={c} setCurrentColumn={setCurrentColumn} setCurrentTask={setCurrentTask} />
+                            <Tasks column={c} setCurrentColumn={setCurrentColumn}
+                                setCurrentTask={setCurrentTask} setDrugStartTask={setDrugStartTask} />
                         </div>)
                 }
                 <button className='btn btn-primary border rounded-2' data-bs-toggle="modal" data-bs-target="#addColumn">

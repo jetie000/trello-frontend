@@ -1,4 +1,5 @@
 import { IColumn } from '@/types/column.interface';
+import { ITask } from '@/types/task.interface';
 import moment from 'moment';
 import * as React from 'react';
 
@@ -6,21 +7,41 @@ interface TasksProps {
     column: IColumn,
     setCurrentColumn: Function,
     setCurrentTask: Function
-    columns: IColumn[]
+    setDrugStartTask: Function
 }
 
-function Tasks({ column, setCurrentColumn, setCurrentTask, columns }: TasksProps) {
+function Tasks({
+    column,
+    setCurrentColumn,
+    setCurrentTask,
+    setDrugStartTask
+}: TasksProps) {
 
     const tasksSorted = React.useMemo(
         () => column.tasks && column.tasks.slice()
-            .sort((t1, t2) => t2.moveDate.getMilliseconds() - t1.moveDate.getMilliseconds())
+            .sort((t1, t2) => new Date(t2.moveDate).getMilliseconds() - new Date(t1.moveDate).getMilliseconds())
         , [column.tasks])
+
+    function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
+        e.stopPropagation()
+    }
+    function dragOverHandler(e: React.DragEvent<HTMLDivElement>) {
+        e.preventDefault()
+        e.stopPropagation()
+    }
+    function dragStartHandler(e: React.DragEvent<HTMLDivElement>, t: ITask) {
+        e.stopPropagation()
+        setDrugStartTask(t)
+    }
 
     return (
         <div className='rounded-2 d-flex flex-column'>
             {
                 tasksSorted && tasksSorted.map(t =>
-                    <div className='d-flex flex-column board-task cursor-pointer' key={t.id}
+                    <div className='d-flex flex-column board-task cursor-pointer cursor-grab' key={t.id} draggable={true}
+                        onDragLeave={(e) => dragLeaveHandler(e)}
+                        onDragStart={(e) => dragStartHandler(e, t)}
+                        onDragOver={(e) => dragOverHandler(e)}
                         onClick={() => setCurrentTask(t)} data-bs-toggle="modal" data-bs-target="#changeTask">
                         <span className='fs-5'>{t.name}</span>
                         <span>Moved:</span>
