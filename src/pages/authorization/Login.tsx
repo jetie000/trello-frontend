@@ -37,8 +37,8 @@ function Login() {
 
     const logIn = () => {
         if (passwordRef.current && emailRef.current &&
-            (passwordRef.current.value === "" ||
-                emailRef.current.value === "")) {
+            (passwordRef.current.value !== "" ||
+                emailRef.current.value !== "")) {
             logInUser({
                 email: emailRef.current.value.trim(),
                 password: passwordRef.current.value.trim()

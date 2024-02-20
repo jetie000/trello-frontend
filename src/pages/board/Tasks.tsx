@@ -6,9 +6,10 @@ interface TasksProps {
     column: IColumn,
     setCurrentColumn: Function,
     setCurrentTask: Function
+    columns: IColumn[]
 }
 
-function Tasks({ column, setCurrentColumn, setCurrentTask }: TasksProps) {
+function Tasks({ column, setCurrentColumn, setCurrentTask, columns }: TasksProps) {
 
     const tasksSorted = React.useMemo(
         () => column.tasks && column.tasks.slice()

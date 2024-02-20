@@ -33,9 +33,9 @@ function Register() {
 
     const registerClick = () => {
         if (fullNameRef.current && passwordRef.current && emailRef.current &&
-            (fullNameRef.current.value === "" ||
-                passwordRef.current.value === "" ||
-                emailRef.current.value === "")) {
+            (fullNameRef.current.value !== "" ||
+                passwordRef.current.value !== "" ||
+                emailRef.current.value !== "")) {
             registerUser({
                 email: emailRef.current.value.trim(),
                 password: passwordRef.current.value.trim(),
