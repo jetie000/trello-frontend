@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Modal from '@/components/modal/Modal'
 import { useRegisterUserMutation } from '@/store/api/user.api';
 import { Toast as bootstrapToast } from 'bootstrap';
@@ -9,19 +9,22 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 function Register() {
     const [registerUser, { isLoading, isSuccess, isError, data, error }] = useRegisterUserMutation();
     const { setToastChildren } = useActions();
+    const fullNameRef = useRef<HTMLInputElement>(null)
+    const emailRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-        if (isSuccess) {
+        if (isSuccess && fullNameRef.current && passwordRef.current && emailRef.current) {
             setToastChildren("You've succesfully registered. Check your e-mail for confirm letter");
-            (document.getElementById('inputFullName') as HTMLInputElement).value = '';
-            (document.getElementById('inputEmail') as HTMLInputElement).value = '';
-            (document.getElementById('inputPassword') as HTMLInputElement).value = '';
+            fullNameRef.current.value = ''
+            passwordRef.current.value = ''
+            emailRef.current.value = ''
             myToast.show()
         }
         if (isError) {
             console.log(error);
-            
+
             setToastChildren(((error as FetchBaseQueryError)?.data as IError).message)
             myToast.show()
         }
@@ -29,22 +32,21 @@ function Register() {
     }, [isLoading])
 
     const registerClick = () => {
-        let inputFullName = (document.getElementById('inputFullName') as HTMLInputElement).value;
-        let inputEmail = (document.getElementById('inputEmail') as HTMLInputElement).value;
-        let inputPassword = (document.getElementById('inputPassword') as HTMLInputElement).value;
-        const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-        if (inputEmail == "" || inputPassword == "" || inputFullName == "") {
-            setToastChildren("Enter data")
-            myToast.show();
+        if (fullNameRef.current && passwordRef.current && emailRef.current &&
+            (fullNameRef.current.value !== "" ||
+                passwordRef.current.value !== "" ||
+                emailRef.current.value !== "")) {
+            registerUser({
+                email: emailRef.current.value.trim(),
+                password: passwordRef.current.value.trim(),
+                fullName: fullNameRef.current.value.trim()
+            });
             return;
         }
-        console.log(inputEmail, ' ', inputFullName, ' ', inputPassword);
+        const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
+        setToastChildren("Enter data")
+        myToast.show();
 
-        registerUser({
-            email: inputEmail.trim(),
-            password: inputPassword.trim(),
-            fullName: inputFullName.trim()
-        });
     }
 
     return (
@@ -52,15 +54,15 @@ function Register() {
             <form>
                 <div className="mb-3">
                     <label htmlFor="inputFullName">Surname and name</label>
-                    <input className="form-control" id="inputFullName" placeholder='Enter surname and name' />
+                    <input className="form-control" id="inputFullName" placeholder='Enter surname and name' ref={fullNameRef} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputEmail">Email</label>
-                    <input type='email' className="form-control" id="inputEmail" placeholder='Enter e-mail' />
+                    <input type='email' className="form-control" id="inputEmail" placeholder='Enter e-mail' ref={emailRef} />
                 </div>
                 <div className="mb-3">
                     <label htmlFor="inputPassword">Password</label>
-                    <input type="password" className="form-control" id="inputPassword" placeholder='Enter password' />
+                    <input type="password" className="form-control" id="inputPassword" placeholder='Enter password' ref={passwordRef} />
                 </div>
                 <button type="button"
                     className="btn btn-primary mt-3 w-100"
@@ -71,7 +73,6 @@ function Register() {
                                 <span className="visually-hidden">Loading...</span>
                             </div> :
                             'Sign Up'
-
                     }
                 </button>
             </form>

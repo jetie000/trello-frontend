@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLogInUserMutation } from '@/store/api/user.api';
 import { useActions } from '@/hooks/useActions';
 import { Toast as bootstrapToast } from 'bootstrap';
@@ -11,6 +11,8 @@ function Login() {
     const navigate = useNavigate();
     const { login, setToastChildren } = useActions();
     const [logInUser, { isLoading, isSuccess, isError, data, error }] = useLogInUserMutation();
+    const emailRef = useRef<HTMLInputElement>(null)
+    const passwordRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         if (isSuccess) {
@@ -34,19 +36,18 @@ function Login() {
     }, [isLoading])
 
     const logIn = () => {
-        let inputEmail = (document.getElementById('inputEmail') as HTMLInputElement).value;
-        let inputPassword = (document.getElementById('inputPassword') as HTMLInputElement).value;
-        const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-
-        if (inputEmail == "" || inputPassword == "") {
-            setToastChildren("Enter data")
-            myToast.show();
+        if (passwordRef.current && emailRef.current &&
+            (passwordRef.current.value !== "" ||
+                emailRef.current.value !== "")) {
+            logInUser({
+                email: emailRef.current.value.trim(),
+                password: passwordRef.current.value.trim()
+            });
             return;
         }
-        logInUser({
-            email: inputEmail.trim(),
-            password: inputPassword.trim()
-        });
+        const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
+        setToastChildren("Enter data")
+        myToast.show();
     }
 
     return (
@@ -54,11 +55,11 @@ function Login() {
             <form>
                 <div className="mb-3">
                     <label className="mb-1" htmlFor="inputEmail">Email</label>
-                    <input type='email' className="form-control" id="inputEmail" placeholder='Enter e-mail' />
+                    <input type='email' className="form-control" id="inputEmail" placeholder='Enter e-mail' ref={emailRef} />
                 </div>
                 <div className="mb-3">
                     <label className="mb-1" htmlFor="inputPassword">Password</label>
-                    <input type="password" className="form-control" id="inputPassword" placeholder='Enter password' />
+                    <input type="password" className="form-control" id="inputPassword" placeholder='Enter password' ref={passwordRef} />
                 </div>
                 <button type="button"
                     className="btn btn-primary mt-3 w-100"
