@@ -17,10 +17,6 @@ function Tasks({
     setDrugStartTask
 }: TasksProps) {
 
-    const tasksSorted = React.useMemo(
-        () => column.tasks && column.tasks.slice()
-            .sort((t1, t2) => new Date(t2.moveDate).getMilliseconds() - new Date(t1.moveDate).getMilliseconds())
-        , [column.tasks])
 
     function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
         e.stopPropagation()
@@ -33,11 +29,11 @@ function Tasks({
         e.stopPropagation()
         setDrugStartTask(t)
     }
-
+    
     return (
         <div className='rounded-2 d-flex flex-column'>
             {
-                tasksSorted && tasksSorted.map(t =>
+                column.tasks && column.tasks.map(t =>
                     <div className='d-flex flex-column board-task cursor-pointer cursor-grab' key={t.id} draggable={true}
                         onDragLeave={(e) => dragLeaveHandler(e)}
                         onDragStart={(e) => dragStartHandler(e, t)}
@@ -69,7 +65,7 @@ function Tasks({
                 )
             }
             {
-                tasksSorted && tasksSorted?.length > 0 && <hr className='mb-2 mt-2' />
+                column.tasks && column.tasks?.length > 0 && <hr className='mb-2 mt-2' />
             }
             <button onClick={() => setCurrentColumn(column)} className='btn btn-primary border rounded-2' data-bs-toggle="modal" data-bs-target="#addTask">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">

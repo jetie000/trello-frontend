@@ -48,7 +48,7 @@ function Columns({ board }: { board: IBoard }) {
 
     React.useEffect(() => {
         if (board.columns)
-            setColumns(board.columns.slice().sort((c1, c2) => c1.order - c2.order))
+            setColumns(board.columns)
     }, [board.columns])
 
     function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
@@ -65,6 +65,7 @@ function Columns({ board }: { board: IBoard }) {
     }
 
     function dropHandler(e: React.DragEvent<HTMLDivElement>, c: IColumn) {
+        
         e.preventDefault()
         e.currentTarget.className = 'border rounded-2 p-2 cursor-grab'
         if (drugStartColumn && c.order !== drugStartColumn.order) {
@@ -80,20 +81,26 @@ function Columns({ board }: { board: IBoard }) {
         }
         else
             if (drugStartTask && drugStartTask.columnId !== c.id && columns) {
+                console.log('STARTTASK  ',drugStartTask);
+                console.log('DROPCOLUMN  ', c);
                 setColumns(columns.map(column => {
                     let columnTemp = Object.assign({}, column)
                     columnTemp.tasks = column.tasks?.slice()
-                    if (column.tasks?.some(t => t.id === drugStartTask.id)) {
+                    if (column.id === drugStartTask.columnId && column.tasks) {
                         columnTemp.tasks = column.tasks.filter(t => t.id !== drugStartTask.id)
                     } else
                         if (column.id === c.id) {
+                            let taskTemp = Object.assign({}, drugStartTask)
+                            taskTemp.columnId = c.id
+                            taskTemp.moveDate = new Date()
                             if (columnTemp.tasks?.length)
-                                columnTemp.tasks?.push(drugStartTask)
+                                columnTemp.tasks?.unshift(taskTemp)
                             else
-                                columnTemp.tasks = [drugStartTask]
+                                columnTemp.tasks = [taskTemp]
                         }
                     return columnTemp
                 }))
+                setDrugStartTask(undefined)
                 changeTask({
                     id: drugStartTask.id,
                     name: drugStartTask.name,
@@ -102,7 +109,7 @@ function Columns({ board }: { board: IBoard }) {
                 })
             }
     }
-
+    
     console.log(columns);
     
 

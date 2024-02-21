@@ -10,8 +10,6 @@ export const variables = {
             ERROR: 'Ошибка',
             ERROR_ACCESS_TOKEN: 'Ошибка токена доступа',
             INPUT_DATA: 'Введите данные',
-            RETURN_TO_THE_CABINET: 'Вернуться в личный кабинет',
-            ADD_FIELD: 'Добавить поле',
             LOADING: 'Загрузка...',
             LOGIN: "Вход",
             REGISTER: 'Регистрация',
@@ -23,7 +21,7 @@ export const variables = {
             ENTER_PASSWORD: 'Введите пароль',
             LOG_IN: 'Войти',
             ALREADY_EXISTS: 'Пользователь с таким адресом эл. почты существует',
-            SUCCESFULLY_REGISTERED: 'Вы успешно зарегистрированы',
+            SUCCESFULLY_REGISTERED: 'Вы успешно зарегистрированы. Проверьте свой e-mail для подтверждения аккаунта',
             SUCCESS: 'Успешно',
             SURNAME: 'Фамилия',
             ENTER_SURNAME: 'Введите фамилию',
@@ -64,14 +62,17 @@ export const variables = {
             ENTER_NEW_EMAIL: 'Введите новый email',
             ENTER_OLD_PASS: 'Введите старый пароль',
             OLD_PASS: 'Старый пароль (Обязательно)',
-            NOTIFICATION: 'Уведомление'
+            NOTIFICATION: 'Уведомление',
+            ENTER_REQUEST: 'Введите запрос',
+            ERROR_REQUEST_BY_IDS: "Ошибка запроса по id пользователей",
+            ERROR_REQUEST_SEARCH: "Ошибка запроса пользователей",
+            SURNAME_AND_NAME: 'Фамилия и имя',
+            ENTER_SURNAME_NAME:"Введите фамилию и имя"
         },
         {
             ERROR: 'Error',
             ERROR_ACCESS_TOKEN: 'Access token error',
             INPUT_DATA: 'Input data',
-            RETURN_TO_THE_CABINET: 'Return to the cabinet',
-            ADD_FIELD: 'Add field',
             LOADING: 'Loading...',
             LOGIN: "Log In",
             REGISTER: 'Sign Up',
@@ -83,7 +84,7 @@ export const variables = {
             ENTER_PASSWORD: 'Input password',
             LOG_IN: 'Log In',
             ALREADY_EXISTS: 'User with that email already exists',
-            SUCCESFULLY_REGISTERED: 'You\'ve succesfully registered',
+            SUCCESFULLY_REGISTERED: "You've succesfully registered. Check your e-mail for confirm letter",
             SUCCESS: 'Success',
             SURNAME: 'Surname',
             ENTER_SURNAME: 'Input surname',
@@ -124,7 +125,12 @@ export const variables = {
             ENTER_NEW_EMAIL: 'Input new email',
             ENTER_OLD_PASS: 'Input old password',
             OLD_PASS: 'Old password (necessary)',
-            NOTIFICATION: 'Notification'
+            NOTIFICATION: 'Notification',
+            ENTER_REQUEST: 'Enter request',
+            ERROR_REQUEST_BY_IDS: "Request by ids error",
+            ERROR_REQUEST_SEARCH: "Request search error",
+            SURNAME_AND_NAME: 'Surname and name',
+            ENTER_SURNAME_NAME:"Enter surname and name"
         }
     ]
 }
