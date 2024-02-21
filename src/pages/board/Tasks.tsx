@@ -1,7 +1,11 @@
+import { RootState } from '@/store/store';
 import { IColumn } from '@/types/column.interface';
 import { ITask } from '@/types/task.interface';
+import { variables } from '@/variables';
 import moment from 'moment';
+import 'moment/locale/ru';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 interface TasksProps {
     column: IColumn,
@@ -17,6 +21,15 @@ function Tasks({
     setDrugStartTask
 }: TasksProps) {
 
+    const { language } = useSelector((state: RootState) => state.options);
+
+    React.useEffect(() => {
+        console.log("moment");
+        
+        moment.locale(language === 0 ? 'ru' : 'en')
+        console.log(moment(new Date()).fromNow());
+        
+    }, [language])
 
     function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
         e.stopPropagation()
@@ -40,12 +53,12 @@ function Tasks({
                         onDragOver={(e) => dragOverHandler(e)}
                         onClick={() => setCurrentTask(t)} data-bs-toggle="modal" data-bs-target="#changeTask">
                         <span className='fs-5'>{t.name}</span>
-                        <span>Moved:</span>
+                        <span>{variables.LANGUAGES[language].MOVED}:</span>
                         <span className='text-truncate'>{moment(t.moveDate).fromNow()}</span>
-                        <span>Created:</span>
+                        <span>{variables.LANGUAGES[language].CREATED}:</span>
                         <span className='text-truncate'>{moment(t.creationDate).fromNow()}</span>
                         <div className='d-flex'>
-                            <span>Users:</span>
+                            <span>{variables.LANGUAGES[language].USERS}:</span>
                             <div className='ms-auto d-flex gap-1' >
                                 {
                                     t.users.filter((t, i) => i < 3).map(tu =>
@@ -58,7 +71,7 @@ function Tasks({
                                 {
                                     t.users.length > 3 && '...'
                                 }
-                                {t.users.length === 0 && 'add users'}
+                                {t.users.length === 0 && variables.LANGUAGES[language].ADD_USERS}
                             </div>
                         </div>
                     </div>

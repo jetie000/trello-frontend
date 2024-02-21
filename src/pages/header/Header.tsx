@@ -26,7 +26,7 @@ function Header() {
                 {
                     token &&
                     <span className="navbar-brand cursor-pointer" onClick={() => navigate('/')}>
-                        My boards
+                        {variables.LANGUAGES[language].MY_BOARDS}
                     </span>
                 }
                 <div className='dropdown align-items-center d-flex cursor-pointer ms-auto'>
@@ -44,8 +44,12 @@ function Header() {
                         }
                     </div>
                     <ul className="dropdown-menu dropdown-menu-end position-absolute">
-                        <li><span onClick={() => setTheme("dark")} className="dropdown-item">Dark</span></li>
-                        <li><span onClick={() => setTheme("light")} className="dropdown-item">Light</span></li>
+                        <li>
+                            <span onClick={() => setTheme("dark")} className="dropdown-item">{variables.LANGUAGES[language].DARK}</span>
+                        </li>
+                        <li>
+                            <span onClick={() => setTheme("light")} className="dropdown-item">{variables.LANGUAGES[language].LIGHT}</span>
+                        </li>
                     </ul>
                 </div>
                 <div className="dropdown align-items-center d-flex cursor-pointer">
@@ -67,7 +71,9 @@ function Header() {
                     token &&
                     <div className="offcanvas offcanvas-end" id="offcanvasNav">
                         <div className="offcanvas-header">
-                            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+                            <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
+                                {variables.LANGUAGES[language].MENU}
+                            </h5>
                             <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div className='offcanvas-body'>
@@ -75,13 +81,13 @@ function Header() {
                                 <li className="nav-item">
                                     <span className="nav-link cursor-pointer"
                                         onClick={() => { navigate("/board/add"); toggleCanvas() }}>
-                                        Add board
+                                        {variables.LANGUAGES[language].ADD_BOARD}
                                     </span>
                                 </li>
                                 <li className="nav-item">
                                     <span className="nav-link cursor-pointer"
                                         onClick={() => { navigate("/cabinet"); toggleCanvas() }}>
-                                        Cabinet
+                                        {variables.LANGUAGES[language].CABINET}
                                     </span>
                                 </li>
                             </ul>
