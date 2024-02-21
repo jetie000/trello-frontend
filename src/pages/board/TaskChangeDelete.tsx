@@ -8,10 +8,14 @@ import { Modal as bootstrapModal } from 'bootstrap';
 import UsersList from '@/components/usersList/UsersList';
 import Modal from '@/components/modal/Modal';
 import { useParams } from 'react-router-dom';
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
+import { variables } from '@/variables';
 
 
 function TaskChangeDelete({ task }: { task: ITask | undefined }) {
     const { id } = useParams()
+    const { language } = useSelector((state: RootState) => state.options);
     const { setToastChildren } = useActions();
     const changeTaskNameRef = useRef<HTMLInputElement>(null)
     const changeTaskDescRef = useRef<HTMLTextAreaElement>(null)
@@ -46,12 +50,12 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
     React.useEffect(() => {
         if (isSuccessChange) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Task changed successfully")
+            setToastChildren(variables.LANGUAGES[language].TASK_CHANGED)
             myToast.show()
         }
         if (isErrorChange) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Error in task changing")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
             myToast.show()
         }
     }, [isLoadingChange])
@@ -63,38 +67,38 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
             const myModal2 = bootstrapModal.getOrCreateInstance(document.getElementById('changeTask') || 'changeTask');
             myModal2.hide();
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Task deleted successfully")
+            setToastChildren(variables.LANGUAGES[language].TASK_DELETED)
             myToast.show()
         }
         if (isErrorDelete) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Error in task deleting")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
             myToast.show()
         }
     }, [isLoadingDelete])
 
     return (
         <div className="d-flex flex-column">
-            <label htmlFor="inputTaskNameChange">Name</label>
+            <label htmlFor="inputTaskNameChange">{variables.LANGUAGES[language].NAME}</label>
             <input className="form-control mb-2" id="inputTaskNameChange"
-                placeholder="Enter task name" ref={changeTaskNameRef} defaultValue={task?.name} />
-            <label htmlFor="inputTaskDescChange">Description (Optional)</label>
+                placeholder={variables.LANGUAGES[language].ENTER_NAME} ref={changeTaskNameRef} defaultValue={task?.name} />
+            <label htmlFor="inputTaskDescChange">{variables.LANGUAGES[language].DESCRIPTION}</label>
             <textarea className="form-control mb-2" id="inputTaskDescChange"
-                placeholder="Enter task description" ref={changeTaskDescRef} defaultValue={task?.description} />
+                placeholder={variables.LANGUAGES[language].ENTER_DESCRIPTION} ref={changeTaskDescRef} defaultValue={task?.description} />
             <UsersList userIds={userIds} setUserIds={setUserIds} boardId={Number(id)}/>
             <button className='btn btn-primary mt-2 mb-2' onClick={changeTaskClick}>
-                Change task
+                {variables.LANGUAGES[language].CHANGE_TASK}
             </button>
             <button className='btn btn-danger' onClick={() => deleteTaskClick()}>
-                Delete task
+                {variables.LANGUAGES[language].DELETE_TASK}
             </button>
-            <Modal id='deleteTask' title='Delete task' size='sm'>
+            <Modal id='deleteTask' title={variables.LANGUAGES[language].DELETE_TASK} size='sm'>
                 <div className='d-flex flex-column gap-2'>
                     <div>
-                        Are you sure you want delete this task?
+                        {variables.LANGUAGES[language].SURE_DELETE_TASK}
                     </div>
                     <button className='btn btn-danger' onClick={() => deleteTask({ taskId: task?.id || 0, boardId: Number(id) || 0 })}>
-                        Delete task
+                        {variables.LANGUAGES[language].DELETE_TASK}
                     </button>
                 </div>
             </Modal>

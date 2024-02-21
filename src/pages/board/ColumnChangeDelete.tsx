@@ -6,11 +6,15 @@ import { useRef } from 'react';
 import { Toast as bootstrapToast } from 'bootstrap';
 import { Modal as bootstrapModal } from 'bootstrap';
 import { useActions } from '@/hooks/useActions';
+import { variables } from '@/variables';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 
 function ColumnChangeDelete({currentColumn}: {currentColumn: IColumn | undefined}) {
     
     const { setToastChildren } = useActions();
+    const { language } = useSelector((state: RootState) => state.options);
     
     const changeColumnRef = useRef<HTMLInputElement>(null)
     const [changeColumn, { isSuccess: isSuccessChange, isError: isErrorChange, isLoading: isLoadingChange }] = useChangeColumnMutation()
@@ -33,12 +37,12 @@ function ColumnChangeDelete({currentColumn}: {currentColumn: IColumn | undefined
             const myModal = bootstrapModal.getOrCreateInstance(document.getElementById('deleteColumn') || 'deleteColumn');
             myModal.hide();
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Column deleted successfully")
+            setToastChildren(variables.LANGUAGES[language].COLUMN_DELETED)
             myToast.show()
         }
         if (isErrorDelete) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Error in column deleting")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
             myToast.show()
         }
     }, [isLoadingDelete])
@@ -46,36 +50,35 @@ function ColumnChangeDelete({currentColumn}: {currentColumn: IColumn | undefined
     React.useEffect(() => {
         if (isSuccessChange) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Column changed successfully")
+            setToastChildren(variables.LANGUAGES[language].COLUMN_CHANGED)
             myToast.show()
         }
         if (isErrorChange) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Error in column changing")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
             myToast.show()
         }
     }, [isLoadingChange])
 
     return (
         <>
-            <Modal title='Change Column' id='changeColumn' size='sm'>
+            <Modal title={variables.LANGUAGES[language].CHANGE_COLUMN} id='changeColumn' size='sm'>
                 <div className="d-flex flex-column">
-                    <label htmlFor="inputColumnNameChange">Name</label>
+                    <label htmlFor="inputColumnNameChange">{variables.LANGUAGES[language].NAME}</label>
                     <input className="form-control mb-2" id="inputColumnNameChange"
-                        placeholder="Enter column name" ref={changeColumnRef} defaultValue={currentColumn?.name} />
+                        placeholder={variables.LANGUAGES[language].ENTER_NAME} ref={changeColumnRef} defaultValue={currentColumn?.name} />
                     <button className='btn btn-primary' onClick={addColumnClick}>
-                        Change column
+                        {variables.LANGUAGES[language].CHANGE_COLUMN}
                     </button>
                 </div>
             </Modal>
-            <Modal id='deleteColumn' title='Delete column' size='sm'>
+            <Modal id='deleteColumn' title={variables.LANGUAGES[language].DELETE_COLUMN} size='sm'>
                 <div className='d-flex flex-column gap-2'>
                     <div>
-                        Are you sure you want delete this column?
-                        You will lost all tasks dedicated to this column.
+                        {variables.LANGUAGES[language].SURE_DELETE_COLUMN}
                     </div>
                     <button className='btn btn-danger' onClick={() => deleteColumn(currentColumn?.id || 0)}>
-                        Delete column
+                        {variables.LANGUAGES[language].DELETE_COLUMN}
                     </button>
                 </div>
             </Modal>

@@ -6,9 +6,14 @@ import { useRef, useState } from 'react';
 import { Toast as bootstrapToast } from 'bootstrap';
 import { Modal as bootstrapModal } from 'bootstrap';
 import { useActions } from '@/hooks/useActions';
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
+import { variables } from '@/variables';
 
 function TaskAdd({column}:{column: IColumn | undefined}) {
     const { setToastChildren } = useActions();
+    const { language } = useSelector((state: RootState) => state.options);
+    
     const addTaskNameRef = useRef<HTMLInputElement>(null)
     const addTaskDescRef = useRef<HTMLTextAreaElement>(null)
     const [addTask, { isSuccess: isSuccessAdd, isError: isErrorAdd, isLoading: isLoadingAdd }] = useAddTaskMutation()
@@ -31,27 +36,27 @@ function TaskAdd({column}:{column: IColumn | undefined}) {
             const myModal = bootstrapModal.getOrCreateInstance(document.getElementById('addTask') || 'addTask');
             myModal.hide();
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Task added successfully")
+            setToastChildren(variables.LANGUAGES[language].TASK_ADDED)
             myToast.show()
         }
         if (isErrorAdd) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Error in task adding")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
             myToast.show()
         }
     }, [isLoadingAdd])
 
     return (
         <div className="d-flex flex-column">
-            <label htmlFor="inputTaskName">Name</label>
+            <label htmlFor="inputTaskName">{variables.LANGUAGES[language].NAME}</label>
             <input className="form-control mb-2" id="inputTaskName"
-                placeholder="Enter task name" ref={addTaskNameRef} />
-            <label htmlFor="inputTaskDesc">Description (Optional)</label>
+                placeholder={variables.LANGUAGES[language].ENTER_NAME} ref={addTaskNameRef} />
+            <label htmlFor="inputTaskDesc">{variables.LANGUAGES[language].DESCRIPTION}</label>
             <textarea className="form-control mb-2" id="inputTaskDesc"
-                placeholder="Enter task description" ref={addTaskDescRef} />
+                placeholder={variables.LANGUAGES[language].ENTER_DESCRIPTION} ref={addTaskDescRef} />
             <UsersList userIds={userIds} setUserIds={setUserIds} boardId={column?.boardId}/>
             <button className='btn btn-primary mt-2' onClick={addTaskClick}>
-                Add task
+                {variables.LANGUAGES[language].ADD_TASK}
             </button>
         </div>
     );

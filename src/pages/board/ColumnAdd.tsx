@@ -4,11 +4,15 @@ import * as React from 'react';
 import { Toast as bootstrapToast } from 'bootstrap';
 import { Modal as bootstrapModal } from 'bootstrap';
 import { useActions } from '@/hooks/useActions';
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
+import { variables } from '@/variables';
 
 function ColumnAdd({board}:{board: IBoard | undefined}) {
     const addColumnRef = React.useRef<HTMLInputElement>(null)
     const [addColumn, { isSuccess: isSuccessAdd, isError: isErrorAdd, isLoading: isLoadingAdd }] = useAddColumnMutation()
     const { setToastChildren } = useActions();
+    const { language } = useSelector((state: RootState) => state.options);
 
     
     React.useEffect(() => {
@@ -16,12 +20,12 @@ function ColumnAdd({board}:{board: IBoard | undefined}) {
             const myModal = bootstrapModal.getOrCreateInstance(document.getElementById('addColumn') || 'addColumn');
             myModal.hide();
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Column added succesfully")
+            setToastChildren(variables.LANGUAGES[language].COLUMN_ADDED)
             myToast.show()
         }
         if (isErrorAdd) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Error in column adding")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
             myToast.show()
         }
     }, [isLoadingAdd])
@@ -39,11 +43,11 @@ function ColumnAdd({board}:{board: IBoard | undefined}) {
 
     return (
         <div className="d-flex flex-column">
-            <label htmlFor="inputColumnName">Name</label>
+            <label htmlFor="inputColumnName">{variables.LANGUAGES[language].NAME}</label>
             <input className="form-control mb-2" id="inputColumnName"
-                placeholder="Enter column name" ref={addColumnRef} />
+                placeholder={variables.LANGUAGES[language].ENTER_NAME} ref={addColumnRef} />
             <button className='btn btn-primary' onClick={addColumnClick}>
-                Add column
+                {variables.LANGUAGES[language].ADD_COLUMN}
             </button>
         </div>
     );

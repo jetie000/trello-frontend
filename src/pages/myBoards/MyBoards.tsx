@@ -1,11 +1,13 @@
+import React, { useEffect } from 'react';
 import { useGetBoardByUserIdQuery } from '@/store/api/board.api';
+import { Toast as bootstrapToast } from 'bootstrap';
 import { RootState } from '@/store/store';
 import { IBoard } from '@/types/board.interface';
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import './MyBoards.scss'
-import { useGetByIdsQuery } from '@/store/api/user.api';
+import { variables } from '@/variables';
+import { useActions } from '@/hooks/useActions';
 
 function MyBoards() {
     const { token, id } = useSelector((state: RootState) => state.user);
@@ -14,18 +16,28 @@ function MyBoards() {
         return <Navigate to={'/login'} />;
     }
 
+    const { setToastChildren } = useActions()
+    const { language } = useSelector((state: RootState) => state.options);
     const navigate = useNavigate()
     const { isLoading, isError, data } = useGetBoardByUserIdQuery(id || 0);
+
+    useEffect(() => {
+        if (isError) {
+            const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
+            setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
+            myToast.show()
+        }
+    }, [isLoading])
 
     return (
         <div className='d-flex flex-fill flex-column'>
             <h2 className='text-center p-3'>
-                My boards
+                {variables.LANGUAGES[language].MY_BOARDS}
             </h2>
             <div className="d-flex flex-column gap-2 my-boards-list">
                 {
                     isLoading && <div className="spinner-border ms-auto me-auto" role="status">
-                        <span className="visually-hidden">Loading...</span>
+                        <span className="visually-hidden">{variables.LANGUAGES[language].LOADING}</span>
                     </div>
                 }
                 {

@@ -1,7 +1,11 @@
+import { RootState } from '@/store/store';
 import { IColumn } from '@/types/column.interface';
 import { ITask } from '@/types/task.interface';
+import { variables } from '@/variables';
 import moment from 'moment';
+import 'moment/locale/ru';
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
 interface TasksProps {
     column: IColumn,
@@ -17,10 +21,15 @@ function Tasks({
     setDrugStartTask
 }: TasksProps) {
 
-    const tasksSorted = React.useMemo(
-        () => column.tasks && column.tasks.slice()
-            .sort((t1, t2) => new Date(t2.moveDate).getMilliseconds() - new Date(t1.moveDate).getMilliseconds())
-        , [column.tasks])
+    const { language } = useSelector((state: RootState) => state.options);
+
+    React.useEffect(() => {
+        console.log("moment");
+        
+        moment.locale(language === 0 ? 'ru' : 'en')
+        console.log(moment(new Date()).fromNow());
+        
+    }, [language])
 
     function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
         e.stopPropagation()
@@ -33,23 +42,23 @@ function Tasks({
         e.stopPropagation()
         setDrugStartTask(t)
     }
-
+    
     return (
         <div className='rounded-2 d-flex flex-column'>
             {
-                tasksSorted && tasksSorted.map(t =>
+                column.tasks && column.tasks.map(t =>
                     <div className='d-flex flex-column board-task cursor-pointer cursor-grab' key={t.id} draggable={true}
                         onDragLeave={(e) => dragLeaveHandler(e)}
                         onDragStart={(e) => dragStartHandler(e, t)}
                         onDragOver={(e) => dragOverHandler(e)}
                         onClick={() => setCurrentTask(t)} data-bs-toggle="modal" data-bs-target="#changeTask">
                         <span className='fs-5'>{t.name}</span>
-                        <span>Moved:</span>
+                        <span>{variables.LANGUAGES[language].MOVED}:</span>
                         <span className='text-truncate'>{moment(t.moveDate).fromNow()}</span>
-                        <span>Created:</span>
+                        <span>{variables.LANGUAGES[language].CREATED}:</span>
                         <span className='text-truncate'>{moment(t.creationDate).fromNow()}</span>
                         <div className='d-flex'>
-                            <span>Users:</span>
+                            <span>{variables.LANGUAGES[language].USERS}:</span>
                             <div className='ms-auto d-flex gap-1' >
                                 {
                                     t.users.filter((t, i) => i < 3).map(tu =>
@@ -62,14 +71,14 @@ function Tasks({
                                 {
                                     t.users.length > 3 && '...'
                                 }
-                                {t.users.length === 0 && 'add users'}
+                                {t.users.length === 0 && variables.LANGUAGES[language].ADD_USERS}
                             </div>
                         </div>
                     </div>
                 )
             }
             {
-                tasksSorted && tasksSorted?.length > 0 && <hr className='mb-2 mt-2' />
+                column.tasks && column.tasks?.length > 0 && <hr className='mb-2 mt-2' />
             }
             <button onClick={() => setCurrentColumn(column)} className='btn btn-primary border rounded-2' data-bs-toggle="modal" data-bs-target="#addTask">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-plus" viewBox="0 0 16 16">

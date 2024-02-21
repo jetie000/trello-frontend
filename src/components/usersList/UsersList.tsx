@@ -3,6 +3,9 @@ import { useGetByIdsQuery, useSearchUsersQuery } from '@/store/api/user.api';
 import { IUserResponse } from '@/types/user.interface';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Toast as bootstrapToast } from 'bootstrap';
+import { variables } from '@/variables';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/store/store';
 
 interface UsersListProps {
     userIds: number[]
@@ -15,6 +18,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
     const inputSearch = useRef<HTMLInputElement>(null);
     const [searchStr, setSearchStr] = useState('');
     const [isShow, setIsShow] = useState(false);
+    const { language } = useSelector((state: RootState) => state.options);
     const { isLoading, isError, data } = useGetByIdsQuery(userIds, { skip: userIds.length === 0 });
     const { setToastChildren } = useActions();
     const { isLoading: isLoadingSearch, isError: isErrorSearch, data: dataSearch } = useSearchUsersQuery(searchStr, { skip: searchStr === '' });
@@ -28,7 +32,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
     useEffect(() => {
         if (isError) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Request by ids error")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST_BY_IDS)
             myToast.show()
         }
     }, [isLoading])
@@ -37,7 +41,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
     useEffect(() => {
         if (isErrorSearch) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Request search error")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST_SEARCH)
             myToast.show()
         }
     }, [isLoadingSearch])
@@ -61,7 +65,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
                 <div className="input-group">
                     <input type="text"
                         className="form-control w-50"
-                        placeholder="Enter request"
+                        placeholder={variables.LANGUAGES[language].ENTER_REQUEST}
                         ref={inputSearch}
                         onChange={(e) => setSearchStr(e.target.value)}
                         onFocus={() => setIsShow(true)} />

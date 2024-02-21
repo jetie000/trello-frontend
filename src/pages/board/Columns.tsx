@@ -12,10 +12,14 @@ import ColumnChangeDelete from './ColumnChangeDelete';
 import { useChangeColumnMutation } from '@/store/api/column.api';
 import { useActions } from '@/hooks/useActions';
 import { useChangeTaskMutation } from '@/store/api/task.api';
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
+import { variables } from '@/variables';
 
 
 function Columns({ board }: { board: IBoard }) {
     const { setToastChildren } = useActions();
+    const { language } = useSelector((state: RootState) => state.options);
     const [currentColumn, setCurrentColumn] = useState<IColumn>()
     const [currentTask, setCurrentTask] = useState<ITask>()
     const [columns, setColumns] = useState<IColumn[]>()
@@ -31,7 +35,7 @@ function Columns({ board }: { board: IBoard }) {
             setDrugStartTask(undefined);
         if (isErrorTask) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Error changing task column");
+            setToastChildren(variables.LANGUAGES[language].ERROR_CHANGING_TASK_COL);
             myToast.show();
         }
     }, [isLoadingTask])
@@ -41,14 +45,14 @@ function Columns({ board }: { board: IBoard }) {
             setDrugStartColumn(undefined);
         if (isError) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Error changing column order");
+            setToastChildren(variables.LANGUAGES[language].ERROR_CHANGING_COL_ORDER);
             myToast.show();
         }
     }, [isLoading])
 
     React.useEffect(() => {
         if (board.columns)
-            setColumns(board.columns.slice().sort((c1, c2) => c1.order - c2.order))
+            setColumns(board.columns)
     }, [board.columns])
 
     function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
@@ -65,6 +69,7 @@ function Columns({ board }: { board: IBoard }) {
     }
 
     function dropHandler(e: React.DragEvent<HTMLDivElement>, c: IColumn) {
+        
         e.preventDefault()
         e.currentTarget.className = 'border rounded-2 p-2 cursor-grab'
         if (drugStartColumn && c.order !== drugStartColumn.order) {
@@ -83,17 +88,21 @@ function Columns({ board }: { board: IBoard }) {
                 setColumns(columns.map(column => {
                     let columnTemp = Object.assign({}, column)
                     columnTemp.tasks = column.tasks?.slice()
-                    if (column.tasks?.some(t => t.id === drugStartTask.id)) {
+                    if (column.id === drugStartTask.columnId && column.tasks) {
                         columnTemp.tasks = column.tasks.filter(t => t.id !== drugStartTask.id)
                     } else
                         if (column.id === c.id) {
+                            let taskTemp = Object.assign({}, drugStartTask)
+                            taskTemp.columnId = c.id
+                            taskTemp.moveDate = new Date()
                             if (columnTemp.tasks?.length)
-                                columnTemp.tasks?.push(drugStartTask)
+                                columnTemp.tasks?.unshift(taskTemp)
                             else
-                                columnTemp.tasks = [drugStartTask]
+                                columnTemp.tasks = [taskTemp]
                         }
                     return columnTemp
                 }))
+                setDrugStartTask(undefined)
                 changeTask({
                     id: drugStartTask.id,
                     name: drugStartTask.name,
@@ -102,7 +111,7 @@ function Columns({ board }: { board: IBoard }) {
                 })
             }
     }
-
+    
     console.log(columns);
     
 
@@ -145,10 +154,10 @@ function Columns({ board }: { board: IBoard }) {
                 </button>
             </div>
             <ColumnChangeDelete currentColumn={currentColumn} />
-            <Modal id='addTask' title='Add task' size='md'>
+            <Modal id='addTask' title={variables.LANGUAGES[language].ADD_TASK} size='md'>
                 <TaskAdd column={currentColumn} />
             </Modal>
-            <Modal id='changeTask' title='Change task' size='md'>
+            <Modal id='changeTask' title={variables.LANGUAGES[language].CHANGE_TASK} size='md'>
                 <TaskChangeDelete task={currentTask} />
             </Modal>
 

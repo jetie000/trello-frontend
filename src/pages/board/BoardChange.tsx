@@ -7,11 +7,15 @@ import { useSearchUsersQuery } from '@/store/api/user.api';
 import { IBoard } from '@/types/board.interface';
 import { useChangeBoardMutation } from '@/store/api/board.api';
 import { IUserResponse } from '@/types/user.interface';
+import { RootState } from '@/store/store';
+import { useSelector } from 'react-redux';
+import { variables } from '@/variables';
 
 function BoardChange({ board }: { board: IBoard }) {
 
     const { setToastChildren } = useActions();
 
+    const { language } = useSelector((state: RootState) => state.options);
     const [userIds, setUserIds] = useState<number[]>(board.users?.map(u => u.id) || [])
     const nameRef = useRef<HTMLInputElement>(null)
     const descRef = useRef<HTMLTextAreaElement>(null)
@@ -21,12 +25,12 @@ function BoardChange({ board }: { board: IBoard }) {
     useEffect(() => {
         if (isErrorChange) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Request error")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
             myToast.show()
         }
         if (isSuccessChange) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Board succesfully changed")
+            setToastChildren(variables.LANGUAGES[language].BOARD_CHANGED)
             myToast.show()
         }
     }, [isLoadingChange])
@@ -43,7 +47,7 @@ function BoardChange({ board }: { board: IBoard }) {
             })
         }
         else {
-            setToastChildren("Enter data")
+            setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
             myToast.show()
         }
     }
@@ -51,14 +55,14 @@ function BoardChange({ board }: { board: IBoard }) {
     return (
         <div>
             <div className="mb-3">
-                <label htmlFor="inputBoardName">Name</label>
+                <label htmlFor="inputBoardName">{variables.LANGUAGES[language].NAME}</label>
                 <input className="form-control" id="inputBoardName"
-                    placeholder='Enter name' ref={nameRef} defaultValue={board.name} />
+                    placeholder={variables.LANGUAGES[language].ENTER_NAME} ref={nameRef} defaultValue={board.name} />
             </div>
             <div className="mb-3">
-                <label htmlFor="inputBoardDescription">Description (Optional)</label>
+                <label htmlFor="inputBoardDescription">{variables.LANGUAGES[language].DESCRIPTION}</label>
                 <textarea className="form-control" id="inputBoardDescription"
-                    placeholder='Enter description' ref={descRef} defaultValue={board.description} />
+                    placeholder={variables.LANGUAGES[language].ENTER_DESCRIPTION} ref={descRef} defaultValue={board.description} />
             </div>
             <UsersList userIds={userIds} setUserIds={setUserIds} />
             <button type="button"
@@ -67,9 +71,9 @@ function BoardChange({ board }: { board: IBoard }) {
                 {
                     isLoadingChange ?
                         <div className="spinner-border spinner-border-sm" role="status">
-                            <span className="visually-hidden">Loading...</span>
+                            <span className="visually-hidden">{variables.LANGUAGES[language].LOADING}</span>
                         </div> :
-                        'Change board'
+                        variables.LANGUAGES[language].CHANGE_BOARD
 
                 }
             </button>

@@ -8,6 +8,7 @@ import { RootState } from '@/store/store';
 import { useActions } from '@/hooks/useActions';
 import UsersList from '../../components/usersList/UsersList';
 import { useAddBoardMutation } from '@/store/api/board.api';
+import { variables } from '@/variables';
 
 function AddBoard() {
     const { token, id } = useSelector((state: RootState) => state.user);
@@ -17,7 +18,7 @@ function AddBoard() {
     }
     const { setToastChildren } = useActions();
 
-
+    const { language } = useSelector((state: RootState) => state.options);
     const [userIds, setUserIds] = useState<number[]>([])
     const nameRef = useRef<HTMLInputElement>(null)
     const descRef = useRef<HTMLTextAreaElement>(null)
@@ -28,12 +29,12 @@ function AddBoard() {
     useEffect(() => {
         if (isErrorAdd) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Request error")
+            setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
             myToast.show()
         }
         if (isSuccessAdd) {
             const myToast = bootstrapToast.getOrCreateInstance(document.getElementById('myToast') || 'myToast');
-            setToastChildren("Board succesfully added")
+            setToastChildren(variables.LANGUAGES[language].BOARD_ADDED)
             myToast.show()
         }
     }, [isLoadingAdd])
@@ -50,7 +51,7 @@ function AddBoard() {
             })
         }
         else {
-            setToastChildren("Enter data")
+            setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
             myToast.show()
         }
     }
@@ -60,17 +61,17 @@ function AddBoard() {
         <div className=' d-flex flex-fill flex-column'>
             <div className='ms-auto me-auto d-flex flex-column add-board ps-3 pe-3 flex-fill'>
                 <h2 className='text-center p-3'>
-                    Add Board
+                    {variables.LANGUAGES[language].ADD_BOARD}
                 </h2>
                 <div className="mb-3">
-                    <label htmlFor="inputName">Name</label>
+                    <label htmlFor="inputName">{variables.LANGUAGES[language].NAME}</label>
                     <input className="form-control" id="inputName"
-                        placeholder='Enter name' ref={nameRef} />
+                        placeholder={variables.LANGUAGES[language].ENTER_NAME} ref={nameRef} />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="inputDescription">Description (Optional)</label>
+                    <label htmlFor="inputDescription">{variables.LANGUAGES[language].DESCRIPTION}</label>
                     <textarea className="form-control" id="inputDescription"
-                        placeholder='Enter description' ref={descRef} />
+                        placeholder={variables.LANGUAGES[language].ENTER_DESCRIPTION} ref={descRef} />
                 </div>
                 <UsersList userIds={userIds} setUserIds={setUserIds} />
                 
@@ -80,9 +81,9 @@ function AddBoard() {
                     {
                         isLoadingAdd ?
                             <div className="spinner-border spinner-border-sm" role="status">
-                                <span className="visually-hidden">Loading...</span>
+                                <span className="visually-hidden">{variables.LANGUAGES[language].LOADING}</span>
                             </div> :
-                            'Add board'
+                            variables.LANGUAGES[language].ADD_BOARD
 
                     }
                 </button>
