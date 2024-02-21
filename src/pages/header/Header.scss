@@ -19,3 +19,9 @@
         }
     }
 }
+
+@media (max-width: $media-sm-1){
+    .header-wrapper{
+        padding: 8px !important; // to override bootstrap style
+    }
+}
