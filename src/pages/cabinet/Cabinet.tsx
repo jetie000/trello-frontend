@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Modal as bootstrapModal } from "bootstrap"
 import { Toast as bootstrapToast } from "bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/store/store"
-import { Link, Navigate, useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { useActions } from "@/hooks/useActions"
 import { baseApi } from "@/store/api/baseApi"
 import { variables } from "@/variables"
@@ -30,6 +30,10 @@ function Cabinet() {
   const { logout, setToastChildren } = useActions()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const fullNameRef = useRef<HTMLInputElement>(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const newPassRef = useRef<HTMLInputElement>(null)
+  const oldPassRef = useRef<HTMLInputElement>(null)
 
   const { isError, data: dataUser } = useGetByIdQuery(id || 0)
   const [logoutMutation, { isLoading: isLoadingLogout, isError: isErrorLogout }] =
@@ -98,26 +102,32 @@ function Cabinet() {
   }
 
   const changeInfoClick = async () => {
-    let inputFullName = (document.getElementById("inputFullName") as HTMLInputElement).value
-    let inputEmail = (document.getElementById("inputEmail") as HTMLInputElement).value
-    let inputOldPassword = (document.getElementById("inputOldPassword") as HTMLInputElement).value
-    let inputNewPassword = (document.getElementById("inputNewPassword") as HTMLInputElement).value
-    if (inputEmail == "" || inputOldPassword == "" || inputFullName == "") {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
-      myToast.show()
-      return
-    }
-    if (token && dataUser && "id" in dataUser)
+    if (
+      token &&
+      dataUser &&
+      "id" in dataUser &&
+      emailRef.current &&
+      fullNameRef.current &&
+      oldPassRef.current &&
+      newPassRef.current &&
+      emailRef.current.value !== "" &&
+      fullNameRef.current.value !== "" &&
+      newPassRef.current.value !== "" &&
+      oldPassRef.current.value !== ""
+    ) {
       changeUser({
-        email: inputEmail.trim(),
-        oldPassword: inputOldPassword.trim(),
-        fullName: inputFullName.trim(),
-        password: inputNewPassword.trim(),
+        email: emailRef.current.value.trim(),
+        oldPassword: oldPassRef.current.value.trim(),
+        fullName: fullNameRef.current.value.trim(),
+        password: newPassRef.current.value.trim(),
         id: dataUser?.id || 0
       })
+    }
+    const myToast = bootstrapToast.getOrCreateInstance(
+      document.getElementById("myToast") || "myToast"
+    )
+    setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
+    myToast.show()
   }
 
   const deleteAccClick = () => {
@@ -156,6 +166,7 @@ function Cabinet() {
             id="inputFullName"
             placeholder={variables.LANGUAGES[language].ENTER_NEW_NAME}
             defaultValue={(dataUser as IUser)?.fullName}
+            ref={fullNameRef}
           />
         </div>
         <div className="mb-3">
@@ -166,6 +177,7 @@ function Cabinet() {
             id="inputEmail"
             placeholder={variables.LANGUAGES[language].ENTER_NEW_EMAIL}
             defaultValue={(dataUser as IUser)?.email}
+            ref={emailRef}
           />
         </div>
         <div className="mb-3">
@@ -175,6 +187,7 @@ function Cabinet() {
             className="form-control"
             id="inputOldPassword"
             placeholder={variables.LANGUAGES[language].ENTER_OLD_PASS}
+            ref={oldPassRef}
           />
         </div>
         <div className="mb-3">
@@ -184,6 +197,7 @@ function Cabinet() {
             className="form-control"
             id="inputNewPassword"
             placeholder={variables.LANGUAGES[language].ENTER_NEW_PASSWORD}
+            ref={newPassRef}
           />
         </div>
         <button

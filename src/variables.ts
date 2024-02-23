@@ -1,9 +1,5 @@
-import { config } from "dotenv"
-
-config()
-
 export const variables = {
-  API_URL: process.env.API_URL || "http://localhost:8080/api",
+  API_URL: process.env.REACT_APP_API_URL || "http://localhost:8080/api",
   TOKEN_LOCALSTORAGE: "token",
   THEME_LOCALSTORAGE: "page_theme",
   LANGUAGE_LOCALSTORAGE: "page_language",
