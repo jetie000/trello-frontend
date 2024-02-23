@@ -1,16 +1,15 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
 .cabinet-my-info {
-    width: 350px;
-    flex-grow: 1;
+  width: 350px;
+  flex-grow: 1;
 }
 
-
 @media (max-width: $media-sm-1) {
-    .cabinet-my-info {
-        width: 250px;
-    }
-    .cabinet-buttons{
-        flex-direction: column;
-    }
+  .cabinet-my-info {
+    width: 250px;
+  }
+  .cabinet-buttons {
+    flex-direction: column;
+  }
 }

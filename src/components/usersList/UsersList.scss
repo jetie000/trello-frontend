@@ -1,8 +1,8 @@
 @media (max-width: $media-sm-1) {
-    .users-list{
-        &>li{
-            flex-direction: column;
-            gap: 10px;
-        }
+  .users-list {
+    & > li {
+      flex-direction: column;
+      gap: 10px;
     }
+  }
 }
