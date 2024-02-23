@@ -78,7 +78,7 @@ function Header() {
               xmlns="http://www.w3.org/2000/svg"
               width="24"
               height="24"
-              fill="currentColor"
+              fill="white"
               className="bi bi-translate"
               viewBox="0 0 16 16"
             >
@@ -100,7 +100,7 @@ function Header() {
           </ul>
         </div>
         <button
-          className="navbar-toggler ms-3"
+          className="navbar-toggler ms-2"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasNav"
