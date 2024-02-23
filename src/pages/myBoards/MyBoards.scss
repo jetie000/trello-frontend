@@ -1,8 +1,7 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
-
-@media (max-width: $media-sm-2){
-    .my-boards-list>div{
-        flex-direction: column;
-    }
+@media (max-width: $media-sm-2) {
+  .my-boards-list > div {
+    flex-direction: column;
+  }
 }

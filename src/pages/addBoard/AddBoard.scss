@@ -1,53 +1,53 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
 .add-board {
-    width: 350px;
-    flex-grow: 1;
+  width: 350px;
+  flex-grow: 1;
 }
 
 .user-search-list {
-    width: 100%;
-    top: 0;
-    max-height: 200px;
-    z-index: 1 !important;
+  width: 100%;
+  top: 0;
+  max-height: 200px;
+  z-index: 1 !important;
 }
 
-.add-board-behind-canvas{
-    z-index: 1 !important; // to override bootstrap style
+.add-board-behind-canvas {
+  z-index: 1 !important; // to override bootstrap style
 }
 
 @media (max-width: $media-md-1) {
-    .user-search-list> li>div {
-            & > span{
-                font-size: 20px !important; // to override bootstrap style
-            }
-
-            & > div > div{
-                font-size: 16px !important; // to override bootstrap style
-            }
+  .user-search-list > li > div {
+    & > span {
+      font-size: 20px !important; // to override bootstrap style
     }
+
+    & > div > div {
+      font-size: 16px !important; // to override bootstrap style
+    }
+  }
 }
 
 @media (max-width: $media-sm-2) {
-    .user-search-list> li {
-        flex-direction: column;
-        height: auto;
-        & >div{
-            width: 100% !important; // to override bootstrap style
-            padding: 10px 0 0 0 !important; // to override bootstrap style
-        }
+  .user-search-list > li {
+    flex-direction: column;
+    height: auto;
+    & > div {
+      width: 100% !important; // to override bootstrap style
+      padding: 10px 0 0 0 !important; // to override bootstrap style
     }
+  }
 }
 
 @media (max-width: $media-sm-1) {
-    .add-board {
-        width: 250px;
-        padding: 0 !important; // to override bootstrap style
+  .add-board {
+    width: 250px;
+    padding: 0 !important; // to override bootstrap style
+  }
+  .add-board-users {
+    & > li {
+      flex-direction: column;
+      gap: 10px;
     }
-    .add-board-users{
-        &>li{
-            flex-direction: column;
-            gap: 10px;
-        }
-    }
+  }
 }

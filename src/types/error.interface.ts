@@ -1,5 +1,5 @@
-export interface IError{
-    status: number
-    errors: []
-    message: string
+export interface IError {
+  status: number
+  errors: []
+  message: string
 }
