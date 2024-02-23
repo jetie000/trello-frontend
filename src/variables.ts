@@ -1,5 +1,9 @@
+import { config } from "dotenv"
+
+config()
+
 export const variables = {
-  API_URL: "https://express-backend-trello.vercel.app/api",
+  API_URL: process.env.API_URL || "http://localhost:8080/api",
   TOKEN_LOCALSTORAGE: "token",
   THEME_LOCALSTORAGE: "page_theme",
   LANGUAGE_LOCALSTORAGE: "page_language",
