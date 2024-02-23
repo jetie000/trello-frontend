@@ -1,21 +1,21 @@
-@import '../../variables.scss';
+@import "../../variables.scss";
 
 .dropdown-toggle::after {
-    color: white !important; // to override bootstrap style
+  color: white !important; // to override bootstrap style
 }
 
 @media (min-width: $media-burger) {
-    nav .dropdown{
-        order: 3;
-    }
+  nav .dropdown {
+    order: 3;
+  }
 }
 
-@media (max-width: calc($media-burger - 1px) ){
-    [data-bs-theme="light"] .offcanvas-body ul li span{
-        color: black;
+@media (max-width: calc($media-burger - 1px)) {
+  [data-bs-theme="light"] .offcanvas-body ul li span {
+    color: black;
 
-        &:hover{
-            color: rgb(87, 87, 87);
-        }
+    &:hover {
+      color: rgb(87, 87, 87);
     }
+  }
 }

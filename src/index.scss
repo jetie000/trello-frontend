@@ -1,83 +1,83 @@
-@import 'variables.scss';
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import "variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 body {
   font-family: Montserrat, Helvetica, sans-serif;
 }
 
 .full-height {
-    min-height: max-content;
+  min-height: max-content;
 }
 
 body {
-    min-height: 100vh;
+  min-height: 100vh;
 }
 
 #root {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .cursor-pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
-.cursor-grab{
-    cursor: grab;
+.cursor-grab {
+  cursor: grab;
 }
 
-.min-w-0{
-    min-width: 0;
+.min-w-0 {
+  min-width: 0;
 }
 
-.min-h-0{
-    min-height: 0;
+.min-h-0 {
+  min-height: 0;
 }
 
 // !IMPORTANT for overriding bootstrap styles
 
 .main-wrapper {
-    width: 1168px !important;
+  width: 1168px !important;
 }
 
-.header-wrapper{
+.header-wrapper {
   max-width: 1168px !important;
 }
 
 @media (max-width: $media-lg-2) {
-    .main-wrapper {
-        width: 868px !important;
-    }
+  .main-wrapper {
+    width: 868px !important;
+  }
 }
 
 @media (max-width: $media-lg-1) {
-    .main-wrapper {
-        width: 668px !important;
-    }
+  .main-wrapper {
+    width: 668px !important;
+  }
 }
 
 @media (max-width: $media-md-2) {
-    .main-wrapper {
-        width: 568px !important;
-    }
+  .main-wrapper {
+    width: 568px !important;
+  }
 }
 
 @media (max-width: $media-md-1) {
-    .main-wrapper {
-        max-width: 490px !important;
-    }
+  .main-wrapper {
+    max-width: 490px !important;
+  }
 }
 @media (max-width: $media-sm-2) {
-    .main-wrapper {
-        max-width: 368px !important;
-        padding: 10px !important;
-    }
+  .main-wrapper {
+    max-width: 368px !important;
+    padding: 10px !important;
+  }
 }
 
 @media (max-width: $media-sm-1) {
-    .main-wrapper {
-        max-width: 270px !important;
-        padding: 10px !important;
-    }
+  .main-wrapper {
+    max-width: 270px !important;
+    padding: 10px !important;
+  }
 }
