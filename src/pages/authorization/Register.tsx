@@ -10,7 +10,7 @@ import { useSelector } from "react-redux"
 import { variables } from "@/variables"
 
 function Register() {
-  const [registerUser, { isLoading, isSuccess, isError, data, error }] = useRegisterUserMutation()
+  const [registerUser, { isLoading, isSuccess, isError, error }] = useRegisterUserMutation()
   const { language } = useSelector((state: RootState) => state.options)
   const { setToastChildren } = useActions()
   const fullNameRef = useRef<HTMLInputElement>(null)

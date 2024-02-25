@@ -18,10 +18,7 @@ function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: T
   const { language } = useSelector((state: RootState) => state.options)
 
   React.useEffect(() => {
-    console.log("moment")
-
     moment.locale(language === 0 ? "ru" : "en")
-    console.log(moment(new Date()).fromNow())
   }, [language])
 
   function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
