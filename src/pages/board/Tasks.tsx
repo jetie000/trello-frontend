@@ -2,8 +2,7 @@ import { RootState } from "@/store/store"
 import { IColumn } from "@/types/column.interface"
 import { ITask } from "@/types/task.interface"
 import { variables } from "@/variables"
-import moment from "moment"
-import "moment/locale/ru"
+import { intlFormatDistance } from "date-fns"
 import * as React from "react"
 import { useSelector } from "react-redux"
 
@@ -16,10 +15,6 @@ interface TasksProps {
 
 function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: TasksProps) {
   const { language } = useSelector((state: RootState) => state.options)
-
-  React.useEffect(() => {
-    moment.locale(language === 0 ? "ru" : "en")
-  }, [language])
 
   function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
     e.stopPropagation()
@@ -50,9 +45,13 @@ function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: T
           >
             <span className="fs-5">{t.name}</span>
             <span>{variables.LANGUAGES[language].MOVED}:</span>
-            <span className="text-truncate">{moment(t.moveDate).fromNow()}</span>
+            <span className="text-truncate">
+              {intlFormatDistance( t.moveDate, Date.now(),{ locale: language === 0 ? "ru" : "en" })}
+            </span>
             <span>{variables.LANGUAGES[language].CREATED}:</span>
-            <span className="text-truncate">{moment(t.creationDate).fromNow()}</span>
+            <span className="text-truncate">
+              {intlFormatDistance( t.creationDate, Date.now(),{ locale: language === 0 ? "ru" : "en" })}
+            </span>
             <div className="d-flex">
               <span>{variables.LANGUAGES[language].USERS}:</span>
               <div className="ms-auto d-flex gap-1">
