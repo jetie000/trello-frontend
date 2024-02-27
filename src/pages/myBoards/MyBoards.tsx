@@ -26,7 +26,7 @@ function MyBoards() {
       const myToast = bootstrapToast.getOrCreateInstance(
         document.getElementById("myToast") || "myToast"
       )
-      setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
+      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
       myToast.show()
     }
   }, [isLoading])

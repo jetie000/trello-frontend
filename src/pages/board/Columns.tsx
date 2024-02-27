@@ -109,8 +109,6 @@ function Columns({ board }: { board: IBoard }) {
     }
   }
 
-  console.log(columns)
-
   return (
     <div className="d-flex p-3 border rounded-2 board-columns flex-fill min-w-0 overflow-x-auto">
       <div className="d-flex gap-2 flex-fill">
