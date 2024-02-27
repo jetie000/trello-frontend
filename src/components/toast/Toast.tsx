@@ -1,14 +1,29 @@
-import React, { ReactElement } from "react"
+import React, { ReactElement, useEffect, useRef } from "react"
+import { Toast as bootstrapToast } from "bootstrap"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
 import { variables } from "@/variables"
+import { useActions } from "@/hooks/useActions"
 
 function Toast() {
   const { language } = useSelector((state: RootState) => state.options)
   const { toastChildren } = useSelector((state: RootState) => state.toast)
+  const toastRef = useRef<HTMLDivElement>(null)
+  const { setToast } = useActions()
+
+  useEffect(() => {
+    setToast(toastRef.current?.id)
+  }, [toastRef.current])
   return (
     <div className="toast-container position-fixed bottom-0 end-0 p-3">
-      <div id="myToast" className="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div
+        id="myToast"
+        className="toast"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        ref={toastRef}
+      >
         <div className="toast-header">
           <svg
             xmlns="http://www.w3.org/2000/svg"

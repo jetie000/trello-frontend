@@ -2,17 +2,14 @@ import * as React from "react"
 import UsersList from "../../components/usersList/UsersList"
 import { useActions } from "@/hooks/useActions"
 import { useEffect, useRef, useState } from "react"
-import { Toast as bootstrapToast } from "bootstrap"
-import { useSearchUsersQuery } from "@/store/api/user.api"
 import { IBoard } from "@/types/board.interface"
 import { useChangeBoardMutation } from "@/store/api/board.api"
-import { IUserResponse } from "@/types/user.interface"
 import { RootState } from "@/store/store"
 import { useSelector } from "react-redux"
 import { variables } from "@/variables"
 
 function BoardChange({ board }: { board: IBoard }) {
-  const { setToastChildren } = useActions()
+  const { showToast } = useActions()
 
   const { language } = useSelector((state: RootState) => state.options)
   const [userIds, setUserIds] = useState<number[]>(board.users?.map(u => u.id) || [])
@@ -24,32 +21,20 @@ function BoardChange({ board }: { board: IBoard }) {
     {
       isLoading: isLoadingChange,
       isError: isErrorChange,
-      data: dataChange,
       isSuccess: isSuccessChange
     }
   ] = useChangeBoardMutation()
 
   useEffect(() => {
     if (isErrorChange) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
     }
     if (isSuccessChange) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].BOARD_CHANGED)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].BOARD_CHANGED)
     }
   }, [isLoadingChange])
 
   const changeBoardClick = () => {
-    const myToast = bootstrapToast.getOrCreateInstance(
-      document.getElementById("myToast") || "myToast"
-    )
     if (nameRef.current && descRef.current && nameRef.current?.value.trim() !== "") {
       changeBoard({
         name: nameRef.current.value,
@@ -58,8 +43,7 @@ function BoardChange({ board }: { board: IBoard }) {
         userIds
       })
     } else {
-      setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].INPUT_DATA)
     }
   }
 

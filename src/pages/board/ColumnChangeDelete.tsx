@@ -11,8 +11,10 @@ import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
 
 function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefined }) {
-  const { setToastChildren } = useActions()
+  const { showToast } = useActions()
   const { language } = useSelector((state: RootState) => state.options)
+  const modalRefDelete = useRef<HTMLDivElement>(null)
+  const modalRefChange = useRef<HTMLDivElement>(null)
 
   const changeColumnRef = useRef<HTMLInputElement>(null)
   const [
@@ -36,45 +38,34 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
 
   React.useEffect(() => {
     if (isSuccessDelete) {
-      const myModal = bootstrapModal.getOrCreateInstance(
-        document.getElementById("deleteColumn") || "deleteColumn"
-      )
-      myModal.hide()
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].COLUMN_DELETED)
-      myToast.show()
+      if (modalRefDelete.current) {
+        const myModal = bootstrapModal.getOrCreateInstance("#" + modalRefDelete.current?.id)
+        myModal.hide()
+      }
+      showToast(variables.LANGUAGES[language].COLUMN_DELETED)
     }
     if (isErrorDelete) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
     }
   }, [isLoadingDelete])
 
   React.useEffect(() => {
     if (isSuccessChange) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].COLUMN_CHANGED)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].COLUMN_CHANGED)
     }
     if (isErrorChange) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
     }
   }, [isLoadingChange])
 
   return (
     <>
-      <Modal title={variables.LANGUAGES[language].CHANGE_COLUMN} id="changeColumn" size="sm">
+      <Modal
+        title={variables.LANGUAGES[language].CHANGE_COLUMN}
+        id="changeColumn"
+        size="sm"
+        ref={modalRefChange}
+      >
         <div className="d-flex flex-column">
           <label htmlFor="inputColumnNameChange">{variables.LANGUAGES[language].NAME}</label>
           <input
@@ -89,7 +80,12 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
           </button>
         </div>
       </Modal>
-      <Modal id="deleteColumn" title={variables.LANGUAGES[language].DELETE_COLUMN} size="sm">
+      <Modal
+        id="deleteColumn"
+        title={variables.LANGUAGES[language].DELETE_COLUMN}
+        size="sm"
+        ref={modalRefDelete}
+      >
         <div className="d-flex flex-column gap-2">
           <div>{variables.LANGUAGES[language].SURE_DELETE_COLUMN}</div>
           <button className="btn btn-danger" onClick={() => deleteColumn(currentColumn?.id || 0)}>

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ForwardedRef, RefObject, forwardRef } from "react"
 import { ReactElement } from "react"
 
 interface ModalProps {
@@ -8,7 +8,7 @@ interface ModalProps {
   size: "sm" | "md" | "lg"
 }
 
-function Modal({ id, title, size, children }: ModalProps) {
+const Modal = forwardRef(function Modal({ id, title, size, children }: ModalProps, ref: ForwardedRef<HTMLDivElement>) {
   return (
     <div
       className="modal  fade"
@@ -17,6 +17,7 @@ function Modal({ id, title, size, children }: ModalProps) {
       role="dialog"
       aria-hidden="true"
       aria-labelledby={id + "Label"}
+      ref={ref}
     >
       <div className={"modal-dialog modal-dialog-centered modal-" + size} role="document">
         <div className="modal-content">
@@ -36,6 +37,6 @@ function Modal({ id, title, size, children }: ModalProps) {
       </div>
     </div>
   )
-}
+})
 
 export default Modal

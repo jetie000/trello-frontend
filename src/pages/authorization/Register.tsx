@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react"
-import Modal from "@/components/modal/Modal"
 import { useRegisterUserMutation } from "@/store/api/user.api"
-import { Toast as bootstrapToast } from "bootstrap"
 import { useActions } from "@/hooks/useActions"
 import { IError } from "@/types/error.interface"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
@@ -12,27 +10,20 @@ import { variables } from "@/variables"
 function Register() {
   const [registerUser, { isLoading, isSuccess, isError, error }] = useRegisterUserMutation()
   const { language } = useSelector((state: RootState) => state.options)
-  const { setToastChildren } = useActions()
+  const { showToast } = useActions()
   const fullNameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    const myToast = bootstrapToast.getOrCreateInstance(
-      document.getElementById("myToast") || "myToast"
-    )
     if (isSuccess && fullNameRef.current && passwordRef.current && emailRef.current) {
-      setToastChildren(variables.LANGUAGES[language].SUCCESFULLY_REGISTERED)
+      showToast(variables.LANGUAGES[language].SUCCESFULLY_REGISTERED)
       fullNameRef.current.value = ""
       passwordRef.current.value = ""
       emailRef.current.value = ""
-      myToast.show()
     }
     if (isError) {
-      console.log(error)
-
-      setToastChildren(((error as FetchBaseQueryError)?.data as IError).message)
-      myToast.show()
+      showToast(((error as FetchBaseQueryError)?.data as IError).message)
     }
   }, [isLoading])
 
@@ -52,11 +43,7 @@ function Register() {
       })
       return
     }
-    const myToast = bootstrapToast.getOrCreateInstance(
-      document.getElementById("myToast") || "myToast"
-    )
-    setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
-    myToast.show()
+    showToast(variables.LANGUAGES[language].INPUT_DATA)
   }
 
   return (

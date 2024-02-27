@@ -1,10 +1,9 @@
 import { IBoard } from "@/types/board.interface"
 import * as React from "react"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Tasks from "./Tasks"
 import Modal from "@/components/modal/Modal"
 import { IColumn } from "@/types/column.interface"
-import { Toast as bootstrapToast } from "bootstrap"
 import TaskAdd from "./TaskAdd"
 import { ITask } from "@/types/task.interface"
 import TaskChangeDelete from "./TaskChangeDelete"
@@ -17,7 +16,7 @@ import { useSelector } from "react-redux"
 import { variables } from "@/variables"
 
 function Columns({ board }: { board: IBoard }) {
-  const { setToastChildren } = useActions()
+  const { showToast } = useActions()
   const { language } = useSelector((state: RootState) => state.options)
   const [currentColumn, setCurrentColumn] = useState<IColumn>()
   const [currentTask, setCurrentTask] = useState<ITask>()
@@ -33,22 +32,14 @@ function Columns({ board }: { board: IBoard }) {
   React.useEffect(() => {
     if (isSuccessTask) setDrugStartTask(undefined)
     if (isErrorTask) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_CHANGING_TASK_COL)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_CHANGING_TASK_COL)
     }
   }, [isLoadingTask])
 
   React.useEffect(() => {
     if (isSuccess) setDrugStartColumn(undefined)
     if (isError) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_CHANGING_COL_ORDER)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_CHANGING_COL_ORDER)
     }
   }, [isLoading])
 
@@ -192,12 +183,8 @@ function Columns({ board }: { board: IBoard }) {
         </button>
       </div>
       <ColumnChangeDelete currentColumn={currentColumn} />
-      <Modal id="addTask" title={variables.LANGUAGES[language].ADD_TASK} size="md">
-        <TaskAdd column={currentColumn} />
-      </Modal>
-      <Modal id="changeTask" title={variables.LANGUAGES[language].CHANGE_TASK} size="md">
-        <TaskChangeDelete task={currentTask} />
-      </Modal>
+      <TaskAdd column={currentColumn} />
+      <TaskChangeDelete task={currentTask} />
     </div>
   )
 }

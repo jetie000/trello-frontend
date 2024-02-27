@@ -16,18 +16,14 @@ function MyBoards() {
     return <Navigate to={"/login"} />
   }
 
-  const { setToastChildren } = useActions()
+  const { showToast } = useActions()
   const { language } = useSelector((state: RootState) => state.options)
   const navigate = useNavigate()
   const { isLoading, isError, data } = useGetBoardByUserIdQuery(id || 0)
 
   useEffect(() => {
     if (isError) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
     }
   }, [isLoading])
 

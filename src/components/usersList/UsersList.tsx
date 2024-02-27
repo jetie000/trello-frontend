@@ -2,7 +2,6 @@ import { useActions } from "@/hooks/useActions"
 import { useGetByIdsQuery, useSearchUsersQuery } from "@/store/api/user.api"
 import { IUserResponse } from "@/types/user.interface"
 import React, { useEffect, useMemo, useRef, useState } from "react"
-import { Toast as bootstrapToast } from "bootstrap"
 import { variables } from "@/variables"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
@@ -19,7 +18,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
   const [isShow, setIsShow] = useState(false)
   const { language } = useSelector((state: RootState) => state.options)
   const { isLoading, isError, data } = useGetByIdsQuery(userIds, { skip: userIds.length === 0 })
-  const { setToastChildren } = useActions()
+  const { showToast } = useActions()
   const {
     isLoading: isLoadingSearch,
     isError: isErrorSearch,
@@ -36,21 +35,13 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
 
   useEffect(() => {
     if (isError) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST_BY_IDS)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_REQUEST_BY_IDS)
     }
   }, [isLoading])
 
   useEffect(() => {
     if (isErrorSearch) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST_SEARCH)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_REQUEST_SEARCH)
     }
   }, [isLoadingSearch])
 

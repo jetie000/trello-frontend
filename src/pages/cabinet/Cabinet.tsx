@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { Modal as bootstrapModal } from "bootstrap"
-import { Toast as bootstrapToast } from "bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/store/store"
 import { Navigate, useNavigate } from "react-router-dom"
@@ -9,7 +8,6 @@ import { baseApi } from "@/store/api/baseApi"
 import { variables } from "@/variables"
 import "./Cabinet.scss"
 import Modal from "../../components/modal/Modal"
-import { IModalInfo } from "@/types/modalInfo.interface"
 import {
   useChangeUserMutation,
   useDeleteUserMutation,
@@ -25,11 +23,11 @@ function Cabinet() {
     return <Navigate to={"/login"} />
   }
 
-  const [modalInfo, setModalInfo] = useState<IModalInfo>({ title: "", children: "" })
   const { language } = useSelector((state: RootState) => state.options)
-  const { logout, setToastChildren } = useActions()
+  const { logout, showToast } = useActions()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const modalRef = useRef<HTMLDivElement>(null)
   const fullNameRef = useRef<HTMLInputElement>(null)
   const emailRef = useRef<HTMLInputElement>(null)
   const newPassRef = useRef<HTMLInputElement>(null)
@@ -40,57 +38,38 @@ function Cabinet() {
     useLogoutMutation()
   const [
     changeUser,
-    { isLoading: isLoadingChange, isSuccess: isSuccessChange, isError: isErrorChange, error }
+    { isLoading: isLoadingChange, isSuccess: isSuccessChange, isError: isErrorChange }
   ] = useChangeUserMutation()
   const [
     deleteUser,
-    {
-      isLoading: isLoadingDelete,
-      isSuccess: isSuccessDelete,
-      isError: isErrorDelete,
-      error: errorDelete
-    }
+    { isLoading: isLoadingDelete, isSuccess: isSuccessDelete, isError: isErrorDelete }
   ] = useDeleteUserMutation()
 
   useEffect(() => {
-    const myToast = bootstrapToast.getOrCreateInstance(
-      document.getElementById("myToast") || "myToast"
-    )
     if (isSuccessChange) {
-      setToastChildren(variables.LANGUAGES[language].USER_SUCCESSFULLY_CHANGED)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].USER_SUCCESSFULLY_CHANGED)
     }
     if (isErrorChange) {
-      setToastChildren(variables.LANGUAGES[language].ERROR_USER_DATA)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_USER_DATA)
     }
   }, [isLoadingChange])
 
   useEffect(() => {
-    const myToast = bootstrapToast.getOrCreateInstance(
-      document.getElementById("myToast") || "myToast"
-    )
     if (isSuccessDelete) {
-      const myModal = bootstrapModal.getOrCreateInstance(
-        document.getElementById("myInfoModal") || "myInfoModal"
-      )
-      myModal.hide()
-      setToastChildren(variables.LANGUAGES[language].USER_SUCCESSFULLY_DELETED)
-      myToast.show()
+      if (modalRef.current) {
+        const myModal = bootstrapModal.getOrCreateInstance("#" + modalRef.current?.id)
+        myModal.hide()
+      }
+      showToast(variables.LANGUAGES[language].USER_SUCCESSFULLY_DELETED)
     }
     if (isErrorDelete) {
-      setToastChildren(variables.LANGUAGES[language].USER_NOT_FOUND)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].USER_NOT_FOUND)
     }
   }, [isLoadingDelete])
 
   useEffect(() => {
     if (isErrorLogout) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_IN_USER_DATA)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_IN_USER_DATA)
     }
   }, [isLoadingLogout])
 
@@ -123,36 +102,14 @@ function Cabinet() {
         id: dataUser?.id || 0
       })
     }
-    const myToast = bootstrapToast.getOrCreateInstance(
-      document.getElementById("myToast") || "myToast"
-    )
-    setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
-    myToast.show()
+    showToast(variables.LANGUAGES[language].INPUT_DATA)
   }
 
   const deleteAccClick = () => {
-    const myModal = bootstrapModal.getOrCreateInstance(
-      document.getElementById("myInfoModal") || "myInfoModal"
-    )
-    const children =
-      dataUser && "id" in dataUser && !isError ? (
-        <div className="d-flex flex-column gap-3">
-          <span>{variables.LANGUAGES[language].SURE_DELETE_ACC_MY}</span>
-          <button
-            onClick={() => {
-              deleteUser(dataUser.id)
-              logOutClick()
-            }}
-            className="btn btn-danger"
-          >
-            {variables.LANGUAGES[language].DELETE_ACCOUNT}
-          </button>
-        </div>
-      ) : (
-        <div>{variables.LANGUAGES[language].USER_NOT_FOUND}</div>
-      )
-    setModalInfo({ title: variables.LANGUAGES[language].DELETING_ACCOUNT, children: children })
-    myModal.show()
+    if (modalRef.current) {
+      const myModal = bootstrapModal.getOrCreateInstance("#" + modalRef.current?.id)
+      myModal.show()
+    }
   }
 
   return (
@@ -249,8 +206,28 @@ function Cabinet() {
           </svg>
         </button>
       </div>
-      <Modal id="myInfoModal" title={modalInfo.title} size="sm">
-        {modalInfo.children}
+      <Modal
+        id="myInfoModal"
+        title={variables.LANGUAGES[language].DELETING_ACCOUNT}
+        size="sm"
+        ref={modalRef}
+      >
+        {dataUser && "id" in dataUser && !isError ? (
+          <div className="d-flex flex-column gap-3">
+            <span>{variables.LANGUAGES[language].SURE_DELETE_ACC_MY}</span>
+            <button
+              onClick={() => {
+                deleteUser(dataUser.id)
+                logOutClick()
+              }}
+              className="btn btn-danger"
+            >
+              {variables.LANGUAGES[language].DELETE_ACCOUNT}
+            </button>
+          </div>
+        ) : (
+          <div>{variables.LANGUAGES[language].USER_NOT_FOUND}</div>
+        )}
       </Modal>
     </div>
   )

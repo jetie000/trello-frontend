@@ -2,7 +2,6 @@ import * as React from "react"
 import "./AddBoard.scss"
 import { useEffect, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
-import { Toast as bootstrapToast } from "bootstrap"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
 import { useActions } from "@/hooks/useActions"
@@ -16,7 +15,7 @@ function AddBoard() {
   if (!token) {
     return <Navigate to={"/login"} />
   }
-  const { setToastChildren } = useActions()
+  const { showToast } = useActions()
 
   const { language } = useSelector((state: RootState) => state.options)
   const [userIds, setUserIds] = useState<number[]>([])
@@ -30,25 +29,14 @@ function AddBoard() {
 
   useEffect(() => {
     if (isErrorAdd) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
     }
     if (isSuccessAdd) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].BOARD_ADDED)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].BOARD_ADDED)
     }
   }, [isLoadingAdd])
 
   const addBoardClick = () => {
-    const myToast = bootstrapToast.getOrCreateInstance(
-      document.getElementById("myToast") || "myToast"
-    )
     if (nameRef.current && descRef.current && id && nameRef.current?.value.trim() !== "") {
       addBoard({
         name: nameRef.current.value,
@@ -57,8 +45,7 @@ function AddBoard() {
         userIds
       })
     } else {
-      setToastChildren(variables.LANGUAGES[language].INPUT_DATA)
-      myToast.show()
+      showToast(variables.LANGUAGES[language].INPUT_DATA)
     }
   }
 
