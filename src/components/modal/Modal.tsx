@@ -14,6 +14,7 @@ const Modal = forwardRef(function Modal({ id, title, size, children }: ModalProp
       className="modal  fade"
       id={id}
       tabIndex={-1}
+      data-testid="modal"
       role="dialog"
       aria-hidden="true"
       aria-labelledby={id + "Label"}

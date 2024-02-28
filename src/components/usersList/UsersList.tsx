@@ -94,6 +94,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
         <div className="position-relative">
           <ul
             onClick={() => setIsShow(false)}
+            data-testid="searchList"
             id="searchList"
             className="list-group user-search-list position-absolute"
           >
