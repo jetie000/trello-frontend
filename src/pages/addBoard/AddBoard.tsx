@@ -1,6 +1,5 @@
-import * as React from "react"
 import "./AddBoard.scss"
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Navigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
@@ -31,8 +30,11 @@ function AddBoard() {
     if (isErrorAdd) {
       showToast(variables.LANGUAGES[language].ERROR_REQUEST)
     }
-    if (isSuccessAdd) {
+    if (isSuccessAdd && nameRef.current && descRef.current) {
       showToast(variables.LANGUAGES[language].BOARD_ADDED)
+      nameRef.current.value = ""
+      descRef.current.value = ""
+      setUserIds([])
     }
   }, [isLoadingAdd])
 
@@ -73,11 +75,7 @@ function AddBoard() {
         </div>
         <UsersList userIds={userIds} setUserIds={setUserIds} />
 
-        <button
-          type="button"
-          className="btn btn-primary w-100 mt-3"
-          onClick={() => addBoardClick()}
-        >
+        <button type="button" className="btn btn-primary w-100 mt-3" onClick={addBoardClick}>
           {isLoadingAdd ? (
             <div className="spinner-border spinner-border-sm" role="status">
               <span className="visually-hidden">{variables.LANGUAGES[language].LOADING}</span>
