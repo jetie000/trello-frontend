@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/plugin-transform-react-jsx": "^7.23.4",
     "@reduxjs/toolkit": "^2.1.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -66,11 +68,13 @@
     "eslint": "^8.56.0",
     "jest": "^27.5.1",
     "jest-dom": "^4.0.0",
+    "jest-fetch-mock": "^3.0.3",
     "prettier": "^3.2.5",
     "prettier-eslint": "^16.3.0",
     "webpack": "^5.90.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^4.15.1",
+    "whatwg-fetch": "^3.6.20"
   },
   "_moduleAliases": {
     "@": "build"
@@ -80,6 +84,9 @@
       "\\.(css|scss)$": "identity-obj-proxy",
       "^@/(.*)$": "<rootDir>/src/$1"
     },
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "./src/setupTests.ts"
+    ]
   }
 }

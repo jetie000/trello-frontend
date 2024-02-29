@@ -1,0 +1,523 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddBoard should add and remove users 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class=" d-flex flex-fill flex-column"
+      >
+        <div
+          class="ms-auto me-auto d-flex flex-column add-board ps-3 pe-3 flex-fill"
+        >
+          <h2
+            class="text-center p-3"
+          >
+            Add board
+          </h2>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputName"
+            >
+              Name
+            </label>
+            <input
+              class="form-control"
+              id="inputName"
+              placeholder="Input name"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputDescription"
+            >
+              Description (optional)
+            </label>
+            <textarea
+              class="form-control"
+              id="inputDescription"
+              placeholder="Enter description"
+            />
+          </div>
+          <div
+            class="mb-1"
+          >
+            <label>
+              Users
+            </label>
+            <div
+              class="input-group"
+            >
+              <input
+                class="form-control w-50"
+                data-testid="search-users-input"
+                placeholder="Enter request"
+                type="text"
+              />
+              <button
+                class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+                type="button"
+              >
+                <svg
+                  class="bi bi-x-lg"
+                  fill="currentColor"
+                  height="20"
+                  viewBox="0 0 16 16"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <ul
+            class="list-group users-list"
+            data-testid="users-list"
+          >
+            <li
+              class="list-group-item d-flex justify-content-between"
+            >
+              <div
+                class="d-flex flex-column"
+              >
+                <div>
+                  1@gmail.com
+                </div>
+                <div>
+                  AA AA
+                </div>
+              </div>
+              <button
+                class="btn btn-danger"
+                data-testid="remove-user-1"
+              >
+                <svg
+                  class="bi bi-trash3-fill"
+                  fill="currentColor"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  width="16"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"
+                  />
+                </svg>
+              </button>
+            </li>
+          </ul>
+          <button
+            class="btn btn-primary w-100 mt-3"
+            type="button"
+          >
+            Add board
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class=" d-flex flex-fill flex-column"
+    >
+      <div
+        class="ms-auto me-auto d-flex flex-column add-board ps-3 pe-3 flex-fill"
+      >
+        <h2
+          class="text-center p-3"
+        >
+          Add board
+        </h2>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputName"
+          >
+            Name
+          </label>
+          <input
+            class="form-control"
+            id="inputName"
+            placeholder="Input name"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputDescription"
+          >
+            Description (optional)
+          </label>
+          <textarea
+            class="form-control"
+            id="inputDescription"
+            placeholder="Enter description"
+          />
+        </div>
+        <div
+          class="mb-1"
+        >
+          <label>
+            Users
+          </label>
+          <div
+            class="input-group"
+          >
+            <input
+              class="form-control w-50"
+              data-testid="search-users-input"
+              placeholder="Enter request"
+              type="text"
+            />
+            <button
+              class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+              type="button"
+            >
+              <svg
+                class="bi bi-x-lg"
+                fill="currentColor"
+                height="20"
+                viewBox="0 0 16 16"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <ul
+          class="list-group users-list"
+          data-testid="users-list"
+        >
+          <li
+            class="list-group-item d-flex justify-content-between"
+          >
+            <div
+              class="d-flex flex-column"
+            >
+              <div>
+                1@gmail.com
+              </div>
+              <div>
+                AA AA
+              </div>
+            </div>
+            <button
+              class="btn btn-danger"
+              data-testid="remove-user-1"
+            >
+              <svg
+                class="bi bi-trash3-fill"
+                fill="currentColor"
+                height="16"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"
+                />
+              </svg>
+            </button>
+          </li>
+        </ul>
+        <button
+          class="btn btn-primary w-100 mt-3"
+          type="button"
+        >
+          Add board
+        </button>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`AddBoard should render the input fields for name and description 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class=" d-flex flex-fill flex-column"
+      >
+        <div
+          class="ms-auto me-auto d-flex flex-column add-board ps-3 pe-3 flex-fill"
+        >
+          <h2
+            class="text-center p-3"
+          >
+            Add board
+          </h2>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputName"
+            >
+              Name
+            </label>
+            <input
+              class="form-control"
+              id="inputName"
+              placeholder="Input name"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputDescription"
+            >
+              Description (optional)
+            </label>
+            <textarea
+              class="form-control"
+              id="inputDescription"
+              placeholder="Enter description"
+            />
+          </div>
+          <div
+            class="mb-1"
+          >
+            <label>
+              Users
+            </label>
+            <div
+              class="input-group"
+            >
+              <input
+                class="form-control w-50"
+                data-testid="search-users-input"
+                placeholder="Enter request"
+                type="text"
+              />
+              <button
+                class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+                type="button"
+              >
+                <svg
+                  class="bi bi-x-lg"
+                  fill="currentColor"
+                  height="20"
+                  viewBox="0 0 16 16"
+                  width="20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+          <button
+            class="btn btn-primary w-100 mt-3"
+            type="button"
+          >
+            Add board
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class=" d-flex flex-fill flex-column"
+    >
+      <div
+        class="ms-auto me-auto d-flex flex-column add-board ps-3 pe-3 flex-fill"
+      >
+        <h2
+          class="text-center p-3"
+        >
+          Add board
+        </h2>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputName"
+          >
+            Name
+          </label>
+          <input
+            class="form-control"
+            id="inputName"
+            placeholder="Input name"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputDescription"
+          >
+            Description (optional)
+          </label>
+          <textarea
+            class="form-control"
+            id="inputDescription"
+            placeholder="Enter description"
+          />
+        </div>
+        <div
+          class="mb-1"
+        >
+          <label>
+            Users
+          </label>
+          <div
+            class="input-group"
+          >
+            <input
+              class="form-control w-50"
+              data-testid="search-users-input"
+              placeholder="Enter request"
+              type="text"
+            />
+            <button
+              class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+              type="button"
+            >
+              <svg
+                class="bi bi-x-lg"
+                fill="currentColor"
+                height="20"
+                viewBox="0 0 16 16"
+                width="20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+        <button
+          class="btn btn-primary w-100 mt-3"
+          type="button"
+        >
+          Add board
+        </button>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

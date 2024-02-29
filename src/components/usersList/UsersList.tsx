@@ -1,10 +1,10 @@
-import { useActions } from "@/hooks/useActions"
-import { useGetByIdsQuery, useSearchUsersQuery } from "@/store/api/user.api"
 import { IUserResponse } from "@/types/user.interface"
 import React, { useEffect, useMemo, useRef, useState } from "react"
+import { useActions } from "@/hooks/useActions"
 import { variables } from "@/variables"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
+import { useGetByIdsQuery, useSearchUsersQuery } from "@/store/api/user.api"
 
 interface UsersListProps {
   userIds: number[]
@@ -61,6 +61,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
         <label>Users</label>
         <div className="input-group">
           <input
+          data-testid="search-users-input"
             type="text"
             className="form-control w-50"
             placeholder={variables.LANGUAGES[language].ENTER_REQUEST}
@@ -107,6 +108,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
                   onClick={() => addUserClick(user)}
                   className="list-group-item p-2 cursor-pointer text-truncate"
                   key={user.email}
+                  data-testid={"add-user-" + user.id}
                 >
                   <div>{user.email}</div>
                   <div>{user.fullName}</div>
@@ -116,7 +118,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
         </div>
       )}
       {userIds.length > 0 && (
-        <ul className="list-group users-list">
+        <ul data-testid="users-list" className="list-group users-list">
           {data &&
             "length" in data &&
             data.map(user => (
@@ -125,7 +127,11 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
                   <div>{user.email}</div>
                   <div>{user.fullName}</div>
                 </div>
-                <button className="btn btn-danger" onClick={() => deleteUser(user.id)}>
+                <button
+                  data-testid={"remove-user-" + user.id}
+                  className="btn btn-danger"
+                  onClick={() => deleteUser(user.id)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
