@@ -1,7 +1,7 @@
 import * as React from "react"
 import { render, screen } from "@testing-library/react"
 import "@testing-library/jest-dom"
-import Modal from "@/components/modal/Modal"
+import ModalWrapper from "@/components/modalWrapper/ModalWrapper"
 
 describe("Modal", () => {
   it("should render a modal with the given id, title, size and children", () => {
@@ -11,9 +11,9 @@ describe("Modal", () => {
     const children = "Modal Content"
 
     const component = render(
-      <Modal id={id} title={title} size={size}>
+      <ModalWrapper id={id} title={title} size={size}>
         {children}
-      </Modal>
+      </ModalWrapper>
     )
 
     expect(screen.getByTestId("modal")).toBeInTheDocument()
@@ -28,9 +28,9 @@ describe("Modal", () => {
     const children = "Modal Content"
 
     render(
-      <Modal id={id} title={title} size={size}>
+      <ModalWrapper id={id} title={title} size={size}>
         {children}
-      </Modal>
+      </ModalWrapper>
     )
 
     const modalElement = screen.getByTestId("modal")

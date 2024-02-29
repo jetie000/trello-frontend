@@ -3,7 +3,6 @@ import { IColumn } from "@/types/column.interface"
 import { ITask } from "@/types/task.interface"
 import { variables } from "@/variables"
 import { intlFormatDistance } from "date-fns"
-import * as React from "react"
 import { useSelector } from "react-redux"
 
 interface TasksProps {
@@ -46,11 +45,13 @@ function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: T
             <span className="fs-5">{t.name}</span>
             <span>{variables.LANGUAGES[language].MOVED}:</span>
             <span className="text-truncate">
-              {intlFormatDistance( t.moveDate, Date.now(),{ locale: language === 0 ? "ru" : "en" })}
+              {intlFormatDistance(t.moveDate, Date.now(), { locale: language === 0 ? "ru" : "en" })}
             </span>
             <span>{variables.LANGUAGES[language].CREATED}:</span>
             <span className="text-truncate">
-              {intlFormatDistance( t.creationDate, Date.now(),{ locale: language === 0 ? "ru" : "en" })}
+              {intlFormatDistance(t.creationDate, Date.now(), {
+                locale: language === 0 ? "ru" : "en"
+              })}
             </span>
             <div className="d-flex">
               <span>{variables.LANGUAGES[language].USERS}:</span>

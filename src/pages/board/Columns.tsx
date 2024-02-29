@@ -1,8 +1,5 @@
-import { IBoard } from "@/types/board.interface"
-import * as React from "react"
-import { useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import Tasks from "./Tasks"
-import Modal from "@/components/modal/Modal"
 import { IColumn } from "@/types/column.interface"
 import TaskAdd from "./TaskAdd"
 import { ITask } from "@/types/task.interface"
@@ -29,21 +26,21 @@ function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
   const [drugStartColumn, setDrugStartColumn] = useState<IColumn | undefined>()
   const [drugStartTask, setDrugStartTask] = useState<ITask | undefined>()
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessTask) setDrugStartTask(undefined)
     if (isErrorTask) {
       showToast(variables.LANGUAGES[language].ERROR_CHANGING_TASK_COL)
     }
   }, [isLoadingTask])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccess) setDrugStartColumn(undefined)
     if (isError) {
       showToast(variables.LANGUAGES[language].ERROR_CHANGING_COL_ORDER)
     }
   }, [isLoading])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (boardColumns) setColumns(boardColumns)
   }, [boardColumns])
 

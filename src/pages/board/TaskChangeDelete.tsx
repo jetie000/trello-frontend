@@ -1,11 +1,10 @@
 import { useActions } from "@/hooks/useActions"
 import { useChangeTaskMutation, useDeleteTaskMutation } from "@/store/api/task.api"
 import { ITask } from "@/types/task.interface"
-import * as React from "react"
-import { useRef, useState } from "react"
-import { Modal as bootstrapModal } from "bootstrap"
+import { useEffect, useRef, useState } from "react"
+import { Modal } from "bootstrap"
 import UsersList from "@/components/usersList/UsersList"
-import Modal from "@/components/modal/Modal"
+import ModalWrapper from "@/components/modalWrapper/ModalWrapper"
 import { useParams } from "react-router-dom"
 import { RootState } from "@/store/store"
 import { useSelector } from "react-redux"
@@ -29,7 +28,7 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
   ] = useDeleteTaskMutation()
   const [userIds, setUserIds] = useState<number[]>([])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (task?.users.length) {
       setUserIds(task.users.map(u => u.id))
     }
@@ -54,12 +53,12 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
 
   const deleteTaskClick = () => {
     if (modalRefDelete.current) {
-      const myModal = bootstrapModal.getOrCreateInstance("#" + modalRefDelete.current?.id)
+      const myModal = Modal.getOrCreateInstance("#" + modalRefDelete.current?.id)
       myModal.show()
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessChange) {
       showToast(variables.LANGUAGES[language].TASK_CHANGED)
     }
@@ -68,14 +67,14 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
     }
   }, [isLoadingChange])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessDelete) {
       if (modalRefDelete.current) {
-        const myModal = bootstrapModal.getOrCreateInstance("#" + modalRefDelete.current?.id)
+        const myModal = Modal.getOrCreateInstance("#" + modalRefDelete.current?.id)
         myModal.hide()
       }
       if (modalRefChange.current) {
-        const myModal = bootstrapModal.getOrCreateInstance("#" + modalRefChange.current?.id)
+        const myModal = Modal.getOrCreateInstance("#" + modalRefChange.current?.id)
         myModal.hide()
       }
       showToast(variables.LANGUAGES[language].TASK_DELETED)
@@ -86,7 +85,7 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
   }, [isLoadingDelete])
 
   return (
-    <Modal
+    <ModalWrapper
       id="changeTask"
       title={variables.LANGUAGES[language].CHANGE_TASK}
       size="md"
@@ -116,7 +115,7 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
         <button className="btn btn-danger" onClick={deleteTaskClick}>
           {variables.LANGUAGES[language].DELETE_TASK}
         </button>
-        <Modal
+        <ModalWrapper
           id="deleteTask"
           title={variables.LANGUAGES[language].DELETE_TASK}
           size="sm"
@@ -131,9 +130,9 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
               {variables.LANGUAGES[language].DELETE_TASK}
             </button>
           </div>
-        </Modal>
+        </ModalWrapper>
       </div>
-    </Modal>
+    </ModalWrapper>
   )
 }
 

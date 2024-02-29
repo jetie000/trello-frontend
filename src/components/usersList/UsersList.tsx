@@ -1,5 +1,5 @@
 import { IUserResponse } from "@/types/user.interface"
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { useActions } from "@/hooks/useActions"
 import { variables } from "@/variables"
 import { useSelector } from "react-redux"
@@ -61,7 +61,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
         <label>Users</label>
         <div className="input-group">
           <input
-          data-testid="search-users-input"
+            data-testid="search-users-input"
             type="text"
             className="form-control w-50"
             placeholder={variables.LANGUAGES[language].ENTER_REQUEST}

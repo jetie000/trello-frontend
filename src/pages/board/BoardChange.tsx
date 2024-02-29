@@ -1,4 +1,3 @@
-import * as React from "react"
 import UsersList from "../../components/usersList/UsersList"
 import { useActions } from "@/hooks/useActions"
 import { useEffect, useRef, useState } from "react"
@@ -18,11 +17,7 @@ function BoardChange({ board }: { board: IBoard }) {
 
   const [
     changeBoard,
-    {
-      isLoading: isLoadingChange,
-      isError: isErrorChange,
-      isSuccess: isSuccessChange
-    }
+    { isLoading: isLoadingChange, isError: isErrorChange, isSuccess: isSuccessChange }
   ] = useChangeBoardMutation()
 
   useEffect(() => {
@@ -70,11 +65,7 @@ function BoardChange({ board }: { board: IBoard }) {
         />
       </div>
       <UsersList userIds={userIds} setUserIds={setUserIds} />
-      <button
-        type="button"
-        className="btn btn-primary w-100 mt-3"
-        onClick={changeBoardClick}
-      >
+      <button type="button" className="btn btn-primary w-100 mt-3" onClick={changeBoardClick}>
         {isLoadingChange ? (
           <div className="spinner-border spinner-border-sm" role="status">
             <span className="visually-hidden">{variables.LANGUAGES[language].LOADING}</span>

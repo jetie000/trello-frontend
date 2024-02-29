@@ -1,10 +1,8 @@
-import Modal from "@/components/modal/Modal"
+import ModalWrapper from "@/components/modalWrapper/ModalWrapper"
 import { useChangeColumnMutation, useDeleteColumnMutation } from "@/store/api/column.api"
 import { IColumn } from "@/types/column.interface"
-import * as React from "react"
-import { useRef } from "react"
-import { Toast as bootstrapToast } from "bootstrap"
-import { Modal as bootstrapModal } from "bootstrap"
+import { useEffect, useRef } from "react"
+import { Modal } from "bootstrap"
 import { useActions } from "@/hooks/useActions"
 import { variables } from "@/variables"
 import { useSelector } from "react-redux"
@@ -36,10 +34,10 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessDelete) {
       if (modalRefDelete.current) {
-        const myModal = bootstrapModal.getOrCreateInstance("#" + modalRefDelete.current?.id)
+        const myModal = Modal.getOrCreateInstance("#" + modalRefDelete.current?.id)
         myModal.hide()
       }
       showToast(variables.LANGUAGES[language].COLUMN_DELETED)
@@ -49,7 +47,7 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
     }
   }, [isLoadingDelete])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessChange) {
       showToast(variables.LANGUAGES[language].COLUMN_CHANGED)
     }
@@ -60,7 +58,7 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
 
   return (
     <>
-      <Modal
+      <ModalWrapper
         title={variables.LANGUAGES[language].CHANGE_COLUMN}
         id="changeColumn"
         size="sm"
@@ -79,8 +77,8 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
             {variables.LANGUAGES[language].CHANGE_COLUMN}
           </button>
         </div>
-      </Modal>
-      <Modal
+      </ModalWrapper>
+      <ModalWrapper
         id="deleteColumn"
         title={variables.LANGUAGES[language].DELETE_COLUMN}
         size="sm"
@@ -92,7 +90,7 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
             {variables.LANGUAGES[language].DELETE_COLUMN}
           </button>
         </div>
-      </Modal>
+      </ModalWrapper>
     </>
   )
 }

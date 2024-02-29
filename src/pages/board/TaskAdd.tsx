@@ -1,14 +1,13 @@
 import UsersList from "@/components/usersList/UsersList"
 import { useAddTaskMutation } from "@/store/api/task.api"
 import { IColumn } from "@/types/column.interface"
-import * as React from "react"
-import { useRef, useState } from "react"
-import { Modal as bootstrapModal } from "bootstrap"
+import { useEffect, useRef, useState } from "react"
+import { Modal } from "bootstrap"
 import { useActions } from "@/hooks/useActions"
 import { RootState } from "@/store/store"
 import { useSelector } from "react-redux"
 import { variables } from "@/variables"
-import Modal from "@/components/modal/Modal"
+import ModalWrapper from "@/components/modalWrapper/ModalWrapper"
 
 function TaskAdd({ column }: { column: IColumn | undefined }) {
   const { showToast } = useActions()
@@ -32,10 +31,10 @@ function TaskAdd({ column }: { column: IColumn | undefined }) {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessAdd) {
       if (modalRefAdd.current) {
-        const myModal = bootstrapModal.getOrCreateInstance("#" + modalRefAdd.current?.id)
+        const myModal = Modal.getOrCreateInstance("#" + modalRefAdd.current?.id)
         myModal.hide()
       }
       showToast(variables.LANGUAGES[language].TASK_ADDED)
@@ -46,7 +45,12 @@ function TaskAdd({ column }: { column: IColumn | undefined }) {
   }, [isLoadingAdd])
 
   return (
-    <Modal id="addTask" title={variables.LANGUAGES[language].ADD_TASK} size="md" ref={modalRefAdd}>
+    <ModalWrapper
+      id="addTask"
+      title={variables.LANGUAGES[language].ADD_TASK}
+      size="md"
+      ref={modalRefAdd}
+    >
       <div className="d-flex flex-column">
         <label htmlFor="inputTaskName">{variables.LANGUAGES[language].NAME}</label>
         <input
@@ -67,7 +71,7 @@ function TaskAdd({ column }: { column: IColumn | undefined }) {
           {variables.LANGUAGES[language].ADD_TASK}
         </button>
       </div>
-    </Modal>
+    </ModalWrapper>
   )
 }
 

@@ -1,11 +1,10 @@
-import React, { ReactElement, useEffect, useRef } from "react"
-import { Toast as bootstrapToast } from "bootstrap"
+import { useEffect, useRef } from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "@/store/store"
 import { variables } from "@/variables"
 import { useActions } from "@/hooks/useActions"
 
-function Toast() {
+function ToastWrapper() {
   const { language } = useSelector((state: RootState) => state.options)
   const { toastChildren } = useSelector((state: RootState) => state.toast)
   const toastRef = useRef<HTMLDivElement>(null)
@@ -50,4 +49,4 @@ function Toast() {
   )
 }
 
-export default Toast
+export default ToastWrapper

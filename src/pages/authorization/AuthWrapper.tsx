@@ -1,4 +1,3 @@
-import React from "react"
 import { Link, Navigate } from "react-router-dom"
 import "./Auth.scss"
 import { ReactElement } from "react"

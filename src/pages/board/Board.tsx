@@ -3,17 +3,16 @@ import {
   useGetBoardByIdQuery,
   useLeaveBoardMutation
 } from "@/store/api/board.api"
-import * as React from "react"
 import { useParams } from "react-router"
-import { useMemo, useRef } from "react"
-import { Modal as bootstrapModal } from "bootstrap"
+import { useEffect, useMemo, useRef } from "react"
+import { Modal } from "bootstrap"
 import Columns from "./Columns"
 import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import { IError } from "@/types/error.interface"
 import { useSelector } from "react-redux"
 import { Navigate, useNavigate } from "react-router-dom"
 import { RootState } from "@/store/store"
-import Modal from "../../components/modal/Modal"
+import ModalWrapper from "../../components/modalWrapper/ModalWrapper"
 import "./Board.scss"
 import { useActions } from "@/hooks/useActions"
 import BoardChange from "./BoardChange"
@@ -49,10 +48,10 @@ function Board() {
     [data]
   )
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessDelete) {
       if (modalRefDelete.current) {
-        const myModal = bootstrapModal.getOrCreateInstance("#" + modalRefDelete.current?.id)
+        const myModal = Modal.getOrCreateInstance("#" + modalRefDelete.current?.id)
         myModal.hide()
       }
       navigate("/")
@@ -63,7 +62,7 @@ function Board() {
     }
   }, [isLoadingDelete])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessLeave) {
       navigate("/")
       showToast(variables.LANGUAGES[language].BOARD_LEFT)
@@ -178,7 +177,7 @@ function Board() {
         </div>
         <Columns boardColumns={data.columns} />
         <ColumnAdd boardId={data.id} />
-        <Modal
+        <ModalWrapper
           id="deleteBoard"
           title={variables.LANGUAGES[language].DELETE_BOARD}
           size="sm"
@@ -190,8 +189,8 @@ function Board() {
               {variables.LANGUAGES[language].DELETE_BOARD}
             </button>
           </div>
-        </Modal>
-        <Modal
+        </ModalWrapper>
+        <ModalWrapper
           id="leaveBoard"
           title={variables.LANGUAGES[language].LEAVE_BOARD}
           size="sm"
@@ -203,15 +202,15 @@ function Board() {
               {variables.LANGUAGES[language].LEAVE_BOARD}
             </button>
           </div>
-        </Modal>
-        <Modal
+        </ModalWrapper>
+        <ModalWrapper
           id="changeBoard"
           title={variables.LANGUAGES[language].CHANGE_BOARD}
           size="md"
           ref={modalRefChange}
         >
           <BoardChange board={data} />
-        </Modal>
+        </ModalWrapper>
       </div>
     )
   )

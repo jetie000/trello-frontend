@@ -1,23 +1,21 @@
 import { useAddColumnMutation } from "@/store/api/column.api"
-import { IBoard } from "@/types/board.interface"
-import * as React from "react"
 import { Modal as bootstrapModal } from "bootstrap"
 import { useActions } from "@/hooks/useActions"
 import { RootState } from "@/store/store"
 import { useSelector } from "react-redux"
 import { variables } from "@/variables"
-import Modal from "@/components/modal/Modal"
-import { useRef } from "react"
+import ModalWrapper from "@/components/modalWrapper/ModalWrapper"
+import { useEffect, useRef } from "react"
 
 function ColumnAdd({ boardId }: { boardId: number | undefined }) {
   const modalRefAdd = useRef<HTMLDivElement>(null)
-  const addColumnRef = React.useRef<HTMLInputElement>(null)
+  const addColumnRef = useRef<HTMLInputElement>(null)
   const [addColumn, { isSuccess: isSuccessAdd, isError: isErrorAdd, isLoading: isLoadingAdd }] =
     useAddColumnMutation()
   const { showToast } = useActions()
   const { language } = useSelector((state: RootState) => state.options)
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessAdd) {
       if (modalRefAdd.current) {
         const myModal = bootstrapModal.getOrCreateInstance("#" + modalRefAdd.current?.id)
@@ -40,7 +38,7 @@ function ColumnAdd({ boardId }: { boardId: number | undefined }) {
   }
 
   return (
-    <Modal
+    <ModalWrapper
       id="addColumn"
       title={variables.LANGUAGES[language].ADD_COLUMN}
       size="sm"
@@ -58,7 +56,7 @@ function ColumnAdd({ boardId }: { boardId: number | undefined }) {
           {variables.LANGUAGES[language].ADD_COLUMN}
         </button>
       </div>
-    </Modal>
+    </ModalWrapper>
   )
 }
 

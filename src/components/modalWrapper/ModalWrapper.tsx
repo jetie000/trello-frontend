@@ -1,4 +1,4 @@
-import React, { ForwardedRef, RefObject, forwardRef } from "react"
+import { ForwardedRef, forwardRef } from "react"
 import { ReactElement } from "react"
 
 interface ModalProps {
@@ -8,7 +8,10 @@ interface ModalProps {
   size: "sm" | "md" | "lg"
 }
 
-const Modal = forwardRef(function Modal({ id, title, size, children }: ModalProps, ref: ForwardedRef<HTMLDivElement>) {
+const ModalWrapper = forwardRef(function Modal(
+  { id, title, size, children }: ModalProps,
+  ref: ForwardedRef<HTMLDivElement>
+) {
   return (
     <div
       className="modal  fade"
@@ -20,7 +23,7 @@ const Modal = forwardRef(function Modal({ id, title, size, children }: ModalProp
       aria-labelledby={id + "Label"}
       ref={ref}
     >
-      <div className={"modal-dialog modal-dialog-centered modal-" + size} role="document">
+      <div className={`modal-dialog modal-dialog-centered modal-${size}`} role="document">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id={id + "Label"}>
@@ -40,4 +43,4 @@ const Modal = forwardRef(function Modal({ id, title, size, children }: ModalProp
   )
 })
 
-export default Modal
+export default ModalWrapper

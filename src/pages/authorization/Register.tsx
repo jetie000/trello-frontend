@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 import { useRegisterUserMutation } from "@/store/api/user.api"
 import { useActions } from "@/hooks/useActions"
 import { IError } from "@/types/error.interface"
@@ -78,11 +78,7 @@ function Register() {
             ref={passwordRef}
           />
         </div>
-        <button
-          type="button"
-          className="btn btn-primary mt-3 w-100"
-          onClick={registerClick}
-        >
+        <button type="button" className="btn btn-primary mt-3 w-100" onClick={registerClick}>
           {isLoading ? (
             <div className="spinner-border spinner-border-sm" role="status">
               <span className="visually-hidden">{variables.LANGUAGES[language].LOADING}</span>

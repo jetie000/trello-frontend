@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { Modal as bootstrapModal } from "bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "@/store/store"
@@ -7,7 +7,7 @@ import { useActions } from "@/hooks/useActions"
 import { baseApi } from "@/store/api/baseApi"
 import { variables } from "@/variables"
 import "./Cabinet.scss"
-import Modal from "../../components/modal/Modal"
+import ModalWrapper from "../../components/modalWrapper/ModalWrapper"
 import {
   useChangeUserMutation,
   useDeleteUserMutation,
@@ -157,11 +157,7 @@ function Cabinet() {
             ref={newPassRef}
           />
         </div>
-        <button
-          type="button"
-          className="btn btn-primary mt-3 w-100"
-          onClick={changeInfoClick}
-        >
+        <button type="button" className="btn btn-primary mt-3 w-100" onClick={changeInfoClick}>
           {variables.LANGUAGES[language].CHANGE_DATA}
         </button>
       </div>
@@ -206,7 +202,7 @@ function Cabinet() {
           </svg>
         </button>
       </div>
-      <Modal
+      <ModalWrapper
         id="myInfoModal"
         title={variables.LANGUAGES[language].DELETING_ACCOUNT}
         size="sm"
@@ -228,7 +224,7 @@ function Cabinet() {
         ) : (
           <div>{variables.LANGUAGES[language].USER_NOT_FOUND}</div>
         )}
-      </Modal>
+      </ModalWrapper>
     </div>
   )
 }

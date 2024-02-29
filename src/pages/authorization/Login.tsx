@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import React, { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useLogInUserMutation } from "@/store/api/user.api"
 import { useActions } from "@/hooks/useActions"
 import { AuthResponse } from "@/types/authResponse.interface"

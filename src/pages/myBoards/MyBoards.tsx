@@ -1,6 +1,5 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import { useGetBoardByUserIdQuery } from "@/store/api/board.api"
-import { Toast as bootstrapToast } from "bootstrap"
 import { RootState } from "@/store/store"
 import { IBoard } from "@/types/board.interface"
 import { useSelector } from "react-redux"
