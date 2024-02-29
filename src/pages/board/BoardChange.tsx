@@ -73,7 +73,7 @@ function BoardChange({ board }: { board: IBoard }) {
       <button
         type="button"
         className="btn btn-primary w-100 mt-3"
-        onClick={() => changeBoardClick()}
+        onClick={changeBoardClick}
       >
         {isLoadingChange ? (
           <div className="spinner-border spinner-border-sm" role="status">

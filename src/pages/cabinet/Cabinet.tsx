@@ -160,14 +160,14 @@ function Cabinet() {
         <button
           type="button"
           className="btn btn-primary mt-3 w-100"
-          onClick={() => changeInfoClick()}
+          onClick={changeInfoClick}
         >
           {variables.LANGUAGES[language].CHANGE_DATA}
         </button>
       </div>
       <div className="d-flex justify-content-between cabinet-buttons mb-3">
         <button
-          onClick={() => logOutClick()}
+          onClick={logOutClick}
           className="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
         >
           <svg
@@ -190,7 +190,7 @@ function Cabinet() {
           {variables.LANGUAGES[language].LOGOUT}
         </button>
         <button
-          onClick={() => deleteAccClick()}
+          onClick={deleteAccClick}
           className="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
         >
           {variables.LANGUAGES[language].DELETE_ACCOUNT}

@@ -15,7 +15,7 @@ import { RootState } from "@/store/store"
 import { useSelector } from "react-redux"
 import { variables } from "@/variables"
 
-function Columns({ board }: { board: IBoard }) {
+function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
   const { showToast } = useActions()
   const { language } = useSelector((state: RootState) => state.options)
   const [currentColumn, setCurrentColumn] = useState<IColumn>()
@@ -44,8 +44,8 @@ function Columns({ board }: { board: IBoard }) {
   }, [isLoading])
 
   React.useEffect(() => {
-    if (board.columns) setColumns(board.columns)
-  }, [board.columns])
+    if (boardColumns) setColumns(boardColumns)
+  }, [boardColumns])
 
   function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
     e.currentTarget.className = "border rounded-2 p-2 cursor-grab"
@@ -109,9 +109,9 @@ function Columns({ board }: { board: IBoard }) {
               className="border rounded-2 p-2 cursor-grab"
               draggable={true}
               key={c.id}
-              onDragLeave={e => dragLeaveHandler(e)}
+              onDragLeave={dragLeaveHandler}
               onDragStart={e => dragStartHandler(e, c)}
-              onDragOver={e => dragOverHandler(e)}
+              onDragOver={dragOverHandler}
               onDrop={e => dropHandler(e, c)}
             >
               <h5 className="m-0 mb-2 text-truncate">{c.name}</h5>

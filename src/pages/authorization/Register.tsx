@@ -81,7 +81,7 @@ function Register() {
         <button
           type="button"
           className="btn btn-primary mt-3 w-100"
-          onClick={() => registerClick()}
+          onClick={registerClick}
         >
           {isLoading ? (
             <div className="spinner-border spinner-border-sm" role="status">

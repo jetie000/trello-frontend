@@ -9,7 +9,7 @@ import { variables } from "@/variables"
 import Modal from "@/components/modal/Modal"
 import { useRef } from "react"
 
-function ColumnAdd({ board }: { board: IBoard | undefined }) {
+function ColumnAdd({ boardId }: { boardId: number | undefined }) {
   const modalRefAdd = useRef<HTMLDivElement>(null)
   const addColumnRef = React.useRef<HTMLInputElement>(null)
   const [addColumn, { isSuccess: isSuccessAdd, isError: isErrorAdd, isLoading: isLoadingAdd }] =
@@ -31,9 +31,9 @@ function ColumnAdd({ board }: { board: IBoard | undefined }) {
   }, [isLoadingAdd])
 
   const addColumnClick = () => {
-    if (addColumnRef.current && addColumnRef.current.value !== "" && board && "id" in board) {
+    if (addColumnRef.current && addColumnRef.current.value !== "" && boardId) {
       addColumn({
-        boardId: board.id,
+        boardId,
         name: addColumnRef.current.value
       })
     }

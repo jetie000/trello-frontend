@@ -176,8 +176,8 @@ function Board() {
             ))}
           </div>
         </div>
-        <Columns board={data} />
-        <ColumnAdd board={data} />
+        <Columns boardColumns={data.columns} />
+        <ColumnAdd boardId={data.id} />
         <Modal
           id="deleteBoard"
           title={variables.LANGUAGES[language].DELETE_BOARD}

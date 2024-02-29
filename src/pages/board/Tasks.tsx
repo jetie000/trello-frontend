@@ -36,9 +36,9 @@ function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: T
             className="d-flex flex-column board-task cursor-pointer cursor-grab"
             key={t.id}
             draggable={true}
-            onDragLeave={e => dragLeaveHandler(e)}
+            onDragLeave={dragLeaveHandler}
             onDragStart={e => dragStartHandler(e, t)}
-            onDragOver={e => dragOverHandler(e)}
+            onDragOver={dragOverHandler}
             onClick={() => setCurrentTask(t)}
             data-bs-toggle="modal"
             data-bs-target="#changeTask"

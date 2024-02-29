@@ -113,7 +113,7 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
         <button className="btn btn-primary mt-2 mb-2" onClick={changeTaskClick}>
           {variables.LANGUAGES[language].CHANGE_TASK}
         </button>
-        <button className="btn btn-danger" onClick={() => deleteTaskClick()}>
+        <button className="btn btn-danger" onClick={deleteTaskClick}>
           {variables.LANGUAGES[language].DELETE_TASK}
         </button>
         <Modal
