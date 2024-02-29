@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react"
 import { useSelector } from "react-redux"
-import { RootState } from "@/store/store"
-import { variables } from "@/variables"
+import { RootStateStore } from "@/store/store"
 import { useActions } from "@/hooks/useActions"
+import { languages } from "@/config/languages"
 
 function ToastWrapper() {
-  const { language } = useSelector((state: RootState) => state.options)
-  const { toastChildren } = useSelector((state: RootState) => state.toast)
+  const { language } = useSelector((state: RootStateStore) => state.options)
+  const { toastChildren } = useSelector((state: RootStateStore) => state.toast)
   const toastRef = useRef<HTMLDivElement>(null)
   const { setToast } = useActions()
 
@@ -35,7 +35,7 @@ function ToastWrapper() {
           >
             <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z" />
           </svg>
-          <strong className="me-auto">{variables.LANGUAGES[language].NOTIFICATION}</strong>
+          <strong className="me-auto">{languages[language].NOTIFICATION}</strong>
           <button
             type="button"
             className="btn-close"

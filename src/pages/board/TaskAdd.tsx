@@ -4,14 +4,14 @@ import { IColumn } from "@/types/column.interface"
 import { useEffect, useRef, useState } from "react"
 import { Modal } from "bootstrap"
 import { useActions } from "@/hooks/useActions"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { useSelector } from "react-redux"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 import ModalWrapper from "@/components/modalWrapper/ModalWrapper"
 
 function TaskAdd({ column }: { column: IColumn | undefined }) {
   const { showToast } = useActions()
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
 
   const modalRefAdd = useRef<HTMLDivElement>(null)
   const addTaskNameRef = useRef<HTMLInputElement>(null)
@@ -37,38 +37,33 @@ function TaskAdd({ column }: { column: IColumn | undefined }) {
         const myModal = Modal.getOrCreateInstance("#" + modalRefAdd.current?.id)
         myModal.hide()
       }
-      showToast(variables.LANGUAGES[language].TASK_ADDED)
+      showToast(languages[language].TASK_ADDED)
     }
     if (isErrorAdd) {
-      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
+      showToast(languages[language].ERROR_REQUEST)
     }
   }, [isLoadingAdd])
 
   return (
-    <ModalWrapper
-      id="addTask"
-      title={variables.LANGUAGES[language].ADD_TASK}
-      size="md"
-      ref={modalRefAdd}
-    >
+    <ModalWrapper id="addTask" title={languages[language].ADD_TASK} size="md" ref={modalRefAdd}>
       <div className="d-flex flex-column">
-        <label htmlFor="inputTaskName">{variables.LANGUAGES[language].NAME}</label>
+        <label htmlFor="inputTaskName">{languages[language].NAME}</label>
         <input
           className="form-control mb-2"
           id="inputTaskName"
-          placeholder={variables.LANGUAGES[language].ENTER_NAME}
+          placeholder={languages[language].ENTER_NAME}
           ref={addTaskNameRef}
         />
-        <label htmlFor="inputTaskDesc">{variables.LANGUAGES[language].DESCRIPTION}</label>
+        <label htmlFor="inputTaskDesc">{languages[language].DESCRIPTION}</label>
         <textarea
           className="form-control mb-2"
           id="inputTaskDesc"
-          placeholder={variables.LANGUAGES[language].ENTER_DESCRIPTION}
+          placeholder={languages[language].ENTER_DESCRIPTION}
           ref={addTaskDescRef}
         />
         <UsersList userIds={userIds} setUserIds={setUserIds} boardId={column?.boardId} />
         <button className="btn btn-primary mt-2" onClick={addTaskClick}>
-          {variables.LANGUAGES[language].ADD_TASK}
+          {languages[language].ADD_TASK}
         </button>
       </div>
     </ModalWrapper>

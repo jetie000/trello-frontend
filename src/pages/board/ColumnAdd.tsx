@@ -1,9 +1,9 @@
 import { useAddColumnMutation } from "@/store/api/column.api"
 import { Modal as bootstrapModal } from "bootstrap"
 import { useActions } from "@/hooks/useActions"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { useSelector } from "react-redux"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 import ModalWrapper from "@/components/modalWrapper/ModalWrapper"
 import { useEffect, useRef } from "react"
 
@@ -13,7 +13,7 @@ function ColumnAdd({ boardId }: { boardId: number | undefined }) {
   const [addColumn, { isSuccess: isSuccessAdd, isError: isErrorAdd, isLoading: isLoadingAdd }] =
     useAddColumnMutation()
   const { showToast } = useActions()
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
 
   useEffect(() => {
     if (isSuccessAdd) {
@@ -21,10 +21,10 @@ function ColumnAdd({ boardId }: { boardId: number | undefined }) {
         const myModal = bootstrapModal.getOrCreateInstance("#" + modalRefAdd.current?.id)
         myModal.hide()
       }
-      showToast(variables.LANGUAGES[language].COLUMN_ADDED)
+      showToast(languages[language].COLUMN_ADDED)
     }
     if (isErrorAdd) {
-      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
+      showToast(languages[language].ERROR_REQUEST)
     }
   }, [isLoadingAdd])
 
@@ -38,22 +38,17 @@ function ColumnAdd({ boardId }: { boardId: number | undefined }) {
   }
 
   return (
-    <ModalWrapper
-      id="addColumn"
-      title={variables.LANGUAGES[language].ADD_COLUMN}
-      size="sm"
-      ref={modalRefAdd}
-    >
+    <ModalWrapper id="addColumn" title={languages[language].ADD_COLUMN} size="sm" ref={modalRefAdd}>
       <div className="d-flex flex-column">
-        <label htmlFor="inputColumnName">{variables.LANGUAGES[language].NAME}</label>
+        <label htmlFor="inputColumnName">{languages[language].NAME}</label>
         <input
           className="form-control mb-2"
           id="inputColumnName"
-          placeholder={variables.LANGUAGES[language].ENTER_NAME}
+          placeholder={languages[language].ENTER_NAME}
           ref={addColumnRef}
         />
         <button className="btn btn-primary" onClick={addColumnClick}>
-          {variables.LANGUAGES[language].ADD_COLUMN}
+          {languages[language].ADD_COLUMN}
         </button>
       </div>
     </ModalWrapper>

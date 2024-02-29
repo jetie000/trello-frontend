@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react"
 import { Modal as bootstrapModal } from "bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { Navigate, useNavigate } from "react-router-dom"
 import { useActions } from "@/hooks/useActions"
 import { baseApi } from "@/store/api/baseApi"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 import "./Cabinet.scss"
 import ModalWrapper from "../../components/modalWrapper/ModalWrapper"
 import {
@@ -17,13 +17,13 @@ import {
 import { IUser } from "@/types/user.interface"
 
 function Cabinet() {
-  const { token, id } = useSelector((state: RootState) => state.user)
+  const { token, id } = useSelector((state: RootStateStore) => state.user)
 
   if (!token) {
     return <Navigate to={"/login"} />
   }
 
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const { logout, showToast } = useActions()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -47,10 +47,10 @@ function Cabinet() {
 
   useEffect(() => {
     if (isSuccessChange) {
-      showToast(variables.LANGUAGES[language].USER_SUCCESSFULLY_CHANGED)
+      showToast(languages[language].USER_SUCCESSFULLY_CHANGED)
     }
     if (isErrorChange) {
-      showToast(variables.LANGUAGES[language].ERROR_USER_DATA)
+      showToast(languages[language].ERROR_USER_DATA)
     }
   }, [isLoadingChange])
 
@@ -60,16 +60,16 @@ function Cabinet() {
         const myModal = bootstrapModal.getOrCreateInstance("#" + modalRef.current?.id)
         myModal.hide()
       }
-      showToast(variables.LANGUAGES[language].USER_SUCCESSFULLY_DELETED)
+      showToast(languages[language].USER_SUCCESSFULLY_DELETED)
     }
     if (isErrorDelete) {
-      showToast(variables.LANGUAGES[language].USER_NOT_FOUND)
+      showToast(languages[language].USER_NOT_FOUND)
     }
   }, [isLoadingDelete])
 
   useEffect(() => {
     if (isErrorLogout) {
-      showToast(variables.LANGUAGES[language].ERROR_IN_USER_DATA)
+      showToast(languages[language].ERROR_IN_USER_DATA)
     }
   }, [isLoadingLogout])
 
@@ -102,7 +102,7 @@ function Cabinet() {
         id: dataUser?.id || 0
       })
     }
-    showToast(variables.LANGUAGES[language].INPUT_DATA)
+    showToast(languages[language].INPUT_DATA)
   }
 
   const deleteAccClick = () => {
@@ -115,13 +115,13 @@ function Cabinet() {
   return (
     <div className=" d-flex flex-fill flex-column">
       <div className="ms-auto me-auto d-flex flex-column cabinet-my-info ps-3 pe-3 flex-fill">
-        <h2 className="text-center p-3">{variables.LANGUAGES[language].MY_DATA}</h2>
+        <h2 className="text-center p-3">{languages[language].MY_DATA}</h2>
         <div className="mb-3">
-          <label htmlFor="inputFullName">{variables.LANGUAGES[language].NAME}</label>
+          <label htmlFor="inputFullName">{languages[language].NAME}</label>
           <input
             className="form-control"
             id="inputFullName"
-            placeholder={variables.LANGUAGES[language].ENTER_NEW_NAME}
+            placeholder={languages[language].ENTER_NEW_NAME}
             defaultValue={(dataUser as IUser)?.fullName}
             ref={fullNameRef}
           />
@@ -132,33 +132,33 @@ function Cabinet() {
             type="email"
             className="form-control"
             id="inputEmail"
-            placeholder={variables.LANGUAGES[language].ENTER_NEW_EMAIL}
+            placeholder={languages[language].ENTER_NEW_EMAIL}
             defaultValue={(dataUser as IUser)?.email}
             ref={emailRef}
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="inputOldPassword">{variables.LANGUAGES[language].OLD_PASS}</label>
+          <label htmlFor="inputOldPassword">{languages[language].OLD_PASS}</label>
           <input
             type="password"
             className="form-control"
             id="inputOldPassword"
-            placeholder={variables.LANGUAGES[language].ENTER_OLD_PASS}
+            placeholder={languages[language].ENTER_OLD_PASS}
             ref={oldPassRef}
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="inputNewPassword">{variables.LANGUAGES[language].NEW_PASSWORD}</label>
+          <label htmlFor="inputNewPassword">{languages[language].NEW_PASSWORD}</label>
           <input
             type="password"
             className="form-control"
             id="inputNewPassword"
-            placeholder={variables.LANGUAGES[language].ENTER_NEW_PASSWORD}
+            placeholder={languages[language].ENTER_NEW_PASSWORD}
             ref={newPassRef}
           />
         </div>
         <button type="button" className="btn btn-primary mt-3 w-100" onClick={changeInfoClick}>
-          {variables.LANGUAGES[language].CHANGE_DATA}
+          {languages[language].CHANGE_DATA}
         </button>
       </div>
       <div className="d-flex justify-content-between cabinet-buttons mb-3">
@@ -183,13 +183,13 @@ function Cabinet() {
               d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"
             />
           </svg>
-          {variables.LANGUAGES[language].LOGOUT}
+          {languages[language].LOGOUT}
         </button>
         <button
           onClick={deleteAccClick}
           className="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
         >
-          {variables.LANGUAGES[language].DELETE_ACCOUNT}
+          {languages[language].DELETE_ACCOUNT}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="20"
@@ -204,13 +204,13 @@ function Cabinet() {
       </div>
       <ModalWrapper
         id="myInfoModal"
-        title={variables.LANGUAGES[language].DELETING_ACCOUNT}
+        title={languages[language].DELETING_ACCOUNT}
         size="sm"
         ref={modalRef}
       >
         {dataUser && "id" in dataUser && !isError ? (
           <div className="d-flex flex-column gap-3">
-            <span>{variables.LANGUAGES[language].SURE_DELETE_ACC_MY}</span>
+            <span>{languages[language].SURE_DELETE_ACC_MY}</span>
             <button
               onClick={() => {
                 deleteUser(dataUser.id)
@@ -218,11 +218,11 @@ function Cabinet() {
               }}
               className="btn btn-danger"
             >
-              {variables.LANGUAGES[language].DELETE_ACCOUNT}
+              {languages[language].DELETE_ACCOUNT}
             </button>
           </div>
         ) : (
-          <div>{variables.LANGUAGES[language].USER_NOT_FOUND}</div>
+          <div>{languages[language].USER_NOT_FOUND}</div>
         )}
       </ModalWrapper>
     </div>

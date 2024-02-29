@@ -1,38 +1,38 @@
 import { useEffect } from "react"
 import { useGetBoardByUserIdQuery } from "@/store/api/board.api"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { IBoard } from "@/types/board.interface"
 import { useSelector } from "react-redux"
 import { Navigate, useNavigate } from "react-router-dom"
 import "./MyBoards.scss"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 import { useActions } from "@/hooks/useActions"
 
 function MyBoards() {
-  const { token, id } = useSelector((state: RootState) => state.user)
+  const { token, id } = useSelector((state: RootStateStore) => state.user)
 
   if (!token) {
     return <Navigate to={"/login"} />
   }
 
   const { showToast } = useActions()
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const navigate = useNavigate()
   const { isLoading, isError, data } = useGetBoardByUserIdQuery(id || 0)
 
   useEffect(() => {
     if (isError) {
-      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
+      showToast(languages[language].ERROR_REQUEST)
     }
   }, [isLoading])
 
   return (
     <div className="d-flex flex-fill flex-column">
-      <h2 className="text-center p-3">{variables.LANGUAGES[language].MY_BOARDS}</h2>
+      <h2 className="text-center p-3">{languages[language].MY_BOARDS}</h2>
       <div className="d-flex flex-column gap-2 my-boards-list">
         {isLoading && (
           <div className="spinner-border ms-auto me-auto" role="status">
-            <span className="visually-hidden">{variables.LANGUAGES[language].LOADING}</span>
+            <span className="visually-hidden">{languages[language].LOADING}</span>
           </div>
         )}
         {data &&

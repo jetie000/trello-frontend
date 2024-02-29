@@ -11,16 +11,16 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
 import { IError } from "@/types/error.interface"
 import { useSelector } from "react-redux"
 import { Navigate, useNavigate } from "react-router-dom"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import ModalWrapper from "../../components/modalWrapper/ModalWrapper"
 import "./Board.scss"
 import { useActions } from "@/hooks/useActions"
 import BoardChange from "./BoardChange"
 import ColumnAdd from "./ColumnAdd"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 
 function Board() {
-  const { token, id: idUser } = useSelector((state: RootState) => state.user)
+  const { token, id: idUser } = useSelector((state: RootStateStore) => state.user)
 
   if (!token) {
     return <Navigate to={"/login"} />
@@ -28,7 +28,7 @@ function Board() {
 
   const { id } = useParams()
   const { showToast } = useActions()
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const navigate = useNavigate()
   const modalRefDelete = useRef<HTMLDivElement>(null)
   const modalRefLeave = useRef<HTMLDivElement>(null)
@@ -55,26 +55,26 @@ function Board() {
         myModal.hide()
       }
       navigate("/")
-      showToast(variables.LANGUAGES[language].BOARD_DELETED)
+      showToast(languages[language].BOARD_DELETED)
     }
     if (isErrorDelete) {
-      showToast(variables.LANGUAGES[language].ERROR_BOARD_DELETING)
+      showToast(languages[language].ERROR_BOARD_DELETING)
     }
   }, [isLoadingDelete])
 
   useEffect(() => {
     if (isSuccessLeave) {
       navigate("/")
-      showToast(variables.LANGUAGES[language].BOARD_LEFT)
+      showToast(languages[language].BOARD_LEFT)
     }
     if (isErrorLeave) {
-      showToast(variables.LANGUAGES[language].ERROR_BOARD_LEAVING)
+      showToast(languages[language].ERROR_BOARD_LEAVING)
     }
   }, [isLoadingLeave])
 
   return isLoading ? (
     <div className="spinner-border m-auto" role="status">
-      <span className="visually-hidden"> {variables.LANGUAGES[language].LOADING}</span>
+      <span className="visually-hidden"> {languages[language].LOADING}</span>
     </div>
   ) : isError ? (
     <h1 className="m-auto">{((error as FetchBaseQueryError).data as IError).message}</h1>
@@ -86,7 +86,7 @@ function Board() {
           <div className="d-flex flex-column border rounded-2 p-3 ">
             <h4 className="text-center">{data && data.name}</h4>
             <h6 className="text-center">
-              {variables.LANGUAGES[language].CREATOR + ": "}
+              {languages[language].CREATOR + ": "}
               {creatorName}
             </h6>
             {data?.description && <h6>{data.description}</h6>}
@@ -179,33 +179,33 @@ function Board() {
         <ColumnAdd boardId={data.id} />
         <ModalWrapper
           id="deleteBoard"
-          title={variables.LANGUAGES[language].DELETE_BOARD}
+          title={languages[language].DELETE_BOARD}
           size="sm"
           ref={modalRefDelete}
         >
           <div className="d-flex flex-column gap-2">
-            <div>{variables.LANGUAGES[language].SURE_DELETE_BOARD}</div>
+            <div>{languages[language].SURE_DELETE_BOARD}</div>
             <button className="btn btn-danger" onClick={() => deleteBoard(data.id)}>
-              {variables.LANGUAGES[language].DELETE_BOARD}
+              {languages[language].DELETE_BOARD}
             </button>
           </div>
         </ModalWrapper>
         <ModalWrapper
           id="leaveBoard"
-          title={variables.LANGUAGES[language].LEAVE_BOARD}
+          title={languages[language].LEAVE_BOARD}
           size="sm"
           ref={modalRefLeave}
         >
           <div className="d-flex flex-column gap-2">
-            <div>{variables.LANGUAGES[language].SURE_LEAVE_BOARD}</div>
+            <div>{languages[language].SURE_LEAVE_BOARD}</div>
             <button className="btn btn-danger" onClick={() => leaveBoard(data.id)}>
-              {variables.LANGUAGES[language].LEAVE_BOARD}
+              {languages[language].LEAVE_BOARD}
             </button>
           </div>
         </ModalWrapper>
         <ModalWrapper
           id="changeBoard"
-          title={variables.LANGUAGES[language].CHANGE_BOARD}
+          title={languages[language].CHANGE_BOARD}
           size="md"
           ref={modalRefChange}
         >

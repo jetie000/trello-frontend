@@ -4,13 +4,13 @@ import { IColumn } from "@/types/column.interface"
 import { useEffect, useRef } from "react"
 import { Modal } from "bootstrap"
 import { useActions } from "@/hooks/useActions"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 import { useSelector } from "react-redux"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 
 function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefined }) {
   const { showToast } = useActions()
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const modalRefDelete = useRef<HTMLDivElement>(null)
   const modalRefChange = useRef<HTMLDivElement>(null)
 
@@ -40,54 +40,54 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
         const myModal = Modal.getOrCreateInstance("#" + modalRefDelete.current?.id)
         myModal.hide()
       }
-      showToast(variables.LANGUAGES[language].COLUMN_DELETED)
+      showToast(languages[language].COLUMN_DELETED)
     }
     if (isErrorDelete) {
-      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
+      showToast(languages[language].ERROR_REQUEST)
     }
   }, [isLoadingDelete])
 
   useEffect(() => {
     if (isSuccessChange) {
-      showToast(variables.LANGUAGES[language].COLUMN_CHANGED)
+      showToast(languages[language].COLUMN_CHANGED)
     }
     if (isErrorChange) {
-      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
+      showToast(languages[language].ERROR_REQUEST)
     }
   }, [isLoadingChange])
 
   return (
     <>
       <ModalWrapper
-        title={variables.LANGUAGES[language].CHANGE_COLUMN}
+        title={languages[language].CHANGE_COLUMN}
         id="changeColumn"
         size="sm"
         ref={modalRefChange}
       >
         <div className="d-flex flex-column">
-          <label htmlFor="inputColumnNameChange">{variables.LANGUAGES[language].NAME}</label>
+          <label htmlFor="inputColumnNameChange">{languages[language].NAME}</label>
           <input
             className="form-control mb-2"
             id="inputColumnNameChange"
-            placeholder={variables.LANGUAGES[language].ENTER_NAME}
+            placeholder={languages[language].ENTER_NAME}
             ref={changeColumnRef}
             defaultValue={currentColumn?.name}
           />
           <button className="btn btn-primary" onClick={addColumnClick}>
-            {variables.LANGUAGES[language].CHANGE_COLUMN}
+            {languages[language].CHANGE_COLUMN}
           </button>
         </div>
       </ModalWrapper>
       <ModalWrapper
         id="deleteColumn"
-        title={variables.LANGUAGES[language].DELETE_COLUMN}
+        title={languages[language].DELETE_COLUMN}
         size="sm"
         ref={modalRefDelete}
       >
         <div className="d-flex flex-column gap-2">
-          <div>{variables.LANGUAGES[language].SURE_DELETE_COLUMN}</div>
+          <div>{languages[language].SURE_DELETE_COLUMN}</div>
           <button className="btn btn-danger" onClick={() => deleteColumn(currentColumn?.id || 0)}>
-            {variables.LANGUAGES[language].DELETE_COLUMN}
+            {languages[language].DELETE_COLUMN}
           </button>
         </div>
       </ModalWrapper>

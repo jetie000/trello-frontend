@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@import "@/config/constants.scss";
 
 .dropdown-toggle::after {
   color: white !important; // to override bootstrap style

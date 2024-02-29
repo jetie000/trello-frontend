@@ -1,3 +1,5 @@
+@import "@/config/constants.scss";
+
 @media (max-width: $media-sm-1) {
   .users-list {
     & > li {

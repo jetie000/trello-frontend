@@ -8,13 +8,13 @@ import ColumnChangeDelete from "./ColumnChangeDelete"
 import { useChangeColumnMutation } from "@/store/api/column.api"
 import { useActions } from "@/hooks/useActions"
 import { useChangeTaskMutation } from "@/store/api/task.api"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { useSelector } from "react-redux"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 
 function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
   const { showToast } = useActions()
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const [currentColumn, setCurrentColumn] = useState<IColumn>()
   const [currentTask, setCurrentTask] = useState<ITask>()
   const [columns, setColumns] = useState<IColumn[]>()
@@ -29,14 +29,14 @@ function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
   useEffect(() => {
     if (isSuccessTask) setDrugStartTask(undefined)
     if (isErrorTask) {
-      showToast(variables.LANGUAGES[language].ERROR_CHANGING_TASK_COL)
+      showToast(languages[language].ERROR_CHANGING_TASK_COL)
     }
   }, [isLoadingTask])
 
   useEffect(() => {
     if (isSuccess) setDrugStartColumn(undefined)
     if (isError) {
-      showToast(variables.LANGUAGES[language].ERROR_CHANGING_COL_ORDER)
+      showToast(languages[language].ERROR_CHANGING_COL_ORDER)
     }
   }, [isLoading])
 

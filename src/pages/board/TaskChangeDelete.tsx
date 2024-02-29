@@ -6,13 +6,13 @@ import { Modal } from "bootstrap"
 import UsersList from "@/components/usersList/UsersList"
 import ModalWrapper from "@/components/modalWrapper/ModalWrapper"
 import { useParams } from "react-router-dom"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { useSelector } from "react-redux"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 
 function TaskChangeDelete({ task }: { task: ITask | undefined }) {
   const { id } = useParams()
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const { showToast } = useActions()
   const modalRefDelete = useRef<HTMLDivElement>(null)
   const changeTaskNameRef = useRef<HTMLInputElement>(null)
@@ -60,10 +60,10 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
 
   useEffect(() => {
     if (isSuccessChange) {
-      showToast(variables.LANGUAGES[language].TASK_CHANGED)
+      showToast(languages[language].TASK_CHANGED)
     }
     if (isErrorChange) {
-      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
+      showToast(languages[language].ERROR_REQUEST)
     }
   }, [isLoadingChange])
 
@@ -77,57 +77,57 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
         const myModal = Modal.getOrCreateInstance("#" + modalRefChange.current?.id)
         myModal.hide()
       }
-      showToast(variables.LANGUAGES[language].TASK_DELETED)
+      showToast(languages[language].TASK_DELETED)
     }
     if (isErrorDelete) {
-      showToast(variables.LANGUAGES[language].ERROR_REQUEST)
+      showToast(languages[language].ERROR_REQUEST)
     }
   }, [isLoadingDelete])
 
   return (
     <ModalWrapper
       id="changeTask"
-      title={variables.LANGUAGES[language].CHANGE_TASK}
+      title={languages[language].CHANGE_TASK}
       size="md"
       ref={modalRefChange}
     >
       <div className="d-flex flex-column">
-        <label htmlFor="inputTaskNameChange">{variables.LANGUAGES[language].NAME}</label>
+        <label htmlFor="inputTaskNameChange">{languages[language].NAME}</label>
         <input
           className="form-control mb-2"
           id="inputTaskNameChange"
-          placeholder={variables.LANGUAGES[language].ENTER_NAME}
+          placeholder={languages[language].ENTER_NAME}
           ref={changeTaskNameRef}
           defaultValue={task?.name}
         />
-        <label htmlFor="inputTaskDescChange">{variables.LANGUAGES[language].DESCRIPTION}</label>
+        <label htmlFor="inputTaskDescChange">{languages[language].DESCRIPTION}</label>
         <textarea
           className="form-control mb-2"
           id="inputTaskDescChange"
-          placeholder={variables.LANGUAGES[language].ENTER_DESCRIPTION}
+          placeholder={languages[language].ENTER_DESCRIPTION}
           ref={changeTaskDescRef}
           defaultValue={task?.description}
         />
         <UsersList userIds={userIds} setUserIds={setUserIds} boardId={Number(id)} />
         <button className="btn btn-primary mt-2 mb-2" onClick={changeTaskClick}>
-          {variables.LANGUAGES[language].CHANGE_TASK}
+          {languages[language].CHANGE_TASK}
         </button>
         <button className="btn btn-danger" onClick={deleteTaskClick}>
-          {variables.LANGUAGES[language].DELETE_TASK}
+          {languages[language].DELETE_TASK}
         </button>
         <ModalWrapper
           id="deleteTask"
-          title={variables.LANGUAGES[language].DELETE_TASK}
+          title={languages[language].DELETE_TASK}
           size="sm"
           ref={modalRefDelete}
         >
           <div className="d-flex flex-column gap-2">
-            <div>{variables.LANGUAGES[language].SURE_DELETE_TASK}</div>
+            <div>{languages[language].SURE_DELETE_TASK}</div>
             <button
               className="btn btn-danger"
               onClick={() => deleteTask({ taskId: task?.id || 0, boardId: Number(id) || 0 })}
             >
-              {variables.LANGUAGES[language].DELETE_TASK}
+              {languages[language].DELETE_TASK}
             </button>
           </div>
         </ModalWrapper>

@@ -1,7 +1,7 @@
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { IColumn } from "@/types/column.interface"
 import { ITask } from "@/types/task.interface"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 import { intlFormatDistance } from "date-fns"
 import { useSelector } from "react-redux"
 
@@ -13,7 +13,7 @@ interface TasksProps {
 }
 
 function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: TasksProps) {
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
 
   function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
     e.stopPropagation()
@@ -43,18 +43,18 @@ function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: T
             data-bs-target="#changeTask"
           >
             <span className="fs-5">{t.name}</span>
-            <span>{variables.LANGUAGES[language].MOVED}:</span>
+            <span>{languages[language].MOVED}:</span>
             <span className="text-truncate">
               {intlFormatDistance(t.moveDate, Date.now(), { locale: language === 0 ? "ru" : "en" })}
             </span>
-            <span>{variables.LANGUAGES[language].CREATED}:</span>
+            <span>{languages[language].CREATED}:</span>
             <span className="text-truncate">
               {intlFormatDistance(t.creationDate, Date.now(), {
                 locale: language === 0 ? "ru" : "en"
               })}
             </span>
             <div className="d-flex">
-              <span>{variables.LANGUAGES[language].USERS}:</span>
+              <span>{languages[language].USERS}:</span>
               <div className="ms-auto d-flex gap-1">
                 {t.users
                   .filter((t, i) => i < 3)
@@ -68,7 +68,7 @@ function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: T
                     </div>
                   ))}
                 {t.users.length > 3 && "..."}
-                {t.users.length === 0 && variables.LANGUAGES[language].ADD_USERS}
+                {t.users.length === 0 && languages[language].ADD_USERS}
               </div>
             </div>
           </div>

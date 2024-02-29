@@ -1,19 +1,20 @@
 import { useNavigate } from "react-router-dom"
 import { useActions } from "@/hooks/useActions"
 import { useSelector } from "react-redux"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import "./Header.scss"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 import { Offcanvas as bootstrapOffcanvas } from "bootstrap"
+import { config } from "@/config/config"
 
 function Header() {
   const { setTheme, setLanguage } = useActions()
-  const { token } = useSelector((state: RootState) => state.user)
-  const { theme, language } = useSelector((state: RootState) => state.options)
+  const { token } = useSelector((state: RootStateStore) => state.user)
+  const { theme, language } = useSelector((state: RootStateStore) => state.options)
   const navigate = useNavigate()
 
   const toggleCanvas = () => {
-    if (window.innerWidth < variables.BURGER_BREAKPOINT) {
+    if (window.innerWidth < config.BURGER_BREAKPOINT) {
       const offcanvas = bootstrapOffcanvas.getOrCreateInstance("#offcanvasNav")
       offcanvas.toggle()
     }
@@ -24,7 +25,7 @@ function Header() {
       <nav className="navbar navbar-expand-sm navbar-dark header-wrapper m-auto ps-3 pe-3">
         {token && (
           <span className="navbar-brand cursor-pointer" onClick={() => navigate("/")}>
-            {variables.LANGUAGES[language].MY_BOARDS}
+            {languages[language].MY_BOARDS}
           </span>
         )}
         <div className="dropdown align-items-center d-flex cursor-pointer ms-auto">
@@ -57,12 +58,12 @@ function Header() {
           <ul className="dropdown-menu dropdown-menu-end position-absolute">
             <li>
               <span onClick={() => setTheme("dark")} className="dropdown-item">
-                {variables.LANGUAGES[language].DARK}
+                {languages[language].DARK}
               </span>
             </li>
             <li>
               <span onClick={() => setTheme("light")} className="dropdown-item">
-                {variables.LANGUAGES[language].LIGHT}
+                {languages[language].LIGHT}
               </span>
             </li>
           </ul>
@@ -111,7 +112,7 @@ function Header() {
           <div className="offcanvas offcanvas-end" id="offcanvasNav">
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                {variables.LANGUAGES[language].MENU}
+                {languages[language].MENU}
               </h5>
               <button
                 type="button"
@@ -130,7 +131,7 @@ function Header() {
                       toggleCanvas()
                     }}
                   >
-                    {variables.LANGUAGES[language].ADD_BOARD}
+                    {languages[language].ADD_BOARD}
                   </span>
                 </li>
                 <li className="nav-item">
@@ -141,7 +142,7 @@ function Header() {
                       toggleCanvas()
                     }}
                   >
-                    {variables.LANGUAGES[language].CABINET}
+                    {languages[language].CABINET}
                   </span>
                 </li>
               </ul>

@@ -1,10 +1,10 @@
 import { IUserResponse } from "@/types/user.interface"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useActions } from "@/hooks/useActions"
-import { variables } from "@/variables"
 import { useSelector } from "react-redux"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { useGetByIdsQuery, useSearchUsersQuery } from "@/store/api/user.api"
+import { languages } from "@/config/languages"
 
 interface UsersListProps {
   userIds: number[]
@@ -16,7 +16,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
   const inputSearch = useRef<HTMLInputElement>(null)
   const [searchStr, setSearchStr] = useState("")
   const [isShow, setIsShow] = useState(false)
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const { isLoading, isError, data } = useGetByIdsQuery(userIds, { skip: userIds.length === 0 })
   const { showToast } = useActions()
   const {
@@ -35,13 +35,13 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
 
   useEffect(() => {
     if (isError) {
-      showToast(variables.LANGUAGES[language].ERROR_REQUEST_BY_IDS)
+      showToast(languages[language].ERROR_REQUEST_BY_IDS)
     }
   }, [isLoading])
 
   useEffect(() => {
     if (isErrorSearch) {
-      showToast(variables.LANGUAGES[language].ERROR_REQUEST_SEARCH)
+      showToast(languages[language].ERROR_REQUEST_SEARCH)
     }
   }, [isLoadingSearch])
 
@@ -64,7 +64,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
             data-testid="search-users-input"
             type="text"
             className="form-control w-50"
-            placeholder={variables.LANGUAGES[language].ENTER_REQUEST}
+            placeholder={languages[language].ENTER_REQUEST}
             ref={inputSearch}
             onChange={e => setSearchStr(e.target.value)}
             onFocus={() => setIsShow(true)}
