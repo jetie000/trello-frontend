@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Toast should render a toast container with a notification icon and a close button 1`] = `
+exports[`ToastWrapper should render a toast container with a notification icon and a close button 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>

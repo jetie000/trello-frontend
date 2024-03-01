@@ -27,19 +27,21 @@ function Register() {
     }
   }, [isLoading])
 
+  const isValidFields = () =>
+    fullNameRef.current &&
+    passwordRef.current &&
+    emailRef.current &&
+    fullNameRef.current.value !== "" &&
+    passwordRef.current.value !== "" &&
+    emailRef.current.value !== ""
+
   const registerClick = () => {
-    if (
-      fullNameRef.current &&
-      passwordRef.current &&
-      emailRef.current &&
-      (fullNameRef.current.value !== "" ||
-        passwordRef.current.value !== "" ||
-        emailRef.current.value !== "")
-    ) {
+    if (isLoading) return
+    if (isValidFields()) {
       registerUser({
-        email: emailRef.current.value.trim(),
-        password: passwordRef.current.value.trim(),
-        fullName: fullNameRef.current.value.trim()
+        email: emailRef.current!.value.trim(),
+        password: passwordRef.current!.value.trim(),
+        fullName: fullNameRef.current!.value.trim()
       })
       return
     }

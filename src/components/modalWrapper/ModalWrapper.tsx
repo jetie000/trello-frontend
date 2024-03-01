@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef } from "react"
 import { ReactElement } from "react"
 
-interface ModalProps {
+export interface ModalProps {
   id: string
   title: string
   children: ReactElement | ReactElement[] | string

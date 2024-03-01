@@ -32,10 +32,12 @@ function Login() {
   }, [isLoading])
 
   const logIn = () => {
+    if(isLoading) return
     if (
       passwordRef.current &&
       emailRef.current &&
-      (passwordRef.current.value !== "" || emailRef.current.value !== "")
+      passwordRef.current.value.trim() !== "" &&
+      emailRef.current.value.trim() !== ""
     ) {
       logInUser({
         email: emailRef.current.value.trim(),
@@ -59,6 +61,7 @@ function Login() {
             id="inputEmail"
             placeholder={languages[language].ENTER_EMAIL}
             ref={emailRef}
+            data-testid="inputEmail"
           />
         </div>
         <div className="mb-3">
@@ -71,6 +74,7 @@ function Login() {
             id="inputPassword"
             placeholder={languages[language].ENTER_PASSWORD}
             ref={passwordRef}
+            data-testid="inputPassword"
           />
         </div>
         <button type="button" className="btn btn-primary mt-3 w-100" onClick={logIn}>

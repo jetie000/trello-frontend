@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Modal should render a modal with the given id, title, size and children 1`] = `
+exports[`ModalWrapper should render a modal with the given id, title, size and children 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>

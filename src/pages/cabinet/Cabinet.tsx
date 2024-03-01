@@ -80,27 +80,26 @@ function Cabinet() {
     navigate("/login")
   }
 
+  const isValidFields = () =>
+    emailRef.current &&
+    fullNameRef.current &&
+    oldPassRef.current &&
+    newPassRef.current &&
+    emailRef.current.value !== "" &&
+    fullNameRef.current.value !== "" &&
+    newPassRef.current.value !== "" &&
+    oldPassRef.current.value !== ""
+
   const changeInfoClick = async () => {
-    if (
-      token &&
-      dataUser &&
-      "id" in dataUser &&
-      emailRef.current &&
-      fullNameRef.current &&
-      oldPassRef.current &&
-      newPassRef.current &&
-      emailRef.current.value !== "" &&
-      fullNameRef.current.value !== "" &&
-      newPassRef.current.value !== "" &&
-      oldPassRef.current.value !== ""
-    ) {
+    if (dataUser && "id" in dataUser && isValidFields()) {
       changeUser({
-        email: emailRef.current.value.trim(),
-        oldPassword: oldPassRef.current.value.trim(),
-        fullName: fullNameRef.current.value.trim(),
-        password: newPassRef.current.value.trim(),
+        email: emailRef.current!.value.trim(),
+        oldPassword: oldPassRef.current!.value.trim(),
+        fullName: fullNameRef.current!.value.trim(),
+        password: newPassRef.current!.value.trim(),
         id: dataUser?.id || 0
       })
+      return
     }
     showToast(languages[language].INPUT_DATA)
   }

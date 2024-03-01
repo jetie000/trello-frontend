@@ -71,6 +71,9 @@ describe("AddBoard", () => {
     })
     mockSearchUsers.mockReturnValue(mockReturnUsers(users))
   })
+  beforeEach(() => {
+    jest.restoreAllMocks()
+  })
   it("should render the input fields for name and description", () => {
     const component = render(<AddBoard />)
 
