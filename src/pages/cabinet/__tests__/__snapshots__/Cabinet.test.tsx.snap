@@ -1,0 +1,823 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Cabinet should change user when all fields are filled correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class=" d-flex flex-fill flex-column"
+      >
+        <div
+          class="ms-auto me-auto d-flex flex-column cabinet-my-info ps-3 pe-3 flex-fill"
+        >
+          <h2
+            class="text-center p-3"
+          >
+            My info
+          </h2>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputFullName"
+            >
+              Surname and name
+            </label>
+            <input
+              class="form-control"
+              id="inputFullName"
+              placeholder="Enter surname and name"
+              value="John Doe"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputEmail"
+            >
+              Email
+            </label>
+            <input
+              class="form-control"
+              id="inputEmail"
+              placeholder="Input new email"
+              type="email"
+              value="john.doe@example.com"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputOldPassword"
+            >
+              Old password (necessary)
+            </label>
+            <input
+              class="form-control"
+              id="inputOldPassword"
+              placeholder="Input old password"
+              type="password"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputNewPassword"
+            >
+              New password (Optional)
+            </label>
+            <input
+              class="form-control"
+              id="inputNewPassword"
+              placeholder="Input new password"
+              type="password"
+            />
+          </div>
+          <button
+            class="btn btn-primary mt-3 w-100"
+            type="button"
+          >
+            Change data
+          </button>
+        </div>
+        <div
+          class="d-flex justify-content-between cabinet-buttons mb-3"
+        >
+          <button
+            class="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
+          >
+            <svg
+              class="bi bi-box-arrow-left"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"
+                fill-rule="evenodd"
+              />
+              <path
+                d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Log out
+          </button>
+          <button
+            class="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
+          >
+            Delete an account
+            <svg
+              class="bi bi-trash3-fill"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          aria-hidden="true"
+          aria-labelledby="myInfoModalLabel"
+          class="modal  fade"
+          data-testid="myInfoModal"
+          id="myInfoModal"
+          role="dialog"
+          tabindex="-1"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-sm"
+            role="document"
+          >
+            <div
+              class="modal-content"
+            >
+              <div
+                class="modal-header"
+              >
+                <h5
+                  class="modal-title"
+                  id="myInfoModalLabel"
+                >
+                  Account deleting
+                </h5>
+                <button
+                  aria-label="Close"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  type="button"
+                />
+              </div>
+              <div
+                class="modal-body"
+              >
+                <div
+                  class="d-flex flex-column gap-3"
+                >
+                  <span>
+                    Are you sure you want to delete an account? You will also delete all of your collections.
+                  </span>
+                  <button
+                    class="btn btn-danger"
+                  >
+                    Delete an account
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class=" d-flex flex-fill flex-column"
+    >
+      <div
+        class="ms-auto me-auto d-flex flex-column cabinet-my-info ps-3 pe-3 flex-fill"
+      >
+        <h2
+          class="text-center p-3"
+        >
+          My info
+        </h2>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputFullName"
+          >
+            Surname and name
+          </label>
+          <input
+            class="form-control"
+            id="inputFullName"
+            placeholder="Enter surname and name"
+            value="John Doe"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputEmail"
+          >
+            Email
+          </label>
+          <input
+            class="form-control"
+            id="inputEmail"
+            placeholder="Input new email"
+            type="email"
+            value="john.doe@example.com"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputOldPassword"
+          >
+            Old password (necessary)
+          </label>
+          <input
+            class="form-control"
+            id="inputOldPassword"
+            placeholder="Input old password"
+            type="password"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputNewPassword"
+          >
+            New password (Optional)
+          </label>
+          <input
+            class="form-control"
+            id="inputNewPassword"
+            placeholder="Input new password"
+            type="password"
+          />
+        </div>
+        <button
+          class="btn btn-primary mt-3 w-100"
+          type="button"
+        >
+          Change data
+        </button>
+      </div>
+      <div
+        class="d-flex justify-content-between cabinet-buttons mb-3"
+      >
+        <button
+          class="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
+        >
+          <svg
+            class="bi bi-box-arrow-left"
+            fill="currentColor"
+            height="20"
+            viewBox="0 0 16 16"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"
+              fill-rule="evenodd"
+            />
+            <path
+              d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"
+              fill-rule="evenodd"
+            />
+          </svg>
+          Log out
+        </button>
+        <button
+          class="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
+        >
+          Delete an account
+          <svg
+            class="bi bi-trash3-fill"
+            fill="currentColor"
+            height="20"
+            viewBox="0 0 16 16"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        aria-hidden="true"
+        aria-labelledby="myInfoModalLabel"
+        class="modal  fade"
+        data-testid="myInfoModal"
+        id="myInfoModal"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-sm"
+          role="document"
+        >
+          <div
+            class="modal-content"
+          >
+            <div
+              class="modal-header"
+            >
+              <h5
+                class="modal-title"
+                id="myInfoModalLabel"
+              >
+                Account deleting
+              </h5>
+              <button
+                aria-label="Close"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                type="button"
+              />
+            </div>
+            <div
+              class="modal-body"
+            >
+              <div
+                class="d-flex flex-column gap-3"
+              >
+                <span>
+                  Are you sure you want to delete an account? You will also delete all of your collections.
+                </span>
+                <button
+                  class="btn btn-danger"
+                >
+                  Delete an account
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Cabinet should render component with all fields and buttons 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class=" d-flex flex-fill flex-column"
+      >
+        <div
+          class="ms-auto me-auto d-flex flex-column cabinet-my-info ps-3 pe-3 flex-fill"
+        >
+          <h2
+            class="text-center p-3"
+          >
+            My info
+          </h2>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputFullName"
+            >
+              Surname and name
+            </label>
+            <input
+              class="form-control"
+              id="inputFullName"
+              placeholder="Enter surname and name"
+              value="John Doe"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputEmail"
+            >
+              Email
+            </label>
+            <input
+              class="form-control"
+              id="inputEmail"
+              placeholder="Input new email"
+              type="email"
+              value="john.doe@example.com"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputOldPassword"
+            >
+              Old password (necessary)
+            </label>
+            <input
+              class="form-control"
+              id="inputOldPassword"
+              placeholder="Input old password"
+              type="password"
+            />
+          </div>
+          <div
+            class="mb-3"
+          >
+            <label
+              for="inputNewPassword"
+            >
+              New password (Optional)
+            </label>
+            <input
+              class="form-control"
+              id="inputNewPassword"
+              placeholder="Input new password"
+              type="password"
+            />
+          </div>
+          <button
+            class="btn btn-primary mt-3 w-100"
+            type="button"
+          >
+            Change data
+          </button>
+        </div>
+        <div
+          class="d-flex justify-content-between cabinet-buttons mb-3"
+        >
+          <button
+            class="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
+          >
+            <svg
+              class="bi bi-box-arrow-left"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"
+                fill-rule="evenodd"
+              />
+              <path
+                d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"
+                fill-rule="evenodd"
+              />
+            </svg>
+            Log out
+          </button>
+          <button
+            class="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
+          >
+            Delete an account
+            <svg
+              class="bi bi-trash3-fill"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+              />
+            </svg>
+          </button>
+        </div>
+        <div
+          aria-hidden="true"
+          aria-labelledby="myInfoModalLabel"
+          class="modal  fade"
+          data-testid="myInfoModal"
+          id="myInfoModal"
+          role="dialog"
+          tabindex="-1"
+        >
+          <div
+            class="modal-dialog modal-dialog-centered modal-sm"
+            role="document"
+          >
+            <div
+              class="modal-content"
+            >
+              <div
+                class="modal-header"
+              >
+                <h5
+                  class="modal-title"
+                  id="myInfoModalLabel"
+                >
+                  Account deleting
+                </h5>
+                <button
+                  aria-label="Close"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  type="button"
+                />
+              </div>
+              <div
+                class="modal-body"
+              >
+                <div
+                  class="d-flex flex-column gap-3"
+                >
+                  <span>
+                    Are you sure you want to delete an account? You will also delete all of your collections.
+                  </span>
+                  <button
+                    class="btn btn-danger"
+                  >
+                    Delete an account
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class=" d-flex flex-fill flex-column"
+    >
+      <div
+        class="ms-auto me-auto d-flex flex-column cabinet-my-info ps-3 pe-3 flex-fill"
+      >
+        <h2
+          class="text-center p-3"
+        >
+          My info
+        </h2>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputFullName"
+          >
+            Surname and name
+          </label>
+          <input
+            class="form-control"
+            id="inputFullName"
+            placeholder="Enter surname and name"
+            value="John Doe"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputEmail"
+          >
+            Email
+          </label>
+          <input
+            class="form-control"
+            id="inputEmail"
+            placeholder="Input new email"
+            type="email"
+            value="john.doe@example.com"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputOldPassword"
+          >
+            Old password (necessary)
+          </label>
+          <input
+            class="form-control"
+            id="inputOldPassword"
+            placeholder="Input old password"
+            type="password"
+          />
+        </div>
+        <div
+          class="mb-3"
+        >
+          <label
+            for="inputNewPassword"
+          >
+            New password (Optional)
+          </label>
+          <input
+            class="form-control"
+            id="inputNewPassword"
+            placeholder="Input new password"
+            type="password"
+          />
+        </div>
+        <button
+          class="btn btn-primary mt-3 w-100"
+          type="button"
+        >
+          Change data
+        </button>
+      </div>
+      <div
+        class="d-flex justify-content-between cabinet-buttons mb-3"
+      >
+        <button
+          class="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
+        >
+          <svg
+            class="bi bi-box-arrow-left"
+            fill="currentColor"
+            height="20"
+            viewBox="0 0 16 16"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0z"
+              fill-rule="evenodd"
+            />
+            <path
+              d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708z"
+              fill-rule="evenodd"
+            />
+          </svg>
+          Log out
+        </button>
+        <button
+          class="justify-self-end btn btn-danger d-flex align-items-center gap-2 mt-4"
+        >
+          Delete an account
+          <svg
+            class="bi bi-trash3-fill"
+            fill="currentColor"
+            height="20"
+            viewBox="0 0 16 16"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"
+            />
+          </svg>
+        </button>
+      </div>
+      <div
+        aria-hidden="true"
+        aria-labelledby="myInfoModalLabel"
+        class="modal  fade"
+        data-testid="myInfoModal"
+        id="myInfoModal"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-sm"
+          role="document"
+        >
+          <div
+            class="modal-content"
+          >
+            <div
+              class="modal-header"
+            >
+              <h5
+                class="modal-title"
+                id="myInfoModalLabel"
+              >
+                Account deleting
+              </h5>
+              <button
+                aria-label="Close"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                type="button"
+              />
+            </div>
+            <div
+              class="modal-body"
+            >
+              <div
+                class="d-flex flex-column gap-3"
+              >
+                <span>
+                  Are you sure you want to delete an account? You will also delete all of your collections.
+                </span>
+                <button
+                  class="btn btn-danger"
+                >
+                  Delete an account
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

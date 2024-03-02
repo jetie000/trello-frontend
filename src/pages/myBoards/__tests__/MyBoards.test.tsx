@@ -51,7 +51,7 @@ describe("MyBoards", () => {
     mockUseSelector.mockReturnValue(mockReturnSelectorValue)
     mockUseActions.mockReturnValue(mockReturnActionsValue as any)
     mockGetBoardsByUser.mockReturnValue({
-      isLoading: true,
+      isLoading: false,
       isError: false,
       refetch: jest.fn(),
       data: mockBoards
@@ -72,5 +72,15 @@ describe("MyBoards", () => {
     render(<MyBoards />)
     fireEvent.click(screen.getByText("Board1"))
     expect(mockNavigateReturn).toHaveBeenCalledWith("/board/1")
+  })
+  it("should show spinner while fetching boards", () => {
+    mockGetBoardsByUser.mockReturnValue({
+      isLoading: true,
+      isError: false,
+      refetch: jest.fn(),
+      data: mockBoards
+    })
+    render(<MyBoards />)
+    expect(screen.getByText(/Loading/i)).toBeInTheDocument()
   })
 })

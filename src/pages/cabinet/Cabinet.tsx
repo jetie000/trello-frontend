@@ -116,11 +116,11 @@ function Cabinet() {
       <div className="ms-auto me-auto d-flex flex-column cabinet-my-info ps-3 pe-3 flex-fill">
         <h2 className="text-center p-3">{languages[language].MY_DATA}</h2>
         <div className="mb-3">
-          <label htmlFor="inputFullName">{languages[language].NAME}</label>
+          <label htmlFor="inputFullName">{languages[language].SURNAME_AND_NAME}</label>
           <input
             className="form-control"
             id="inputFullName"
-            placeholder={languages[language].ENTER_NEW_NAME}
+            placeholder={languages[language].ENTER_SURNAME_NAME}
             defaultValue={(dataUser as IUser)?.fullName}
             ref={fullNameRef}
           />

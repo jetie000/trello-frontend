@@ -5,29 +5,24 @@ import ModalWrapper, { ModalProps } from "@/components/modalWrapper/ModalWrapper
 
 const renderModal = (params: ModalProps) => render(<ModalWrapper {...params} />)
 
+const id = "modalId"
+const title = "Modal Title"
+const size = "md"
+const children = "Modal Content"
+
 describe("ModalWrapper", () => {
   it("should render a modal with the given id, title, size and children", () => {
-    const id = "modalId"
-    const title = "Modal Title"
-    const size = "md"
-    const children = "Modal Content"
-
     const component = renderModal({ id, children, size, title })
 
-    expect(screen.getByTestId("modal")).toBeInTheDocument()
+    expect(screen.getByTestId(id)).toBeInTheDocument()
     expect(screen.getByText(title)).toBeInTheDocument()
     expect(screen.getByText(children)).toBeInTheDocument()
     expect(component).toMatchSnapshot()
   })
   it("should render a modal with a header containing the title and a close button", () => {
-    const id = "modalId"
-    const title = "Modal Title"
-    const size = "md"
-    const children = "Modal Content"
-
     renderModal({ id, children, size, title })
 
-    const modalElement = screen.getByTestId("modal")
+    const modalElement = screen.getByTestId(id)
     expect(modalElement).toBeInTheDocument()
     expect(modalElement).toHaveAttribute("id", id)
     expect(modalElement).toHaveAttribute("aria-labelledby", id + "Label")

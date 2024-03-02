@@ -6,6 +6,7 @@ import * as userApi from "@/store/api/user.api"
 import { fireEvent, render, screen } from "@testing-library/react"
 import { AuthResponse } from "@/types/authResponse.interface"
 import Login from "../Login"
+import { languages } from "@/config/languages"
 
 jest.mock("@/store/store")
 jest.mock("react-redux")
@@ -44,6 +45,9 @@ const mockReturnLogin = (isLoading: boolean, isPressed: boolean) => ({
   reset: jest.fn()
 })
 
+const emailUser = "test@example.com"
+const passwordUser = "password"
+
 describe("Login", () => {
   beforeEach(() => {
     jest.restoreAllMocks()
@@ -60,15 +64,19 @@ describe("Login", () => {
     expect(mockUseActions).toHaveBeenCalled()
     expect(mockLogin).toHaveBeenCalled()
     expect(mockUseSelector).toHaveBeenCalled()
-    fireEvent.change(screen.getByTestId("inputEmail"), { target: { value: "test@example.com" } })
-    fireEvent.change(screen.getByTestId("inputPassword"), { target: { value: "password" } })
-    fireEvent.click(screen.getByRole("button", { name: "Log In" }))
+    fireEvent.change(screen.getByTestId("inputEmail"), { target: { value: emailUser } })
+    fireEvent.change(screen.getByTestId("inputPassword"), { target: { value: passwordUser } })
+    fireEvent.click(
+      screen.getByRole("button", { name: languages[mockReturnSelectorValue.language].LOG_IN })
+    )
     mockLogin.mockReturnValue([mockLoginFunc, mockReturnLogin(true, true)])
     component.rerender(<Login />)
     mockLogin.mockReturnValue([mockLoginFunc, mockReturnLogin(false, true)])
     component.rerender(<Login />)
-    expect(mockLoginFunc).toBeCalledWith({ email: "test@example.com", password: "password" })
-    expect(showToastMock).toHaveBeenCalledWith("You've succesfully entered")
+    expect(mockLoginFunc).toBeCalledWith({ email: emailUser, password: passwordUser })
+    expect(showToastMock).toHaveBeenCalledWith(
+      languages[mockReturnSelectorValue.language].SUCCESFULLY_ENTERED
+    )
     expect(showToastMock).toHaveBeenCalledTimes(1)
     expect(mockNavigateReturn).toHaveBeenCalledWith("/")
     expect(component).toMatchSnapshot()
@@ -76,16 +84,22 @@ describe("Login", () => {
   it("should show enter data message when provided invalid data", () => {
     render(<Login />)
 
-    fireEvent.click(screen.getByRole("button", { name: "Log In" }))
-    expect(showToastMock).toHaveBeenCalledWith("Input data")
+    fireEvent.click(
+      screen.getByRole("button", { name: languages[mockReturnSelectorValue.language].LOG_IN })
+    )
+    expect(showToastMock).toHaveBeenCalledWith(
+      languages[mockReturnSelectorValue.language].INPUT_DATA
+    )
     expect(showToastMock).toHaveBeenCalledTimes(1)
   })
   it("should show loading spinner while fetching", () => {
     const component = render(<Login />)
 
-    fireEvent.change(screen.getByTestId("inputEmail"), { target: { value: "test@example.com" } })
-    fireEvent.change(screen.getByTestId("inputPassword"), { target: { value: "password" } })
-    fireEvent.click(screen.getByRole("button", { name: "Log In" }))
+    fireEvent.change(screen.getByTestId("inputEmail"), { target: { value: emailUser } })
+    fireEvent.change(screen.getByTestId("inputPassword"), { target: { value: passwordUser } })
+    fireEvent.click(
+      screen.getByRole("button", { name: languages[mockReturnSelectorValue.language].LOG_IN })
+    )
     mockLogin.mockReturnValue([mockLoginFunc, mockReturnLogin(true, true)])
     component.rerender(<Login />)
     expect(screen.getByText(/Loading/i)).toBeInTheDocument()

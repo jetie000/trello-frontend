@@ -6,6 +6,7 @@ import AddBoard from "@/pages/addBoard/AddBoard"
 import { fireEvent, render, screen } from "@testing-library/react"
 import { IUserResponse } from "@/types/user.interface"
 import { skipToken } from "@reduxjs/toolkit/query"
+import { languages } from "@/config/languages"
 
 jest.mock("@/store/store")
 jest.mock("react-redux")
@@ -77,8 +78,12 @@ describe("AddBoard", () => {
   it("should render the input fields for name and description", () => {
     const component = render(<AddBoard />)
 
-    expect(screen.getByLabelText(/Name/i)).toBeInTheDocument()
-    expect(screen.getByLabelText(/Description/i)).toBeInTheDocument()
+    expect(
+      screen.getByLabelText(languages[mockReturnSelectorValue.language].NAME)
+    ).toBeInTheDocument()
+    expect(
+      screen.getByLabelText(languages[mockReturnSelectorValue.language].DESCRIPTION)
+    ).toBeInTheDocument()
     expect(component).toMatchSnapshot()
   })
   it("should add and remove users", () => {

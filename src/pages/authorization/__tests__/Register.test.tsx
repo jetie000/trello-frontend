@@ -6,6 +6,7 @@ import * as userApi from "@/store/api/user.api"
 import { fireEvent, render, screen } from "@testing-library/react"
 import { AuthResponse } from "@/types/authResponse.interface"
 import Register from "../Register"
+import { languages } from "@/config/languages"
 
 jest.mock("@/store/store")
 jest.mock("react-redux")
@@ -16,6 +17,10 @@ const mockUseSelector = jest.spyOn(reduxHooks, "useSelector")
 const mockUseActions = jest.spyOn(actions, "useActions")
 const mockRegister = jest.spyOn(userApi, "useRegisterUserMutation")
 const mockUseNavigate = jest.spyOn(reactRouterDom, "useNavigate")
+
+const nameUser = "John Doe"
+const emailUser = "john.doe@example.com"
+const passUser = "password123"
 
 const mockReturnSelectorValue = {
   language: 1,
@@ -37,7 +42,7 @@ const mockReturnRegister = (isLoading: boolean, isPressed: boolean) => ({
       ? ({
           accessToken: "11",
           refreshToken: "22",
-          email: "test@example.com"
+          email: emailUser
         } as AuthResponse)
       : undefined,
   reset: jest.fn()
@@ -58,27 +63,40 @@ describe("Register", () => {
     expect(mockRegister).toHaveBeenCalled()
     expect(mockUseSelector).toHaveBeenCalled()
 
-    fireEvent.change(screen.getByPlaceholderText("Enter surname and name"), {
-      target: { value: "John Doe" }
-    })
-    fireEvent.change(screen.getByPlaceholderText("Input e-mail"), {
-      target: { value: "john.doe@example.com" }
-    })
-    fireEvent.change(screen.getByPlaceholderText("Input password"), {
-      target: { value: "password123" }
-    })
-    fireEvent.click(screen.getByRole("button", { name: "Sign Up" }))
+    fireEvent.change(
+      screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_SURNAME_NAME),
+      {
+        target: { value: nameUser }
+      }
+    )
+    fireEvent.change(
+      screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_EMAIL),
+      {
+        target: { value: emailUser }
+      }
+    )
+    fireEvent.change(
+      screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_PASSWORD),
+      {
+        target: { value: passUser }
+      }
+    )
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: languages[mockReturnSelectorValue.language].REGISTER_
+      })
+    )
     mockRegister.mockReturnValue([mockRegisterFunc, mockReturnRegister(true, true)])
     component.rerender(<Register />)
     mockRegister.mockReturnValue([mockRegisterFunc, mockReturnRegister(false, true)])
     component.rerender(<Register />)
     expect(mockRegisterFunc).toHaveBeenCalledWith({
-      email: "john.doe@example.com",
-      password: "password123",
-      fullName: "John Doe"
+      email: emailUser,
+      password: passUser,
+      fullName: nameUser
     })
     expect(showToastMock).toHaveBeenCalledWith(
-      "You've succesfully registered. Check your e-mail for confirm letter"
+      languages[mockReturnSelectorValue.language].SUCCESFULLY_REGISTERED
     )
     expect(showToastMock).toHaveBeenCalledTimes(1)
     expect(component).toMatchSnapshot()
@@ -86,23 +104,42 @@ describe("Register", () => {
   it("should show enter data message when provided invalid data", () => {
     render(<Register />)
 
-    fireEvent.click(screen.getByRole("button", { name: "Sign Up" }))
-    expect(showToastMock).toHaveBeenCalledWith("Input data")
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: languages[mockReturnSelectorValue.language].REGISTER_
+      })
+    )
+    expect(showToastMock).toHaveBeenCalledWith(
+      languages[mockReturnSelectorValue.language].INPUT_DATA
+    )
     expect(showToastMock).toHaveBeenCalledTimes(1)
   })
   it("should show loading spinner while fetching", () => {
     const component = render(<Register />)
 
-    fireEvent.change(screen.getByPlaceholderText("Enter surname and name"), {
-      target: { value: "John Doe" }
-    })
-    fireEvent.change(screen.getByPlaceholderText("Input e-mail"), {
-      target: { value: "john.doe@example.com" }
-    })
-    fireEvent.change(screen.getByPlaceholderText("Input password"), {
-      target: { value: "password123" }
-    })
-    fireEvent.click(screen.getByRole("button", { name: "Sign Up" }))
+    fireEvent.change(
+      screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_SURNAME_NAME),
+      {
+        target: { value: nameUser }
+      }
+    )
+    fireEvent.change(
+      screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_EMAIL),
+      {
+        target: { value: emailUser }
+      }
+    )
+    fireEvent.change(
+      screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_PASSWORD),
+      {
+        target: { value: passUser }
+      }
+    )
+    fireEvent.click(
+      screen.getByRole("button", {
+        name: languages[mockReturnSelectorValue.language].REGISTER_
+      })
+    )
     mockRegister.mockReturnValue([mockRegisterFunc, mockReturnRegister(true, true)])
     component.rerender(<Register />)
     expect(screen.getByText(/Loading/i)).toBeInTheDocument()

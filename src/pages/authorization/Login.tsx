@@ -32,7 +32,7 @@ function Login() {
   }, [isLoading])
 
   const logIn = () => {
-    if(isLoading) return
+    if (isLoading) return
     if (
       passwordRef.current &&
       emailRef.current &&

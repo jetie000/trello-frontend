@@ -1,5 +1,3 @@
-
-
 export const useSetTheme = () => {
   const setTheme = () => {
     document.documentElement.setAttribute(
