@@ -28,7 +28,9 @@ function TaskAdd({ column }: { column: IColumn | undefined }) {
         description: addTaskDescRef.current?.value,
         userIds: userIds
       })
+      return
     }
+    showToast(languages[language].INPUT_DATA)
   }
 
   useEffect(() => {
@@ -62,7 +64,7 @@ function TaskAdd({ column }: { column: IColumn | undefined }) {
           ref={addTaskDescRef}
         />
         <UsersList userIds={userIds} setUserIds={setUserIds} boardId={column?.boardId} />
-        <button className="btn btn-primary mt-2" onClick={addTaskClick}>
+        <button className="btn btn-primary mt-2" onClick={addTaskClick} data-testid="add-task-btn">
           {languages[language].ADD_TASK}
         </button>
       </div>

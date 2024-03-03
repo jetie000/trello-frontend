@@ -5,7 +5,7 @@ import { languages } from "@/config/languages"
 import { intlFormatDistance } from "date-fns"
 import { useSelector } from "react-redux"
 
-interface TasksProps {
+export interface TasksProps {
   column: IColumn
   setCurrentColumn: Function
   setCurrentTask: Function
@@ -41,6 +41,7 @@ function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: T
             onClick={() => setCurrentTask(t)}
             data-bs-toggle="modal"
             data-bs-target="#changeTask"
+            data-testid={`task${t.id}`}
           >
             <span className="fs-5">{t.name}</span>
             <span>{languages[language].MOVED}:</span>
@@ -79,6 +80,7 @@ function Tasks({ column, setCurrentColumn, setCurrentTask, setDrugStartTask }: T
         className="btn btn-primary border rounded-2"
         data-bs-toggle="modal"
         data-bs-target="#addTask"
+        data-testid="show-add-task"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

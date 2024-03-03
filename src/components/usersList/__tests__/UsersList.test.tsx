@@ -18,7 +18,7 @@ const mockSearchUsers = jest.spyOn(userApi, "useSearchUsersQuery")
 const mockReturnSelectorValue = {
   language: 0
 }
-const users = [
+export const mockUsers = [
   {
     id: 1,
     email: "1@gmail.com",
@@ -39,7 +39,7 @@ const users = [
   }
 ]
 const mockReturnActionsValue = { showToast: jest.fn() }
-const mockReturnUsers = (users: IUserResponse[]) => ({
+export const mockReturnUsers = (users: IUserResponse[]) => ({
   isLoading: false,
   isError: false,
   refetch: jest.fn(),
@@ -52,9 +52,9 @@ describe("UsersList", () => {
     mockUseActions.mockReturnValue(mockReturnActionsValue as any)
     mockGetByIds.mockImplementation((ids: number[] | typeof skipToken) => {
       if (typeof ids !== "symbol")
-        return mockReturnUsers(users.filter(u => ids.some(id => id === u.id))) as any
+        return mockReturnUsers(mockUsers.filter(u => ids.some(id => id === u.id))) as any
     })
-    mockSearchUsers.mockReturnValue(mockReturnUsers(users))
+    mockSearchUsers.mockReturnValue(mockReturnUsers(mockUsers))
   })
   it("should render a list of 2 users", () => {
     const userIds = [1, 2]

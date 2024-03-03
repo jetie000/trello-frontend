@@ -1,0 +1,1584 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TaskAdd should change user when all fields are filled correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        aria-hidden="true"
+        aria-labelledby="addTaskLabel"
+        class="modal  fade"
+        data-testid="addTask"
+        id="addTask"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-md"
+          role="document"
+        >
+          <div
+            class="modal-content"
+          >
+            <div
+              class="modal-header"
+            >
+              <h5
+                class="modal-title"
+                id="addTaskLabel"
+              >
+                Add task
+              </h5>
+              <button
+                aria-label="Close"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                type="button"
+              />
+            </div>
+            <div
+              class="modal-body"
+            >
+              <div
+                class="d-flex flex-column"
+              >
+                <label
+                  for="inputTaskName"
+                >
+                  Name
+                </label>
+                <input
+                  class="form-control mb-2"
+                  id="inputTaskName"
+                  placeholder="Input name"
+                />
+                <label
+                  for="inputTaskDesc"
+                >
+                  Description (optional)
+                </label>
+                <textarea
+                  class="form-control mb-2"
+                  id="inputTaskDesc"
+                  placeholder="Enter description"
+                />
+                <div
+                  class="mb-1"
+                >
+                  <label>
+                    Users
+                  </label>
+                  <div
+                    class="input-group"
+                  >
+                    <input
+                      class="form-control w-50"
+                      data-testid="search-users-input"
+                      placeholder="Enter request"
+                      type="text"
+                    />
+                    <button
+                      class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+                      type="button"
+                    >
+                      <svg
+                        class="bi bi-x-lg"
+                        fill="currentColor"
+                        height="20"
+                        viewBox="0 0 16 16"
+                        width="20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <button
+                  class="btn btn-primary mt-2"
+                  data-testid="add-task-btn"
+                >
+                  Add task
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      aria-hidden="true"
+      aria-labelledby="addTaskLabel"
+      class="modal  fade"
+      data-testid="addTask"
+      id="addTask"
+      role="dialog"
+      tabindex="-1"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-md"
+        role="document"
+      >
+        <div
+          class="modal-content"
+        >
+          <div
+            class="modal-header"
+          >
+            <h5
+              class="modal-title"
+              id="addTaskLabel"
+            >
+              Add task
+            </h5>
+            <button
+              aria-label="Close"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              type="button"
+            />
+          </div>
+          <div
+            class="modal-body"
+          >
+            <div
+              class="d-flex flex-column"
+            >
+              <label
+                for="inputTaskName"
+              >
+                Name
+              </label>
+              <input
+                class="form-control mb-2"
+                id="inputTaskName"
+                placeholder="Input name"
+              />
+              <label
+                for="inputTaskDesc"
+              >
+                Description (optional)
+              </label>
+              <textarea
+                class="form-control mb-2"
+                id="inputTaskDesc"
+                placeholder="Enter description"
+              />
+              <div
+                class="mb-1"
+              >
+                <label>
+                  Users
+                </label>
+                <div
+                  class="input-group"
+                >
+                  <input
+                    class="form-control w-50"
+                    data-testid="search-users-input"
+                    placeholder="Enter request"
+                    type="text"
+                  />
+                  <button
+                    class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+                    type="button"
+                  >
+                    <svg
+                      class="bi bi-x-lg"
+                      fill="currentColor"
+                      height="20"
+                      viewBox="0 0 16 16"
+                      width="20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <button
+                class="btn btn-primary mt-2"
+                data-testid="add-task-btn"
+              >
+                Add task
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`TaskAdd should render component with all fields and buttons 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        aria-hidden="true"
+        aria-labelledby="addTaskLabel"
+        class="modal  fade"
+        data-testid="addTask"
+        id="addTask"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-md"
+          role="document"
+        >
+          <div
+            class="modal-content"
+          >
+            <div
+              class="modal-header"
+            >
+              <h5
+                class="modal-title"
+                id="addTaskLabel"
+              >
+                Add task
+              </h5>
+              <button
+                aria-label="Close"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                type="button"
+              />
+            </div>
+            <div
+              class="modal-body"
+            >
+              <div
+                class="d-flex flex-column"
+              >
+                <label
+                  for="inputTaskName"
+                >
+                  Name
+                </label>
+                <input
+                  class="form-control mb-2"
+                  id="inputTaskName"
+                  placeholder="Input name"
+                />
+                <label
+                  for="inputTaskDesc"
+                >
+                  Description (optional)
+                </label>
+                <textarea
+                  class="form-control mb-2"
+                  id="inputTaskDesc"
+                  placeholder="Enter description"
+                />
+                <div
+                  class="mb-1"
+                >
+                  <label>
+                    Users
+                  </label>
+                  <div
+                    class="input-group"
+                  >
+                    <input
+                      class="form-control w-50"
+                      data-testid="search-users-input"
+                      placeholder="Enter request"
+                      type="text"
+                    />
+                    <button
+                      class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+                      type="button"
+                    >
+                      <svg
+                        class="bi bi-x-lg"
+                        fill="currentColor"
+                        height="20"
+                        viewBox="0 0 16 16"
+                        width="20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+                <button
+                  class="btn btn-primary mt-2"
+                  data-testid="add-task-btn"
+                >
+                  Add task
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      aria-hidden="true"
+      aria-labelledby="addTaskLabel"
+      class="modal  fade"
+      data-testid="addTask"
+      id="addTask"
+      role="dialog"
+      tabindex="-1"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-md"
+        role="document"
+      >
+        <div
+          class="modal-content"
+        >
+          <div
+            class="modal-header"
+          >
+            <h5
+              class="modal-title"
+              id="addTaskLabel"
+            >
+              Add task
+            </h5>
+            <button
+              aria-label="Close"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              type="button"
+            />
+          </div>
+          <div
+            class="modal-body"
+          >
+            <div
+              class="d-flex flex-column"
+            >
+              <label
+                for="inputTaskName"
+              >
+                Name
+              </label>
+              <input
+                class="form-control mb-2"
+                id="inputTaskName"
+                placeholder="Input name"
+              />
+              <label
+                for="inputTaskDesc"
+              >
+                Description (optional)
+              </label>
+              <textarea
+                class="form-control mb-2"
+                id="inputTaskDesc"
+                placeholder="Enter description"
+              />
+              <div
+                class="mb-1"
+              >
+                <label>
+                  Users
+                </label>
+                <div
+                  class="input-group"
+                >
+                  <input
+                    class="form-control w-50"
+                    data-testid="search-users-input"
+                    placeholder="Enter request"
+                    type="text"
+                  />
+                  <button
+                    class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+                    type="button"
+                  >
+                    <svg
+                      class="bi bi-x-lg"
+                      fill="currentColor"
+                      height="20"
+                      viewBox="0 0 16 16"
+                      width="20"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <button
+                class="btn btn-primary mt-2"
+                data-testid="add-task-btn"
+              >
+                Add task
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Tasks should display "add users" when task has no users 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="rounded-2 d-flex flex-column"
+      >
+        <div
+          class="d-flex flex-column board-task cursor-pointer cursor-grab"
+          data-bs-target="#changeTask"
+          data-bs-toggle="modal"
+          data-testid="task1"
+          draggable="true"
+        >
+          <span
+            class="fs-5"
+          >
+            Task 1
+          </span>
+          <span>
+            Moved
+            :
+          </span>
+          <span
+            class="text-truncate"
+          >
+            now
+          </span>
+          <span>
+            Created
+            :
+          </span>
+          <span
+            class="text-truncate"
+          >
+            now
+          </span>
+          <div
+            class="d-flex"
+          >
+            <span>
+              Users
+              :
+            </span>
+            <div
+              class="ms-auto d-flex gap-1"
+            >
+              add users
+            </div>
+          </div>
+        </div>
+        <hr
+          class="mb-2 mt-2"
+        />
+        <button
+          class="btn btn-primary border rounded-2"
+          data-bs-target="#addTask"
+          data-bs-toggle="modal"
+          data-testid="show-add-task"
+        >
+          <svg
+            class="bi bi-plus"
+            fill="currentColor"
+            height="24"
+            viewBox="0 0 16 16"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="rounded-2 d-flex flex-column"
+    >
+      <div
+        class="d-flex flex-column board-task cursor-pointer cursor-grab"
+        data-bs-target="#changeTask"
+        data-bs-toggle="modal"
+        data-testid="task1"
+        draggable="true"
+      >
+        <span
+          class="fs-5"
+        >
+          Task 1
+        </span>
+        <span>
+          Moved
+          :
+        </span>
+        <span
+          class="text-truncate"
+        >
+          now
+        </span>
+        <span>
+          Created
+          :
+        </span>
+        <span
+          class="text-truncate"
+        >
+          now
+        </span>
+        <div
+          class="d-flex"
+        >
+          <span>
+            Users
+            :
+          </span>
+          <div
+            class="ms-auto d-flex gap-1"
+          >
+            add users
+          </div>
+        </div>
+      </div>
+      <hr
+        class="mb-2 mt-2"
+      />
+      <button
+        class="btn btn-primary border rounded-2"
+        data-bs-target="#addTask"
+        data-bs-toggle="modal"
+        data-testid="show-add-task"
+      >
+        <svg
+          class="bi bi-plus"
+          fill="currentColor"
+          height="24"
+          viewBox="0 0 16 16"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Tasks should render a list of given tasks 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="rounded-2 d-flex flex-column"
+      >
+        <div
+          class="d-flex flex-column board-task cursor-pointer cursor-grab"
+          data-bs-target="#changeTask"
+          data-bs-toggle="modal"
+          data-testid="task1"
+          draggable="true"
+        >
+          <span
+            class="fs-5"
+          >
+            Task 1
+          </span>
+          <span>
+            Moved
+            :
+          </span>
+          <span
+            class="text-truncate"
+          >
+            54 years ago
+          </span>
+          <span>
+            Created
+            :
+          </span>
+          <span
+            class="text-truncate"
+          >
+            54 years ago
+          </span>
+          <div
+            class="d-flex"
+          >
+            <span>
+              Users
+              :
+            </span>
+            <div
+              class="ms-auto d-flex gap-1"
+            >
+              <div
+                class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+              >
+                U
+              </div>
+              <div
+                class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+              >
+                U
+              </div>
+              <div
+                class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+              >
+                U
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="d-flex flex-column board-task cursor-pointer cursor-grab"
+          data-bs-target="#changeTask"
+          data-bs-toggle="modal"
+          data-testid="task2"
+          draggable="true"
+        >
+          <span
+            class="fs-5"
+          >
+            Task 2
+          </span>
+          <span>
+            Moved
+            :
+          </span>
+          <span
+            class="text-truncate"
+          >
+            now
+          </span>
+          <span>
+            Created
+            :
+          </span>
+          <span
+            class="text-truncate"
+          >
+            now
+          </span>
+          <div
+            class="d-flex"
+          >
+            <span>
+              Users
+              :
+            </span>
+            <div
+              class="ms-auto d-flex gap-1"
+            >
+              <div
+                class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+              >
+                U
+              </div>
+              <div
+                class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+              >
+                U
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr
+          class="mb-2 mt-2"
+        />
+        <button
+          class="btn btn-primary border rounded-2"
+          data-bs-target="#addTask"
+          data-bs-toggle="modal"
+          data-testid="show-add-task"
+        >
+          <svg
+            class="bi bi-plus"
+            fill="currentColor"
+            height="24"
+            viewBox="0 0 16 16"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="rounded-2 d-flex flex-column"
+    >
+      <div
+        class="d-flex flex-column board-task cursor-pointer cursor-grab"
+        data-bs-target="#changeTask"
+        data-bs-toggle="modal"
+        data-testid="task1"
+        draggable="true"
+      >
+        <span
+          class="fs-5"
+        >
+          Task 1
+        </span>
+        <span>
+          Moved
+          :
+        </span>
+        <span
+          class="text-truncate"
+        >
+          54 years ago
+        </span>
+        <span>
+          Created
+          :
+        </span>
+        <span
+          class="text-truncate"
+        >
+          54 years ago
+        </span>
+        <div
+          class="d-flex"
+        >
+          <span>
+            Users
+            :
+          </span>
+          <div
+            class="ms-auto d-flex gap-1"
+          >
+            <div
+              class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+            >
+              U
+            </div>
+            <div
+              class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+            >
+              U
+            </div>
+            <div
+              class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+            >
+              U
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-column board-task cursor-pointer cursor-grab"
+        data-bs-target="#changeTask"
+        data-bs-toggle="modal"
+        data-testid="task2"
+        draggable="true"
+      >
+        <span
+          class="fs-5"
+        >
+          Task 2
+        </span>
+        <span>
+          Moved
+          :
+        </span>
+        <span
+          class="text-truncate"
+        >
+          now
+        </span>
+        <span>
+          Created
+          :
+        </span>
+        <span
+          class="text-truncate"
+        >
+          now
+        </span>
+        <div
+          class="d-flex"
+        >
+          <span>
+            Users
+            :
+          </span>
+          <div
+            class="ms-auto d-flex gap-1"
+          >
+            <div
+              class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+            >
+              U
+            </div>
+            <div
+              class="d-flex board-users-avatar-sm bg-secondary text-light border rounded-circle align-items-center justify-content-center"
+            >
+              U
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr
+        class="mb-2 mt-2"
+      />
+      <button
+        class="btn btn-primary border rounded-2"
+        data-bs-target="#addTask"
+        data-bs-toggle="modal"
+        data-testid="show-add-task"
+      >
+        <svg
+          class="bi bi-plus"
+          fill="currentColor"
+          height="24"
+          viewBox="0 0 16 16"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`Tasks should render only the add task button when column has no tasks 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="rounded-2 d-flex flex-column"
+      >
+        <button
+          class="btn btn-primary border rounded-2"
+          data-bs-target="#addTask"
+          data-bs-toggle="modal"
+          data-testid="show-add-task"
+        >
+          <svg
+            class="bi bi-plus"
+            fill="currentColor"
+            height="24"
+            viewBox="0 0 16 16"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="rounded-2 d-flex flex-column"
+    >
+      <button
+        class="btn btn-primary border rounded-2"
+        data-bs-target="#addTask"
+        data-bs-toggle="modal"
+        data-testid="show-add-task"
+      >
+        <svg
+          class="bi bi-plus"
+          fill="currentColor"
+          height="24"
+          viewBox="0 0 16 16"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`UsersList should not render a list of users when userIds is empty 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="mb-1"
+      >
+        <label>
+          Users
+        </label>
+        <div
+          class="input-group"
+        >
+          <input
+            class="form-control w-50"
+            data-testid="search-users-input"
+            placeholder="Введите запрос"
+            type="text"
+          />
+          <button
+            class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+            type="button"
+          >
+            <svg
+              class="bi bi-x-lg"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="mb-1"
+    >
+      <label>
+        Users
+      </label>
+      <div
+        class="input-group"
+      >
+        <input
+          class="form-control w-50"
+          data-testid="search-users-input"
+          placeholder="Введите запрос"
+          type="text"
+        />
+        <button
+          class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+          type="button"
+        >
+          <svg
+            class="bi bi-x-lg"
+            fill="currentColor"
+            height="20"
+            viewBox="0 0 16 16"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
+
+exports[`UsersList should render a list of 2 users 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="mb-1"
+      >
+        <label>
+          Users
+        </label>
+        <div
+          class="input-group"
+        >
+          <input
+            class="form-control w-50"
+            data-testid="search-users-input"
+            placeholder="Введите запрос"
+            type="text"
+          />
+          <button
+            class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+            type="button"
+          >
+            <svg
+              class="bi bi-x-lg"
+              fill="currentColor"
+              height="20"
+              viewBox="0 0 16 16"
+              width="20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <ul
+        class="list-group users-list"
+        data-testid="users-list"
+      >
+        <li
+          class="list-group-item d-flex justify-content-between"
+        >
+          <div
+            class="d-flex flex-column"
+          >
+            <div>
+              1@gmail.com
+            </div>
+            <div>
+              AA AA
+            </div>
+          </div>
+          <button
+            class="btn btn-danger"
+            data-testid="remove-user-1"
+          >
+            <svg
+              class="bi bi-trash3-fill"
+              fill="currentColor"
+              height="16"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"
+              />
+            </svg>
+          </button>
+        </li>
+        <li
+          class="list-group-item d-flex justify-content-between"
+        >
+          <div
+            class="d-flex flex-column"
+          >
+            <div>
+              2@gmail.com
+            </div>
+            <div>
+              BB BB
+            </div>
+          </div>
+          <button
+            class="btn btn-danger"
+            data-testid="remove-user-2"
+          >
+            <svg
+              class="bi bi-trash3-fill"
+              fill="currentColor"
+              height="16"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"
+              />
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="mb-1"
+    >
+      <label>
+        Users
+      </label>
+      <div
+        class="input-group"
+      >
+        <input
+          class="form-control w-50"
+          data-testid="search-users-input"
+          placeholder="Введите запрос"
+          type="text"
+        />
+        <button
+          class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
+          type="button"
+        >
+          <svg
+            class="bi bi-x-lg"
+            fill="currentColor"
+            height="20"
+            viewBox="0 0 16 16"
+            width="20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <ul
+      class="list-group users-list"
+      data-testid="users-list"
+    >
+      <li
+        class="list-group-item d-flex justify-content-between"
+      >
+        <div
+          class="d-flex flex-column"
+        >
+          <div>
+            1@gmail.com
+          </div>
+          <div>
+            AA AA
+          </div>
+        </div>
+        <button
+          class="btn btn-danger"
+          data-testid="remove-user-1"
+        >
+          <svg
+            class="bi bi-trash3-fill"
+            fill="currentColor"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"
+            />
+          </svg>
+        </button>
+      </li>
+      <li
+        class="list-group-item d-flex justify-content-between"
+      >
+        <div
+          class="d-flex flex-column"
+        >
+          <div>
+            2@gmail.com
+          </div>
+          <div>
+            BB BB
+          </div>
+        </div>
+        <button
+          class="btn btn-danger"
+          data-testid="remove-user-2"
+        >
+          <svg
+            class="bi bi-trash3-fill"
+            fill="currentColor"
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5"
+            />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

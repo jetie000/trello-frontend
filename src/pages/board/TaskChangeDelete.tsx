@@ -48,7 +48,9 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
         userIds,
         columnId: task.columnId
       })
+      return
     }
+    showToast(languages[language].INPUT_DATA)
   }
 
   const deleteTaskClick = () => {
