@@ -4,7 +4,7 @@ import * as actions from "@/hooks/useActions"
 import * as userApi from "@/store/api/user.api"
 import UsersList from "@/components/usersList/UsersList"
 import { skipToken } from "@reduxjs/toolkit/query"
-import { IUserResponse } from "@/types/user.interface"
+import { mockReturnUsers, mockUsers } from "@/config/mockValues"
 
 jest.mock("@/store/store")
 jest.mock("react-redux")
@@ -18,33 +18,8 @@ const mockSearchUsers = jest.spyOn(userApi, "useSearchUsersQuery")
 const mockReturnSelectorValue = {
   language: 0
 }
-export const mockUsers = [
-  {
-    id: 1,
-    email: "1@gmail.com",
-    fullName: "AA AA",
-    loginDate: new Date()
-  },
-  {
-    id: 2,
-    email: "2@gmail.com",
-    fullName: "BB BB",
-    loginDate: new Date()
-  },
-  {
-    id: 3,
-    email: "3@gmail.com",
-    fullName: "CC CC",
-    loginDate: new Date()
-  }
-]
+
 const mockReturnActionsValue = { showToast: jest.fn() }
-export const mockReturnUsers = (users: IUserResponse[]) => ({
-  isLoading: false,
-  isError: false,
-  refetch: jest.fn(),
-  data: users
-})
 
 describe("UsersList", () => {
   beforeAll(() => {

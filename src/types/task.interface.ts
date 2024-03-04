@@ -8,7 +8,7 @@ export interface ITask {
   users: IUserResponse[]
   creationDate: Date
   moveDate: Date
-  Column: IColumn
+  Column?: IColumn
   columnId: number
 }
 

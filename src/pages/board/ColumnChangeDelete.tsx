@@ -24,14 +24,16 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
     { isSuccess: isSuccessDelete, isError: isErrorDelete, isLoading: isLoadingDelete }
   ] = useDeleteColumnMutation()
 
-  const addColumnClick = () => {
+  const changeColumnClick = () => {
     if (changeColumnRef.current && changeColumnRef.current.value !== "" && currentColumn) {
       changeColumn({
         id: currentColumn.id,
         name: changeColumnRef.current.value,
         order: currentColumn.order
       })
+      return
     }
+    showToast(languages[language].INPUT_DATA)
   }
 
   useEffect(() => {
@@ -73,7 +75,11 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
             ref={changeColumnRef}
             defaultValue={currentColumn?.name}
           />
-          <button className="btn btn-primary" onClick={addColumnClick}>
+          <button
+            className="btn btn-primary"
+            onClick={changeColumnClick}
+            data-testid="change-column-btn"
+          >
             {languages[language].CHANGE_COLUMN}
           </button>
         </div>
@@ -86,7 +92,11 @@ function ColumnChangeDelete({ currentColumn }: { currentColumn: IColumn | undefi
       >
         <div className="d-flex flex-column gap-2">
           <div>{languages[language].SURE_DELETE_COLUMN}</div>
-          <button className="btn btn-danger" onClick={() => deleteColumn(currentColumn?.id || 0)}>
+          <button
+            className="btn btn-danger"
+            onClick={() => deleteColumn(currentColumn?.id || 0)}
+            data-testid="delete-column-btn"
+          >
             {languages[language].DELETE_COLUMN}
           </button>
         </div>

@@ -1,22 +1,23 @@
 import * as reduxHooks from "react-redux"
 import * as actions from "@/hooks/useActions"
-import * as taskApi from "@/store/api/task.api"
+import * as boardApi from "@/store/api/board.api"
 import * as userApi from "@/store/api/user.api"
 import { fireEvent, render, screen } from "@testing-library/react"
 import { languages } from "@/config/languages"
-import TaskAdd from "../TaskAdd"
 import { skipToken } from "@reduxjs/toolkit/query"
-import { mockColumn, mockReturnUsers, mockUsers } from "../../../config/mockValues"
+import { mockBoards, mockReturnUsers, mockUsers } from "../../../config/mockValues"
 import { mockReturnMutation } from "@/config/mockValues"
+import BoardChange from "../BoardChange"
 
 jest.mock("@/store/store")
 jest.mock("react-redux")
+jest.mock("react-router-dom")
 jest.mock("@/hooks/useActions")
 jest.mock("@/store/api/user.api")
-jest.mock("@/store/api/task.api")
+jest.mock("@/store/api/board.api")
 const mockUseSelector = jest.spyOn(reduxHooks, "useSelector")
 const mockUseActions = jest.spyOn(actions, "useActions")
-const mockAdd = jest.spyOn(taskApi, "useAddTaskMutation")
+const mockChange = jest.spyOn(boardApi, "useChangeBoardMutation")
 const mockGetByIds = jest.spyOn(userApi, "useGetByIdsQuery")
 const mockSearchUsers = jest.spyOn(userApi, "useSearchUsersQuery")
 
@@ -25,14 +26,14 @@ const mockReturnSelectorValue = {
   id: 1,
   token: "token"
 }
-const mockAddFunc = jest.fn()
+const mockChangeFunc = jest.fn()
 const showToastMock = jest.fn()
 const mockReturnActionsValue = { showToast: showToastMock }
 
-const nameTask = "Task 3"
-const descriptionTask = "Desc Task 3"
+const nameBoard = "Board 11"
+const descriptionBoard = "Desc Board 11"
 
-describe("TaskAdd", () => {
+describe("BoardChange", () => {
   beforeEach(() => {
     jest.restoreAllMocks()
     jest.resetAllMocks()
@@ -43,58 +44,63 @@ describe("TaskAdd", () => {
     mockSearchUsers.mockReturnValue(mockReturnUsers(mockUsers))
     mockUseSelector.mockReturnValue(mockReturnSelectorValue)
     mockUseActions.mockReturnValue(mockReturnActionsValue as any)
-    mockAdd.mockReturnValue([mockAddFunc, mockReturnMutation(false, false)])
+    mockChange.mockReturnValue([mockChangeFunc, mockReturnMutation(false, false)])
   })
   it("should render component with all fields and buttons", () => {
-    const component = render(<TaskAdd column={mockColumn} />)
+    const component = render(<BoardChange board={mockBoards[0]} />)
     expect(
       screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_NAME)
     ).toBeInTheDocument()
     expect(
       screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_DESCRIPTION)
     ).toBeInTheDocument()
-    expect(screen.getByTestId("add-task-btn")).toBeInTheDocument()
+    expect(screen.getByTestId("change-board-btn")).toBeInTheDocument()
     expect(component).toMatchSnapshot()
   })
-  it("should add task when all fields are filled correctly", () => {
-    const component = render(<TaskAdd column={mockColumn} />)
+  it("should show enter data message when provided invalid data when changing board", () => {
+    const component = render(<BoardChange board={mockBoards[0]} />)
+    fireEvent.change(
+      screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_NAME),
+      {
+        target: { value: "" }
+      }
+    )
+    fireEvent.click(screen.getByTestId("change-board-btn"))
+    expect(showToastMock).toHaveBeenCalledWith(
+      languages[mockReturnSelectorValue.language].INPUT_DATA
+    )
+    expect(showToastMock).toHaveBeenCalledTimes(1)
+  })
+  it("should change task when all fields are filled correctly", () => {
+    const component = render(<BoardChange board={mockBoards[0]} />)
     expect(mockUseActions).toHaveBeenCalled()
-    expect(mockAdd).toHaveBeenCalled()
+    expect(mockChange).toHaveBeenCalled()
     expect(mockUseSelector).toHaveBeenCalled()
     fireEvent.change(
       screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_NAME),
       {
-        target: { value: nameTask }
+        target: { value: nameBoard }
       }
     )
     fireEvent.change(
       screen.getByPlaceholderText(languages[mockReturnSelectorValue.language].ENTER_DESCRIPTION),
       {
-        target: { value: descriptionTask }
+        target: { value: descriptionBoard }
       }
     )
-    fireEvent.click(screen.getByTestId("add-task-btn"))
-    mockAdd.mockReturnValue([mockAddFunc, mockReturnMutation(true, true)])
-    component.rerender(<TaskAdd column={mockColumn} />)
-    mockAdd.mockReturnValue([mockAddFunc, mockReturnMutation(false, true)])
-    component.rerender(<TaskAdd column={mockColumn} />)
-    expect(mockAddFunc).toHaveBeenCalledWith({
-      columnId: mockColumn.id,
-      name: nameTask,
-      description: descriptionTask,
-      userIds: []
+    fireEvent.click(screen.getByTestId("change-board-btn"))
+    mockChange.mockReturnValue([mockChangeFunc, mockReturnMutation(true, true)])
+    component.rerender(<BoardChange board={mockBoards[0]} />)
+    mockChange.mockReturnValue([mockChangeFunc, mockReturnMutation(false, true)])
+    component.rerender(<BoardChange board={mockBoards[0]} />)
+    expect(mockChangeFunc).toHaveBeenCalledWith({
+      id: mockBoards[0].id,
+      name: nameBoard,
+      description: descriptionBoard,
+      userIds: mockBoards[0].users?.map(u => u.id) || []
     })
     expect(showToastMock).toHaveBeenCalledWith(
-      languages[mockReturnSelectorValue.language].TASK_ADDED
-    )
-    expect(showToastMock).toHaveBeenCalledTimes(1)
-  })
-  it("should show enter data message when provided invalid data when adding task", () => {
-    const component = render(<TaskAdd column={mockColumn} />)
-
-    fireEvent.click(screen.getByTestId("add-task-btn"))
-    expect(showToastMock).toHaveBeenCalledWith(
-      languages[mockReturnSelectorValue.language].INPUT_DATA
+      languages[mockReturnSelectorValue.language].BOARD_CHANGED
     )
     expect(showToastMock).toHaveBeenCalledTimes(1)
   })

@@ -19,22 +19,19 @@ function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
   const [currentTask, setCurrentTask] = useState<ITask>()
   const [columns, setColumns] = useState<IColumn[]>()
 
-  const [changeColumn, { isSuccess, isError, isLoading }] = useChangeColumnMutation()
-  const [changeTask, { isSuccess: isSuccessTask, isError: isErrorTask, isLoading: isLoadingTask }] =
-    useChangeTaskMutation()
+  const [changeColumn, { isError, isLoading }] = useChangeColumnMutation()
+  const [changeTask, { isError: isErrorTask, isLoading: isLoadingTask }] = useChangeTaskMutation()
 
   const [drugStartColumn, setDrugStartColumn] = useState<IColumn | undefined>()
   const [drugStartTask, setDrugStartTask] = useState<ITask | undefined>()
 
   useEffect(() => {
-    if (isSuccessTask) setDrugStartTask(undefined)
     if (isErrorTask) {
       showToast(languages[language].ERROR_CHANGING_TASK_COL)
     }
   }, [isLoadingTask])
 
   useEffect(() => {
-    if (isSuccess) setDrugStartColumn(undefined)
     if (isError) {
       showToast(languages[language].ERROR_CHANGING_COL_ORDER)
     }
@@ -59,7 +56,6 @@ function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
 
   function dropHandler(e: React.DragEvent<HTMLDivElement>, c: IColumn) {
     e.preventDefault()
-    e.currentTarget.className = "border rounded-2 p-2 cursor-grab"
     if (drugStartColumn && c.order !== drugStartColumn.order) {
       let columnsTemp = columns?.slice()
       columnsTemp?.splice(drugStartColumn?.order - 1, 1)
@@ -70,6 +66,7 @@ function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
         order: c.order,
         name: drugStartColumn.name
       })
+      setDrugStartColumn(undefined)
     } else if (drugStartTask && drugStartTask.columnId !== c.id && columns) {
       setColumns(
         columns.map(column => {
@@ -87,13 +84,13 @@ function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
           return columnTemp
         })
       )
-      setDrugStartTask(undefined)
       changeTask({
         id: drugStartTask.id,
         name: drugStartTask.name,
         userIds: drugStartTask.users.map(u => u.id),
         columnId: c.id
       })
+      setDrugStartTask(undefined)
     }
   }
 
@@ -110,6 +107,7 @@ function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
               onDragStart={e => dragStartHandler(e, c)}
               onDragOver={dragOverHandler}
               onDrop={e => dropHandler(e, c)}
+              data-testid={`column${c.id}`}
             >
               <h5 className="m-0 mb-2 text-truncate">{c.name}</h5>
               <div className="d-flex gap-2">

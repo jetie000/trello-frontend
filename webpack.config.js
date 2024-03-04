@@ -43,7 +43,7 @@ module.exports = (_, argv) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "ClientReactCourseSEM5",
+      name: "ReactTrello",
       filename: "remoteEntry.js",
       remotes: {},
       exposes: {},

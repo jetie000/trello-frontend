@@ -34,7 +34,9 @@ function ColumnAdd({ boardId }: { boardId: number | undefined }) {
         boardId,
         name: addColumnRef.current.value
       })
+      return
     }
+    showToast(languages[language].INPUT_DATA)
   }
 
   return (
@@ -47,7 +49,7 @@ function ColumnAdd({ boardId }: { boardId: number | undefined }) {
           placeholder={languages[language].ENTER_NAME}
           ref={addColumnRef}
         />
-        <button className="btn btn-primary" onClick={addColumnClick}>
+        <button className="btn btn-primary" onClick={addColumnClick} data-testid="add-column-btn">
           {languages[language].ADD_COLUMN}
         </button>
       </div>

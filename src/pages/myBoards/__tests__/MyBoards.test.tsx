@@ -1,11 +1,10 @@
-import React from "react"
 import * as reduxHooks from "react-redux"
 import * as reactRouterDom from "react-router-dom"
 import * as actions from "@/hooks/useActions"
 import { fireEvent, render, screen } from "@testing-library/react"
 import { boardApi } from "@/store/api/board.api"
-import { IBoard } from "@/types/board.interface"
 import MyBoards from "../MyBoards"
+import { mockBoards } from "@/config/mockValues"
 
 jest.mock("@/store/store")
 jest.mock("react-redux")
@@ -25,24 +24,6 @@ const mockReturnSelectorValue = {
 const mockNavigateReturn = jest.fn()
 const showToastMock = jest.fn()
 const mockReturnActionsValue = { showToast: showToastMock }
-
-const mockBoards: IBoard[] = [
-  {
-    id: 1,
-    creatorId: 1,
-    name: "Board1"
-  },
-  {
-    id: 2,
-    creatorId: 1,
-    name: "Board2"
-  },
-  {
-    id: 3,
-    creatorId: 1,
-    name: "Board3"
-  }
-]
 
 describe("MyBoards", () => {
   beforeEach(() => {

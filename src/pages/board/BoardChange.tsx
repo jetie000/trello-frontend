@@ -65,7 +65,12 @@ function BoardChange({ board }: { board: IBoard }) {
         />
       </div>
       <UsersList userIds={userIds} setUserIds={setUserIds} />
-      <button type="button" className="btn btn-primary w-100 mt-3" onClick={changeBoardClick}>
+      <button
+        type="button"
+        className="btn btn-primary w-100 mt-3"
+        onClick={changeBoardClick}
+        data-testid="change-board-btn"
+      >
         {isLoadingChange ? (
           <div className="spinner-border spinner-border-sm" role="status">
             <span className="visually-hidden">{languages[language].LOADING}</span>

@@ -1,21 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TaskAdd should render component with all fields and buttons 1`] = `
+exports[`ColumnChangeDelete should render component with all fields and buttons 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <div
         aria-hidden="true"
-        aria-labelledby="addTaskLabel"
+        aria-labelledby="changeColumnLabel"
         class="modal  fade"
-        data-testid="addTask"
-        id="addTask"
+        data-testid="changeColumn"
+        id="changeColumn"
         role="dialog"
         tabindex="-1"
       >
         <div
-          class="modal-dialog modal-dialog-centered modal-md"
+          class="modal-dialog modal-dialog-centered modal-sm"
           role="document"
         >
           <div
@@ -26,9 +26,9 @@ Object {
             >
               <h5
                 class="modal-title"
-                id="addTaskLabel"
+                id="changeColumnLabel"
               >
-                Add task
+                Change column
               </h5>
               <button
                 aria-label="Close"
@@ -44,64 +44,73 @@ Object {
                 class="d-flex flex-column"
               >
                 <label
-                  for="inputTaskName"
+                  for="inputColumnNameChange"
                 >
                   Name
                 </label>
                 <input
                   class="form-control mb-2"
-                  id="inputTaskName"
+                  id="inputColumnNameChange"
                   placeholder="Input name"
+                  value="TODO"
                 />
-                <label
-                  for="inputTaskDesc"
+                <button
+                  class="btn btn-primary"
+                  data-testid="change-column-btn"
                 >
-                  Description (optional)
-                </label>
-                <textarea
-                  class="form-control mb-2"
-                  id="inputTaskDesc"
-                  placeholder="Enter description"
-                />
-                <div
-                  class="mb-1"
-                >
-                  <label>
-                    Users
-                  </label>
-                  <div
-                    class="input-group"
-                  >
-                    <input
-                      class="form-control w-50"
-                      data-testid="search-users-input"
-                      placeholder="Enter request"
-                      type="text"
-                    />
-                    <button
-                      class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
-                      type="button"
-                    >
-                      <svg
-                        class="bi bi-x-lg"
-                        fill="currentColor"
-                        height="20"
-                        viewBox="0 0 16 16"
-                        width="20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
-                        />
-                      </svg>
-                    </button>
-                  </div>
+                  Change column
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        aria-hidden="true"
+        aria-labelledby="deleteColumnLabel"
+        class="modal  fade"
+        data-testid="deleteColumn"
+        id="deleteColumn"
+        role="dialog"
+        tabindex="-1"
+      >
+        <div
+          class="modal-dialog modal-dialog-centered modal-sm"
+          role="document"
+        >
+          <div
+            class="modal-content"
+          >
+            <div
+              class="modal-header"
+            >
+              <h5
+                class="modal-title"
+                id="deleteColumnLabel"
+              >
+                Delete column
+              </h5>
+              <button
+                aria-label="Close"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                type="button"
+              />
+            </div>
+            <div
+              class="modal-body"
+            >
+              <div
+                class="d-flex flex-column gap-2"
+              >
+                <div>
+                  Are you sure you want delete this column? You will lost all tasks dedicated to this column.
                 </div>
                 <button
-                  class="btn btn-primary mt-2"
-                  data-testid="add-task-btn"
+                  class="btn btn-danger"
+                  data-testid="delete-column-btn"
                 >
-                  Add task
+                  Delete column
                 </button>
               </div>
             </div>
@@ -113,15 +122,15 @@ Object {
   "container": <div>
     <div
       aria-hidden="true"
-      aria-labelledby="addTaskLabel"
+      aria-labelledby="changeColumnLabel"
       class="modal  fade"
-      data-testid="addTask"
-      id="addTask"
+      data-testid="changeColumn"
+      id="changeColumn"
       role="dialog"
       tabindex="-1"
     >
       <div
-        class="modal-dialog modal-dialog-centered modal-md"
+        class="modal-dialog modal-dialog-centered modal-sm"
         role="document"
       >
         <div
@@ -132,9 +141,9 @@ Object {
           >
             <h5
               class="modal-title"
-              id="addTaskLabel"
+              id="changeColumnLabel"
             >
-              Add task
+              Change column
             </h5>
             <button
               aria-label="Close"
@@ -150,64 +159,73 @@ Object {
               class="d-flex flex-column"
             >
               <label
-                for="inputTaskName"
+                for="inputColumnNameChange"
               >
                 Name
               </label>
               <input
                 class="form-control mb-2"
-                id="inputTaskName"
+                id="inputColumnNameChange"
                 placeholder="Input name"
+                value="TODO"
               />
-              <label
-                for="inputTaskDesc"
+              <button
+                class="btn btn-primary"
+                data-testid="change-column-btn"
               >
-                Description (optional)
-              </label>
-              <textarea
-                class="form-control mb-2"
-                id="inputTaskDesc"
-                placeholder="Enter description"
-              />
-              <div
-                class="mb-1"
-              >
-                <label>
-                  Users
-                </label>
-                <div
-                  class="input-group"
-                >
-                  <input
-                    class="form-control w-50"
-                    data-testid="search-users-input"
-                    placeholder="Enter request"
-                    type="text"
-                  />
-                  <button
-                    class="btn btn-secondary d-flex align-items-center add-board-behind-canvas"
-                    type="button"
-                  >
-                    <svg
-                      class="bi bi-x-lg"
-                      fill="currentColor"
-                      height="20"
-                      viewBox="0 0 16 16"
-                      width="20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"
-                      />
-                    </svg>
-                  </button>
-                </div>
+                Change column
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      aria-hidden="true"
+      aria-labelledby="deleteColumnLabel"
+      class="modal  fade"
+      data-testid="deleteColumn"
+      id="deleteColumn"
+      role="dialog"
+      tabindex="-1"
+    >
+      <div
+        class="modal-dialog modal-dialog-centered modal-sm"
+        role="document"
+      >
+        <div
+          class="modal-content"
+        >
+          <div
+            class="modal-header"
+          >
+            <h5
+              class="modal-title"
+              id="deleteColumnLabel"
+            >
+              Delete column
+            </h5>
+            <button
+              aria-label="Close"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              type="button"
+            />
+          </div>
+          <div
+            class="modal-body"
+          >
+            <div
+              class="d-flex flex-column gap-2"
+            >
+              <div>
+                Are you sure you want delete this column? You will lost all tasks dedicated to this column.
               </div>
               <button
-                class="btn btn-primary mt-2"
-                data-testid="add-task-btn"
+                class="btn btn-danger"
+                data-testid="delete-column-btn"
               >
-                Add task
+                Delete column
               </button>
             </div>
           </div>

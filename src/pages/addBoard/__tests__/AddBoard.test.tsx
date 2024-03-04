@@ -7,6 +7,7 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import { IUserResponse } from "@/types/user.interface"
 import { skipToken } from "@reduxjs/toolkit/query"
 import { languages } from "@/config/languages"
+import { mockReturnUsers, mockUsers } from "@/config/mockValues"
 
 jest.mock("@/store/store")
 jest.mock("react-redux")
@@ -32,32 +33,6 @@ const mockReturnAdd = {
   data: undefined,
   reset: jest.fn()
 }
-const users = [
-  {
-    id: 1,
-    email: "1@gmail.com",
-    fullName: "AA AA",
-    loginDate: new Date()
-  },
-  {
-    id: 2,
-    email: "2@gmail.com",
-    fullName: "BB BB",
-    loginDate: new Date()
-  },
-  {
-    id: 3,
-    email: "3@gmail.com",
-    fullName: "CC CC",
-    loginDate: new Date()
-  }
-]
-const mockReturnUsers = (users: IUserResponse[]) => ({
-  isLoading: false,
-  isError: false,
-  refetch: jest.fn(),
-  data: users
-})
 
 const mockReturnActionsValue = { showToast: jest.fn() }
 
@@ -68,9 +43,9 @@ describe("AddBoard", () => {
     mockAddBoard.mockReturnValue([jest.fn(), mockReturnAdd])
     mockGetByIds.mockImplementation((ids: number[] | typeof skipToken) => {
       if (typeof ids !== "symbol")
-        return mockReturnUsers(users.filter(u => ids.some(id => id === u.id))) as any
+        return mockReturnUsers(mockUsers.filter(u => ids.some(id => id === u.id))) as any
     })
-    mockSearchUsers.mockReturnValue(mockReturnUsers(users))
+    mockSearchUsers.mockReturnValue(mockReturnUsers(mockUsers))
   })
   beforeEach(() => {
     jest.restoreAllMocks()

@@ -1,12 +1,12 @@
-import React from "react"
 import * as reduxHooks from "react-redux"
 import * as reactRouterDom from "react-router-dom"
 import * as actions from "@/hooks/useActions"
 import * as userApi from "@/store/api/user.api"
-import { fireEvent, queryByText, render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import Cabinet from "../Cabinet"
 import { languages } from "@/config/languages"
 import { IUser } from "@/types/user.interface"
+import { mockReturnMutation } from "@/config/mockValues"
 
 jest.mock("@/store/store")
 jest.mock("react-redux")
@@ -34,14 +34,6 @@ const mockLogoutFunc = jest.fn()
 const showToastMock = jest.fn()
 const mockLogoutAction = jest.fn()
 const mockReturnActionsValue = { showToast: showToastMock, logout: mockLogoutAction }
-
-const mockReturnMutation = (isLoading: boolean, isPressed: boolean) => ({
-  isLoading: isLoading && isPressed,
-  isError: false,
-  isSuccess: !isLoading && isPressed,
-  refetch: jest.fn(),
-  reset: jest.fn()
-})
 
 const nameUser = "John Doe"
 const emailUser = "john.doe@example.com"

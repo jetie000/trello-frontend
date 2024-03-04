@@ -111,7 +111,11 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
           defaultValue={task?.description}
         />
         <UsersList userIds={userIds} setUserIds={setUserIds} boardId={Number(id)} />
-        <button className="btn btn-primary mt-2 mb-2" onClick={changeTaskClick}>
+        <button
+          className="btn btn-primary mt-2 mb-2"
+          onClick={changeTaskClick}
+          data-testid="change-task-btn"
+        >
           {languages[language].CHANGE_TASK}
         </button>
         <button className="btn btn-danger" onClick={deleteTaskClick}>
@@ -128,6 +132,7 @@ function TaskChangeDelete({ task }: { task: ITask | undefined }) {
             <button
               className="btn btn-danger"
               onClick={() => deleteTask({ taskId: task?.id || 0, boardId: Number(id) || 0 })}
+              data-testid="delete-task-btn"
             >
               {languages[language].DELETE_TASK}
             </button>

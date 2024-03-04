@@ -1,13 +1,8 @@
-import React from "react"
 import * as reduxHooks from "react-redux"
-import * as reactRouterDom from "react-router-dom"
-import * as actions from "@/hooks/useActions"
-import * as userApi from "@/store/api/user.api"
-import { fireEvent, queryByText, render, screen } from "@testing-library/react"
-import { languages } from "@/config/languages"
-import { IUser } from "@/types/user.interface"
+import { fireEvent, render, screen } from "@testing-library/react"
 import { IColumn } from "@/types/column.interface"
 import Tasks, { TasksProps } from "../Tasks"
+import { mockColumn } from "../../../config/mockValues"
 
 jest.mock("@/store/store")
 jest.mock("react-redux")
@@ -23,39 +18,6 @@ const renderTasks = (params: TasksProps) => render(<Tasks {...params} />)
 const setCurrentColumn = jest.fn()
 const setDrugStartTask = jest.fn()
 const setCurrentTask = jest.fn()
-export const mockColumn: IColumn = {
-  id: 1,
-  boardId: 1,
-  name: "TODO",
-  order: 1,
-  tasks: [
-    {
-      id: 1,
-      columnId: 1,
-      name: "Task 1",
-      creationDate: new Date(0),
-      moveDate: new Date(0),
-      description: "Description of Task 1",
-      users: [
-        { id: 1, fullName: "User 1" },
-        { id: 2, fullName: "User 2" },
-        { id: 3, fullName: "User 3" }
-      ]
-    },
-    {
-      id: 2,
-      columnId: 1,
-      name: "Task 2",
-      creationDate: new Date(),
-      moveDate: new Date(),
-      description: "Description of Task 2",
-      users: [
-        { id: 4, fullName: "User 4" },
-        { id: 5, fullName: "User 5" }
-      ]
-    }
-  ]
-} as IColumn
 
 describe("Tasks", () => {
   beforeEach(() => {
