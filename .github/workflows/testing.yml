@@ -1,0 +1,25 @@
+name: Node CI
+run-name: ${{ github.actor }}, ${{github.action}}
+on: 
+  push:
+    branches: [ master, dev ]
+  pull_request: 
+    branches: [ master ]
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            node-version: [ 21.x ]
+    steps:
+        - uses: actions/checkout@v4
+        - name: Starting Node.js ${{matrix.node-version}}
+          uses: actions/setup-node@v4
+          with: 
+            node-version: ${{ matrix.node-version}}
+        - name: install modules
+          run: npm install
+        - name: build project
+          run: npm run build
+        - name: unit and integration test
+          run: npm run test
