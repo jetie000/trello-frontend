@@ -7,17 +7,15 @@ import { useParams } from "react-router"
 import { useEffect, useMemo, useRef } from "react"
 import { Modal } from "bootstrap"
 import Columns from "./Columns"
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
-import { IError } from "@/types/error.interface"
 import { useSelector } from "react-redux"
 import { Navigate, useNavigate } from "react-router-dom"
 import { RootStateStore } from "@/store/store"
 import ModalWrapper from "../../components/modalWrapper/ModalWrapper"
-import "./Board.scss"
 import { useActions } from "@/hooks/useActions"
 import BoardChange from "./BoardChange"
 import ColumnAdd from "./ColumnAdd"
 import { languages } from "@/config/languages"
+import "./Board.scss"
 
 function Board() {
   const { token, id: idUser } = useSelector((state: RootStateStore) => state.user)
@@ -33,7 +31,7 @@ function Board() {
   const modalRefDelete = useRef<HTMLDivElement>(null)
   const modalRefLeave = useRef<HTMLDivElement>(null)
   const modalRefChange = useRef<HTMLDivElement>(null)
-  const { isLoading, isError, data, error } = useGetBoardByIdQuery(Number(id))
+  const { isLoading, isError, isSuccess, data } = useGetBoardByIdQuery(Number(id))
   const [
     deleteBoard,
     { isSuccess: isSuccessDelete, isError: isErrorDelete, isLoading: isLoadingDelete }
@@ -47,6 +45,10 @@ function Board() {
     () => data && "name" in data && data.users?.find(u => u.id === data.creatorId)?.fullName,
     [data]
   )
+
+  useEffect(() => {
+    if (isSuccess && !data) navigate("/")
+  }, [isLoading])
 
   useEffect(() => {
     if (isSuccessDelete) {
@@ -77,7 +79,7 @@ function Board() {
       <span className="visually-hidden"> {languages[language].LOADING}</span>
     </div>
   ) : isError ? (
-    <h1 className="m-auto">{((error as FetchBaseQueryError).data as IError).message}</h1>
+    <h1 className="m-auto">{languages[language].ERROR_REQUEST}</h1>
   ) : (
     data &&
     "name" in data && (
@@ -177,40 +179,54 @@ function Board() {
         </div>
         <Columns boardColumns={data.columns} />
         <ColumnAdd boardId={data.id} />
-        <ModalWrapper
-          id="deleteBoard"
-          title={languages[language].DELETE_BOARD}
-          size="sm"
-          ref={modalRefDelete}
-        >
-          <div className="d-flex flex-column gap-2">
-            <div>{languages[language].SURE_DELETE_BOARD}</div>
-            <button className="btn btn-danger" onClick={() => deleteBoard(data.id)}>
-              {languages[language].DELETE_BOARD}
-            </button>
-          </div>
-        </ModalWrapper>
-        <ModalWrapper
-          id="leaveBoard"
-          title={languages[language].LEAVE_BOARD}
-          size="sm"
-          ref={modalRefLeave}
-        >
-          <div className="d-flex flex-column gap-2">
-            <div>{languages[language].SURE_LEAVE_BOARD}</div>
-            <button className="btn btn-danger" onClick={() => leaveBoard(data.id)}>
-              {languages[language].LEAVE_BOARD}
-            </button>
-          </div>
-        </ModalWrapper>
-        <ModalWrapper
-          id="changeBoard"
-          title={languages[language].CHANGE_BOARD}
-          size="md"
-          ref={modalRefChange}
-        >
-          <BoardChange board={data} />
-        </ModalWrapper>
+
+        {data.creatorId === idUser ? (
+          <>
+            <ModalWrapper
+              id="deleteBoard"
+              title={languages[language].DELETE_BOARD}
+              size="sm"
+              ref={modalRefDelete}
+            >
+              <div className="d-flex flex-column gap-2">
+                <div>{languages[language].SURE_DELETE_BOARD}</div>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteBoard(data.id)}
+                  data-testid="delete-board-btn"
+                >
+                  {languages[language].DELETE_BOARD}
+                </button>
+              </div>
+            </ModalWrapper>
+            <ModalWrapper
+              id="changeBoard"
+              title={languages[language].CHANGE_BOARD}
+              size="md"
+              ref={modalRefChange}
+            >
+              <BoardChange board={data} />
+            </ModalWrapper>
+          </>
+        ) : (
+          <ModalWrapper
+            id="leaveBoard"
+            title={languages[language].LEAVE_BOARD}
+            size="sm"
+            ref={modalRefLeave}
+          >
+            <div className="d-flex flex-column gap-2">
+              <div>{languages[language].SURE_LEAVE_BOARD}</div>
+              <button
+                className="btn btn-danger"
+                onClick={() => leaveBoard(data.id)}
+                data-testid="leave-board-btn"
+              >
+                {languages[language].LEAVE_BOARD}
+              </button>
+            </div>
+          </ModalWrapper>
+        )}
       </div>
     )
   )
