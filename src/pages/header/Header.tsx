@@ -1,20 +1,20 @@
-import React from "react"
-import { Navigate, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useActions } from "@/hooks/useActions"
 import { useSelector } from "react-redux"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import "./Header.scss"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 import { Offcanvas as bootstrapOffcanvas } from "bootstrap"
+import { config } from "@/config/config"
 
 function Header() {
   const { setTheme, setLanguage } = useActions()
-  const { token } = useSelector((state: RootState) => state.user)
-  const { theme, language } = useSelector((state: RootState) => state.options)
+  const { token } = useSelector((state: RootStateStore) => state.user)
+  const { theme, language } = useSelector((state: RootStateStore) => state.options)
   const navigate = useNavigate()
 
   const toggleCanvas = () => {
-    if (window.innerWidth < variables.BURGER_BREAKPOINT) {
+    if (window.innerWidth < config.BURGER_BREAKPOINT) {
       const offcanvas = bootstrapOffcanvas.getOrCreateInstance("#offcanvasNav")
       offcanvas.toggle()
     }
@@ -25,13 +25,19 @@ function Header() {
       <nav className="navbar navbar-expand-sm navbar-dark header-wrapper m-auto ps-3 pe-3">
         {token && (
           <span className="navbar-brand cursor-pointer" onClick={() => navigate("/")}>
-            {variables.LANGUAGES[language].MY_BOARDS}
+            {languages[language].MY_BOARDS}
           </span>
         )}
         <div className="dropdown align-items-center d-flex cursor-pointer ms-auto">
-          <div className="dropdown-toggle p-2" data-bs-toggle="dropdown" aria-expanded="false">
+          <div
+            data-testid="dropdown-toggle"
+            className="dropdown-toggle p-2"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
             {theme === "dark" ? (
               <svg
+                data-testid="dark-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -44,6 +50,7 @@ function Header() {
               </svg>
             ) : (
               <svg
+                data-testid="light-icon"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
                 height="24"
@@ -55,21 +62,25 @@ function Header() {
               </svg>
             )}
           </div>
-          <ul className="dropdown-menu dropdown-menu-end position-absolute">
+          <ul
+            data-testid="dropdown-menu"
+            className="dropdown-menu dropdown-menu-end position-absolute"
+          >
             <li>
               <span onClick={() => setTheme("dark")} className="dropdown-item">
-                {variables.LANGUAGES[language].DARK}
+                {languages[language].DARK}
               </span>
             </li>
             <li>
               <span onClick={() => setTheme("light")} className="dropdown-item">
-                {variables.LANGUAGES[language].LIGHT}
+                {languages[language].LIGHT}
               </span>
             </li>
           </ul>
         </div>
         <div className="dropdown align-items-center d-flex cursor-pointer">
           <div
+            data-testid="dropdown-toggle"
             className="font-light dropdown-toggle p-2"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -86,7 +97,7 @@ function Header() {
               <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z" />
             </svg>
           </div>
-          <ul className="dropdown-menu dropdown-menu-end">
+          <ul data-testid="dropdown-menu" className="dropdown-menu dropdown-menu-end">
             <li>
               <span onClick={() => setLanguage(1)} className="dropdown-item">
                 English
@@ -112,7 +123,7 @@ function Header() {
           <div className="offcanvas offcanvas-end" id="offcanvasNav">
             <div className="offcanvas-header">
               <h5 className="offcanvas-title" id="offcanvasNavbarLabel">
-                {variables.LANGUAGES[language].MENU}
+                {languages[language].MENU}
               </h5>
               <button
                 type="button"
@@ -131,7 +142,7 @@ function Header() {
                       toggleCanvas()
                     }}
                   >
-                    {variables.LANGUAGES[language].ADD_BOARD}
+                    {languages[language].ADD_BOARD}
                   </span>
                 </li>
                 <li className="nav-item">
@@ -142,7 +153,7 @@ function Header() {
                       toggleCanvas()
                     }}
                   >
-                    {variables.LANGUAGES[language].CABINET}
+                    {languages[language].CABINET}
                   </span>
                 </li>
               </ul>

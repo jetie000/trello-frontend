@@ -1,11 +1,10 @@
-import { useActions } from "@/hooks/useActions"
-import { useGetByIdsQuery, useSearchUsersQuery } from "@/store/api/user.api"
 import { IUserResponse } from "@/types/user.interface"
-import React, { useEffect, useMemo, useRef, useState } from "react"
-import { Toast as bootstrapToast } from "bootstrap"
-import { variables } from "@/variables"
+import { useEffect, useMemo, useRef, useState } from "react"
+import { useActions } from "@/hooks/useActions"
 import { useSelector } from "react-redux"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
+import { useGetByIdsQuery, useSearchUsersQuery } from "@/store/api/user.api"
+import { languages } from "@/config/languages"
 
 interface UsersListProps {
   userIds: number[]
@@ -17,9 +16,9 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
   const inputSearch = useRef<HTMLInputElement>(null)
   const [searchStr, setSearchStr] = useState("")
   const [isShow, setIsShow] = useState(false)
-  const { language } = useSelector((state: RootState) => state.options)
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const { isLoading, isError, data } = useGetByIdsQuery(userIds, { skip: userIds.length === 0 })
-  const { setToastChildren } = useActions()
+  const { showToast } = useActions()
   const {
     isLoading: isLoadingSearch,
     isError: isErrorSearch,
@@ -36,21 +35,13 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
 
   useEffect(() => {
     if (isError) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST_BY_IDS)
-      myToast.show()
+      showToast(languages[language].ERROR_REQUEST_BY_IDS)
     }
   }, [isLoading])
 
   useEffect(() => {
     if (isErrorSearch) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST_SEARCH)
-      myToast.show()
+      showToast(languages[language].ERROR_REQUEST_SEARCH)
     }
   }, [isLoadingSearch])
 
@@ -70,9 +61,10 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
         <label>Users</label>
         <div className="input-group">
           <input
+            data-testid="search-users-input"
             type="text"
             className="form-control w-50"
-            placeholder={variables.LANGUAGES[language].ENTER_REQUEST}
+            placeholder={languages[language].ENTER_REQUEST}
             ref={inputSearch}
             onChange={e => setSearchStr(e.target.value)}
             onFocus={() => setIsShow(true)}
@@ -103,6 +95,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
         <div className="position-relative">
           <ul
             onClick={() => setIsShow(false)}
+            data-testid="searchList"
             id="searchList"
             className="list-group user-search-list position-absolute"
           >
@@ -115,6 +108,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
                   onClick={() => addUserClick(user)}
                   className="list-group-item p-2 cursor-pointer text-truncate"
                   key={user.email}
+                  data-testid={"add-user-" + user.id}
                 >
                   <div>{user.email}</div>
                   <div>{user.fullName}</div>
@@ -124,7 +118,7 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
         </div>
       )}
       {userIds.length > 0 && (
-        <ul className="list-group users-list">
+        <ul data-testid="users-list" className="list-group users-list">
           {data &&
             "length" in data &&
             data.map(user => (
@@ -133,7 +127,11 @@ function UsersList({ userIds, setUserIds, boardId }: UsersListProps) {
                   <div>{user.email}</div>
                   <div>{user.fullName}</div>
                 </div>
-                <button className="btn btn-danger" onClick={() => deleteUser(user.id)}>
+                <button
+                  data-testid={"remove-user-" + user.id}
+                  className="btn btn-danger"
+                  onClick={() => deleteUser(user.id)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"

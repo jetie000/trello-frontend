@@ -1,10 +1,6 @@
-import { IBoard } from "@/types/board.interface"
-import * as React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Tasks from "./Tasks"
-import Modal from "@/components/modal/Modal"
 import { IColumn } from "@/types/column.interface"
-import { Toast as bootstrapToast } from "bootstrap"
 import TaskAdd from "./TaskAdd"
 import { ITask } from "@/types/task.interface"
 import TaskChangeDelete from "./TaskChangeDelete"
@@ -12,49 +8,38 @@ import ColumnChangeDelete from "./ColumnChangeDelete"
 import { useChangeColumnMutation } from "@/store/api/column.api"
 import { useActions } from "@/hooks/useActions"
 import { useChangeTaskMutation } from "@/store/api/task.api"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { useSelector } from "react-redux"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
 
-function Columns({ board }: { board: IBoard }) {
-  const { setToastChildren } = useActions()
-  const { language } = useSelector((state: RootState) => state.options)
+function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
+  const { showToast } = useActions()
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const [currentColumn, setCurrentColumn] = useState<IColumn>()
   const [currentTask, setCurrentTask] = useState<ITask>()
   const [columns, setColumns] = useState<IColumn[]>()
 
-  const [changeColumn, { isSuccess, isError, isLoading }] = useChangeColumnMutation()
-  const [changeTask, { isSuccess: isSuccessTask, isError: isErrorTask, isLoading: isLoadingTask }] =
-    useChangeTaskMutation()
+  const [changeColumn, { isError, isLoading }] = useChangeColumnMutation()
+  const [changeTask, { isError: isErrorTask, isLoading: isLoadingTask }] = useChangeTaskMutation()
 
   const [drugStartColumn, setDrugStartColumn] = useState<IColumn | undefined>()
   const [drugStartTask, setDrugStartTask] = useState<ITask | undefined>()
 
-  React.useEffect(() => {
-    if (isSuccessTask) setDrugStartTask(undefined)
+  useEffect(() => {
     if (isErrorTask) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_CHANGING_TASK_COL)
-      myToast.show()
+      showToast(languages[language].ERROR_CHANGING_TASK_COL)
     }
   }, [isLoadingTask])
 
-  React.useEffect(() => {
-    if (isSuccess) setDrugStartColumn(undefined)
+  useEffect(() => {
     if (isError) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_CHANGING_COL_ORDER)
-      myToast.show()
+      showToast(languages[language].ERROR_CHANGING_COL_ORDER)
     }
   }, [isLoading])
 
-  React.useEffect(() => {
-    if (board.columns) setColumns(board.columns)
-  }, [board.columns])
+  useEffect(() => {
+    if (boardColumns) setColumns(boardColumns)
+  }, [boardColumns])
 
   function dragLeaveHandler(e: React.DragEvent<HTMLDivElement>) {
     e.currentTarget.className = "border rounded-2 p-2 cursor-grab"
@@ -71,7 +56,6 @@ function Columns({ board }: { board: IBoard }) {
 
   function dropHandler(e: React.DragEvent<HTMLDivElement>, c: IColumn) {
     e.preventDefault()
-    e.currentTarget.className = "border rounded-2 p-2 cursor-grab"
     if (drugStartColumn && c.order !== drugStartColumn.order) {
       let columnsTemp = columns?.slice()
       columnsTemp?.splice(drugStartColumn?.order - 1, 1)
@@ -82,6 +66,7 @@ function Columns({ board }: { board: IBoard }) {
         order: c.order,
         name: drugStartColumn.name
       })
+      setDrugStartColumn(undefined)
     } else if (drugStartTask && drugStartTask.columnId !== c.id && columns) {
       setColumns(
         columns.map(column => {
@@ -99,13 +84,13 @@ function Columns({ board }: { board: IBoard }) {
           return columnTemp
         })
       )
-      setDrugStartTask(undefined)
       changeTask({
         id: drugStartTask.id,
         name: drugStartTask.name,
         userIds: drugStartTask.users.map(u => u.id),
         columnId: c.id
       })
+      setDrugStartTask(undefined)
     }
   }
 
@@ -118,10 +103,11 @@ function Columns({ board }: { board: IBoard }) {
               className="border rounded-2 p-2 cursor-grab"
               draggable={true}
               key={c.id}
-              onDragLeave={e => dragLeaveHandler(e)}
+              onDragLeave={dragLeaveHandler}
               onDragStart={e => dragStartHandler(e, c)}
-              onDragOver={e => dragOverHandler(e)}
+              onDragOver={dragOverHandler}
               onDrop={e => dropHandler(e, c)}
+              data-testid={`column${c.id}`}
             >
               <h5 className="m-0 mb-2 text-truncate">{c.name}</h5>
               <div className="d-flex gap-2">
@@ -192,12 +178,8 @@ function Columns({ board }: { board: IBoard }) {
         </button>
       </div>
       <ColumnChangeDelete currentColumn={currentColumn} />
-      <Modal id="addTask" title={variables.LANGUAGES[language].ADD_TASK} size="md">
-        <TaskAdd column={currentColumn} />
-      </Modal>
-      <Modal id="changeTask" title={variables.LANGUAGES[language].CHANGE_TASK} size="md">
-        <TaskChangeDelete task={currentTask} />
-      </Modal>
+      <TaskAdd column={currentColumn} />
+      <TaskChangeDelete task={currentTask} />
     </div>
   )
 }

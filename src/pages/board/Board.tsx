@@ -3,36 +3,35 @@ import {
   useGetBoardByIdQuery,
   useLeaveBoardMutation
 } from "@/store/api/board.api"
-import * as React from "react"
 import { useParams } from "react-router"
-import { useMemo } from "react"
-import { Toast as bootstrapToast } from "bootstrap"
-import { Modal as bootstrapModal } from "bootstrap"
+import { useEffect, useMemo, useRef } from "react"
+import { Modal } from "bootstrap"
 import Columns from "./Columns"
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query"
-import { IError } from "@/types/error.interface"
 import { useSelector } from "react-redux"
 import { Navigate, useNavigate } from "react-router-dom"
-import { RootState } from "@/store/store"
-import Modal from "../../components/modal/Modal"
-import "./Board.scss"
+import { RootStateStore } from "@/store/store"
+import ModalWrapper from "../../components/modalWrapper/ModalWrapper"
 import { useActions } from "@/hooks/useActions"
 import BoardChange from "./BoardChange"
 import ColumnAdd from "./ColumnAdd"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
+import "./Board.scss"
 
 function Board() {
-  const { token, id: idUser } = useSelector((state: RootState) => state.user)
+  const { token, id: idUser } = useSelector((state: RootStateStore) => state.user)
 
   if (!token) {
     return <Navigate to={"/login"} />
   }
 
   const { id } = useParams()
-  const { setToastChildren } = useActions()
-  const { language } = useSelector((state: RootState) => state.options)
+  const { showToast } = useActions()
+  const { language } = useSelector((state: RootStateStore) => state.options)
   const navigate = useNavigate()
-  const { isLoading, isError, data, error } = useGetBoardByIdQuery(Number(id))
+  const modalRefDelete = useRef<HTMLDivElement>(null)
+  const modalRefLeave = useRef<HTMLDivElement>(null)
+  const modalRefChange = useRef<HTMLDivElement>(null)
+  const { isLoading, isError, isSuccess, data } = useGetBoardByIdQuery(Number(id))
   const [
     deleteBoard,
     { isSuccess: isSuccessDelete, isError: isErrorDelete, isLoading: isLoadingDelete }
@@ -47,52 +46,40 @@ function Board() {
     [data]
   )
 
-  React.useEffect(() => {
+  useEffect(() => {
+    if (isSuccess && !data) navigate("/")
+  }, [isLoading])
+
+  useEffect(() => {
     if (isSuccessDelete) {
-      const myModal = bootstrapModal.getOrCreateInstance(
-        document.getElementById("deleteBoard") || "deleteBoard"
-      )
-      myModal.hide()
+      if (modalRefDelete.current) {
+        const myModal = Modal.getOrCreateInstance("#" + modalRefDelete.current?.id)
+        myModal.hide()
+      }
       navigate("/")
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].BOARD_DELETED)
-      myToast.show()
+      showToast(languages[language].BOARD_DELETED)
     }
     if (isErrorDelete) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_BOARD_DELETING)
-      myToast.show()
+      showToast(languages[language].ERROR_BOARD_DELETING)
     }
   }, [isLoadingDelete])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessLeave) {
       navigate("/")
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].BOARD_LEFT)
-      myToast.show()
+      showToast(languages[language].BOARD_LEFT)
     }
     if (isErrorLeave) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_BOARD_LEAVING)
-      myToast.show()
+      showToast(languages[language].ERROR_BOARD_LEAVING)
     }
   }, [isLoadingLeave])
 
   return isLoading ? (
     <div className="spinner-border m-auto" role="status">
-      <span className="visually-hidden"> {variables.LANGUAGES[language].LOADING}</span>
+      <span className="visually-hidden"> {languages[language].LOADING}</span>
     </div>
   ) : isError ? (
-    <h1 className="m-auto">{((error as FetchBaseQueryError).data as IError).message}</h1>
+    <h1 className="m-auto">{languages[language].ERROR_REQUEST}</h1>
   ) : (
     data &&
     "name" in data && (
@@ -101,7 +88,7 @@ function Board() {
           <div className="d-flex flex-column border rounded-2 p-3 ">
             <h4 className="text-center">{data && data.name}</h4>
             <h6 className="text-center">
-              {variables.LANGUAGES[language].CREATOR + ": "}
+              {languages[language].CREATOR + ": "}
               {creatorName}
             </h6>
             {data?.description && <h6>{data.description}</h6>}
@@ -190,29 +177,56 @@ function Board() {
             ))}
           </div>
         </div>
-        <Columns board={data} />
-        <Modal id="addColumn" title={variables.LANGUAGES[language].ADD_COLUMN} size="sm">
-          <ColumnAdd board={data} />
-        </Modal>
-        <Modal id="deleteBoard" title={variables.LANGUAGES[language].DELETE_BOARD} size="sm">
-          <div className="d-flex flex-column gap-2">
-            <div>{variables.LANGUAGES[language].SURE_DELETE_BOARD}</div>
-            <button className="btn btn-danger" onClick={() => deleteBoard(data.id)}>
-              {variables.LANGUAGES[language].DELETE_BOARD}
-            </button>
-          </div>
-        </Modal>
-        <Modal id="leaveBoard" title={variables.LANGUAGES[language].LEAVE_BOARD} size="sm">
-          <div className="d-flex flex-column gap-2">
-            <div>{variables.LANGUAGES[language].SURE_LEAVE_BOARD}</div>
-            <button className="btn btn-danger" onClick={() => leaveBoard(data.id)}>
-              {variables.LANGUAGES[language].LEAVE_BOARD}
-            </button>
-          </div>
-        </Modal>
-        <Modal id="changeBoard" title={variables.LANGUAGES[language].CHANGE_BOARD} size="md">
-          <BoardChange board={data} />
-        </Modal>
+        <Columns boardColumns={data.columns} />
+        <ColumnAdd boardId={data.id} />
+
+        {data.creatorId === idUser ? (
+          <>
+            <ModalWrapper
+              id="deleteBoard"
+              title={languages[language].DELETE_BOARD}
+              size="sm"
+              ref={modalRefDelete}
+            >
+              <div className="d-flex flex-column gap-2">
+                <div>{languages[language].SURE_DELETE_BOARD}</div>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => deleteBoard(data.id)}
+                  data-testid="delete-board-btn"
+                >
+                  {languages[language].DELETE_BOARD}
+                </button>
+              </div>
+            </ModalWrapper>
+            <ModalWrapper
+              id="changeBoard"
+              title={languages[language].CHANGE_BOARD}
+              size="md"
+              ref={modalRefChange}
+            >
+              <BoardChange board={data} />
+            </ModalWrapper>
+          </>
+        ) : (
+          <ModalWrapper
+            id="leaveBoard"
+            title={languages[language].LEAVE_BOARD}
+            size="sm"
+            ref={modalRefLeave}
+          >
+            <div className="d-flex flex-column gap-2">
+              <div>{languages[language].SURE_LEAVE_BOARD}</div>
+              <button
+                className="btn btn-danger"
+                onClick={() => leaveBoard(data.id)}
+                data-testid="leave-board-btn"
+              >
+                {languages[language].LEAVE_BOARD}
+              </button>
+            </div>
+          </ModalWrapper>
+        )}
       </div>
     )
   )

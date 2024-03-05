@@ -3,7 +3,7 @@ import { Provider } from "react-redux"
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import { ErrorBoundary } from "react-error-boundary"
 import { store } from "./store/store"
-import Toast from "./components/toast/Toast"
+import ToastWrapper from "./components/toastWrapper/ToastWrapper"
 import { useSetTheme } from "./hooks/useSetTheme"
 import AuthWrapper from "./pages/authorization/AuthWrapper"
 import Login from "./pages/authorization/Login"
@@ -55,7 +55,7 @@ function App() {
               <Route path="*" element={<Custom404 />} />
             </Routes>
           </Wrapper>
-          <Toast />
+          <ToastWrapper />
         </BrowserRouter>
       </ErrorBoundary>
     </Provider>

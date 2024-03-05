@@ -1,19 +1,19 @@
 import UsersList from "@/components/usersList/UsersList"
 import { useAddTaskMutation } from "@/store/api/task.api"
 import { IColumn } from "@/types/column.interface"
-import * as React from "react"
-import { useRef, useState } from "react"
-import { Toast as bootstrapToast } from "bootstrap"
-import { Modal as bootstrapModal } from "bootstrap"
+import { useEffect, useRef, useState } from "react"
+import { Modal } from "bootstrap"
 import { useActions } from "@/hooks/useActions"
-import { RootState } from "@/store/store"
+import { RootStateStore } from "@/store/store"
 import { useSelector } from "react-redux"
-import { variables } from "@/variables"
+import { languages } from "@/config/languages"
+import ModalWrapper from "@/components/modalWrapper/ModalWrapper"
 
 function TaskAdd({ column }: { column: IColumn | undefined }) {
-  const { setToastChildren } = useActions()
-  const { language } = useSelector((state: RootState) => state.options)
+  const { showToast } = useActions()
+  const { language } = useSelector((state: RootStateStore) => state.options)
 
+  const modalRefAdd = useRef<HTMLDivElement>(null)
   const addTaskNameRef = useRef<HTMLInputElement>(null)
   const addTaskDescRef = useRef<HTMLTextAreaElement>(null)
   const [addTask, { isSuccess: isSuccessAdd, isError: isErrorAdd, isLoading: isLoadingAdd }] =
@@ -28,51 +28,47 @@ function TaskAdd({ column }: { column: IColumn | undefined }) {
         description: addTaskDescRef.current?.value,
         userIds: userIds
       })
+      return
     }
+    showToast(languages[language].INPUT_DATA)
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isSuccessAdd) {
-      const myModal = bootstrapModal.getOrCreateInstance(
-        document.getElementById("addTask") || "addTask"
-      )
-      myModal.hide()
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].TASK_ADDED)
-      myToast.show()
+      if (modalRefAdd.current) {
+        const myModal = Modal.getOrCreateInstance("#" + modalRefAdd.current?.id)
+        myModal.hide()
+      }
+      showToast(languages[language].TASK_ADDED)
     }
     if (isErrorAdd) {
-      const myToast = bootstrapToast.getOrCreateInstance(
-        document.getElementById("myToast") || "myToast"
-      )
-      setToastChildren(variables.LANGUAGES[language].ERROR_REQUEST)
-      myToast.show()
+      showToast(languages[language].ERROR_REQUEST)
     }
   }, [isLoadingAdd])
 
   return (
-    <div className="d-flex flex-column">
-      <label htmlFor="inputTaskName">{variables.LANGUAGES[language].NAME}</label>
-      <input
-        className="form-control mb-2"
-        id="inputTaskName"
-        placeholder={variables.LANGUAGES[language].ENTER_NAME}
-        ref={addTaskNameRef}
-      />
-      <label htmlFor="inputTaskDesc">{variables.LANGUAGES[language].DESCRIPTION}</label>
-      <textarea
-        className="form-control mb-2"
-        id="inputTaskDesc"
-        placeholder={variables.LANGUAGES[language].ENTER_DESCRIPTION}
-        ref={addTaskDescRef}
-      />
-      <UsersList userIds={userIds} setUserIds={setUserIds} boardId={column?.boardId} />
-      <button className="btn btn-primary mt-2" onClick={addTaskClick}>
-        {variables.LANGUAGES[language].ADD_TASK}
-      </button>
-    </div>
+    <ModalWrapper id="addTask" title={languages[language].ADD_TASK} size="md" ref={modalRefAdd}>
+      <div className="d-flex flex-column">
+        <label htmlFor="inputTaskName">{languages[language].NAME}</label>
+        <input
+          className="form-control mb-2"
+          id="inputTaskName"
+          placeholder={languages[language].ENTER_NAME}
+          ref={addTaskNameRef}
+        />
+        <label htmlFor="inputTaskDesc">{languages[language].DESCRIPTION}</label>
+        <textarea
+          className="form-control mb-2"
+          id="inputTaskDesc"
+          placeholder={languages[language].ENTER_DESCRIPTION}
+          ref={addTaskDescRef}
+        />
+        <UsersList userIds={userIds} setUserIds={setUserIds} boardId={column?.boardId} />
+        <button className="btn btn-primary mt-2" onClick={addTaskClick} data-testid="add-task-btn">
+          {languages[language].ADD_TASK}
+        </button>
+      </div>
+    </ModalWrapper>
   )
 }
 
