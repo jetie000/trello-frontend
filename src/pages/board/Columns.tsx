@@ -55,6 +55,7 @@ function Columns({ boardColumns }: { boardColumns: IColumn[] | undefined }) {
   }
 
   function dropHandler(e: React.DragEvent<HTMLDivElement>, c: IColumn) {
+    e.currentTarget.className = "border rounded-2 p-2 cursor-grab"
     e.preventDefault()
     if (drugStartColumn && c.order !== drugStartColumn.order) {
       let columnsTemp = columns?.slice()
