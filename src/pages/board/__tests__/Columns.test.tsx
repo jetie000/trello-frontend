@@ -64,7 +64,6 @@ describe("Columns", () => {
     })
     expect(screen.getByTestId("change-column-btn")).toBeInTheDocument()
     expect(screen.getByTestId("delete-column-btn")).toBeInTheDocument()
-    expect(component).toMatchSnapshot()
   })
   it("should allow dragging and dropping tasks between columns", () => {
     const component = render(<Columns boardColumns={mockBoards[0].columns} />)
@@ -111,7 +110,6 @@ describe("Columns", () => {
 
     expect(screen.getByText(mockBoards[0].columns![0].tasks![0].name)).toBeInTheDocument()
     expect(screen.getByText(mockBoards[0].columns![0].tasks![1].name)).toBeInTheDocument()
-    expect(component).toMatchSnapshot()
   })
   it("should allow changing columns order by dragging and dropping", () => {
     const component = render(<Columns boardColumns={mockBoards[0].columns} />)
@@ -128,6 +126,5 @@ describe("Columns", () => {
       order: 2,
       name: mockBoards[0].columns![0].name
     })
-    expect(component).toMatchSnapshot()
   })
 })

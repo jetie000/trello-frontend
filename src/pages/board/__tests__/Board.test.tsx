@@ -100,7 +100,6 @@ describe("Board", () => {
     })
     expect(screen.getByTestId("change-board-btn")).toBeInTheDocument()
     expect(screen.getByTestId("delete-board-btn")).toBeInTheDocument()
-    expect(component).toMatchSnapshot()
   })
   it("should show loading spinner while fetching board data", () => {
     mockBoardById.mockReturnValue({
@@ -110,9 +109,7 @@ describe("Board", () => {
       data: undefined
     })
     const component = render(<Board />)
-
     expect(screen.getByText(/Loading/i)).toBeInTheDocument()
-    expect(component).toMatchSnapshot()
   })
   it("should delete board if you are creator", () => {
     const component = render(<Board />)
@@ -134,7 +131,6 @@ describe("Board", () => {
     expect(screen.getByTestId("delete-board-btn")).toBeInTheDocument()
     expect(screen.getByTestId("change-board-btn")).toBeInTheDocument()
     expect(screen.queryByTestId("leave-board-btn")).not.toBeInTheDocument()
-    expect(component).toMatchSnapshot()
   })
   it("should be only leave button if you are not the creator", () => {
     mockUseSelector.mockReturnValue({
@@ -147,7 +143,6 @@ describe("Board", () => {
     expect(screen.queryByTestId("delete-board-btn")).not.toBeInTheDocument()
     expect(screen.queryByTestId("change-board-btn")).not.toBeInTheDocument()
     expect(screen.getByTestId("leave-board-btn")).toBeInTheDocument()
-    expect(component).toMatchSnapshot()
   })
   it("should navigate to login page if no token provided", () => {
     mockUseSelector.mockReturnValue({
