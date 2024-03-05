@@ -216,7 +216,7 @@ Object {
                   <span
                     class="text-truncate"
                   >
-                    now
+                    1 second ago
                   </span>
                   <span>
                     Created
@@ -225,7 +225,7 @@ Object {
                   <span
                     class="text-truncate"
                   >
-                    now
+                    1 second ago
                   </span>
                   <div
                     class="d-flex"
@@ -1272,7 +1272,7 @@ Object {
                 <span
                   class="text-truncate"
                 >
-                  now
+                  1 second ago
                 </span>
                 <span>
                   Created
@@ -1281,7 +1281,7 @@ Object {
                 <span
                   class="text-truncate"
                 >
-                  now
+                  1 second ago
                 </span>
                 <div
                   class="d-flex"
@@ -2364,7 +2364,7 @@ Object {
                   <span
                     class="text-truncate"
                   >
-                    now
+                    1 second ago
                   </span>
                   <span>
                     Created
@@ -2373,7 +2373,7 @@ Object {
                   <span
                     class="text-truncate"
                   >
-                    now
+                    1 second ago
                   </span>
                   <div
                     class="d-flex"
@@ -3288,7 +3288,7 @@ Object {
                 <span
                   class="text-truncate"
                 >
-                  now
+                  1 second ago
                 </span>
                 <span>
                   Created
@@ -3297,7 +3297,7 @@ Object {
                 <span
                   class="text-truncate"
                 >
-                  now
+                  1 second ago
                 </span>
                 <div
                   class="d-flex"
